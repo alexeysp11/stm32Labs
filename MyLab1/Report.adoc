@@ -4,8 +4,8 @@
 
 1. Создал проект C++ c main.cpp
 
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateNewProject.png
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateMainFunc.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateNewProject.png[]
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateMainFunc.png[]
 
 2. Не понял, как подключить к проекту файл cstartup.cpp, однако при дальнейшем копировании 
 проекта преподавателя скопировал в том числе и файл cstartup.cpp. 
