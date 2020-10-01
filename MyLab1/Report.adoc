@@ -22,7 +22,7 @@ image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SetHeapAndS
 
 6. Скопировал проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1. 
 
-В моем репозитории это папка находится здесь https://github.com/alexeysp11/stm32Labs/tree/master/Lab1
+В моем репозитории это папка находится link:https://github.com/alexeysp11/stm32Labs/tree/master/Lab1[здесь]
 
 7. Скопировал содержимое папки из папки AHardware/Registers и Common с проекта преподавателя в свой проект
 
