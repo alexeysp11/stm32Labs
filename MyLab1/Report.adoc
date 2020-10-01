@@ -16,9 +16,9 @@ image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateMainF
 
 5. Из файла iarproject.map узнал размер проекта и настроил STACK, HEAP. 
 
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/InfoAboutHeapAndStack.png
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/EditHeapAndStack.png
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SetHeapAndStack.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/InfoAboutHeapAndStack.png[]
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/EditHeapAndStack.png[]
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SetHeapAndStack.png[]
 
 6. Скопировал проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1. 
 
@@ -64,16 +64,16 @@ https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/ErrorWhileRunning
 У меня появлялась эта проблема из-за того, что у меня были прописаны пути к заголовочным файлам, 
 вследствие чего компилятор не мог их найти. 
 Я прописал пути следующим образом: 
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/FixedBugWithHeaders.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/FixedBugWithHeaders.png[]
 
 2. Загрузить программу в симуляторе и сделал пошаговую отладку
 
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/StartedDebuggingButFacedProblemWithSetFunc.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/StartedDebuggingButFacedProblemWithSetFunc.png[]
 
 3. Настроил Debugger на отладку через StLink
 
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SimulationMode.png
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/StLinkMode.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SimulationMode.png[]
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/StLinkMode.png[]
 
 4. Подключил плату к компьютеру, загрузил программу в плату, выполнил пошаговую отладку
 
