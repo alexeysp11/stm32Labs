@@ -4,7 +4,11 @@
 
 1. Создал проект C++ c main.cpp
 
-2. Не понял, как подключить к проекту файл cstartup.cpp
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateNewProject.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/CreateMainFunc.png
+
+2. Не понял, как подключить к проекту файл cstartup.cpp, однако при дальнейшем копировании 
+проекта преподавателя скопировал в том числе и файл cstartup.cpp. 
 
 3. Создал папки AbstractHardware/Registers/FiledValues, Common
 
@@ -12,7 +16,13 @@
 
 5. Из файла iarproject.map узнал размер проекта и настроил STACK, HEAP. 
 
-6. Скопировал проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/InfoAboutHeapAndStack.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/EditHeapAndStack.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SetHeapAndStack.png
+
+6. Скопировал проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1. 
+
+В моем репозитории это папка находится здесь https://github.com/alexeysp11/stm32Labs/tree/master/Lab1
 
 7. Скопировал содержимое папки из папки AHardware/Registers и Common с проекта преподавателя в свой проект
 
@@ -34,17 +44,37 @@ int main()
 
 == Задание 2
 
-1. Откомпилировать и отлинковать программу не получилось ввиду полученных ошибок компилятора: 
+1. Сначала откомпилировать и отлинковать программу не получилось ввиду полученных ошибок компилятора: 
 
 `Error[Pe276]: name followed by "::" must be a class or namespace name C:\Users\User\Desktop\projects\microprocessors\Lab1\main.cpp 33`
+и
 `Error while running C/C++ Compiler`
 
 В языке С++ `::` - это оператор разрешения области видимости, который позволяет статически 
 перемещаться по областям, таким как пространства имен и классы, чтобы ссылаться на нужный 
 идентификатор.
 
-Исходя из этого, я полагаю, что ошибка связана с тем, что линкер не видит Enable и Disable 
-как часть пространства имен ODR5. Это можно решить, если более детально рассмотреть окружение 
-проекта: сокрее всего, нужный файл, в котором объявлялись Enable и Disable, не был подключен.
+Исходя из этого, я полагал, что ошибка связана с тем, что линкер не видит Enable и Disable 
+как часть пространства имен ODR5. 
+Однако позднее выяснилось, что вместо Enable и Disable необходимо писать High и Low соответственно. 
 
-Ввиду полученной ошибки я не смог выполнить дальнейшие задания. 
+После этого я столкнулся со следующей проблемой: 
+https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/ErrorWhileRunningCompiler.png
+
+У меня появлялась эта проблема из-за того, что у меня были прописаны пути к заголовочным файлам, 
+вследствие чего компилятор не мог их найти. 
+Я прописал пути следующим образом: 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/FixedBugWithHeaders.png
+
+2. Загрузить программу в симуляторе и сделал пошаговую отладку
+
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/StartedDebuggingButFacedProblemWithSetFunc.png
+
+3. Настроил Debugger на отладку через StLink
+
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/SimulationMode.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab1/img/StLinkMode.png
+
+4. Подключил плату к компьютеру, загрузил программу в плату, выполнил пошаговую отладку
+
+Если пошагово делать отладку, светодиод загорается. Если сделать еще один шаг, то гаснет. 

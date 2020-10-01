@@ -349,7 +349,10 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\AHardware\Registers</state>
+                    <state>$PROJ_DIR$\AHardware\Registers\STM32F411</state>
+                    <state>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues</state>
+                    <state>$PROJ_DIR$\Common</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -599,7 +602,7 @@
                 </option>
                 <option>
                     <name>AOutputFile</name>
-                    <state></state>
+                    <state>$FILE_BNAME$.o</state>
                 </option>
                 <option>
                     <name>ALimitErrorsCheck</name>

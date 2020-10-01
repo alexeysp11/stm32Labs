@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Program Files\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "C:\Users\User\Desktop\projects\microprocessors\Lab1\settings\iarproject.Debug.general.xcl" --backend -f "C:\Users\User\Desktop\projects\microprocessors\Lab1\settings\iarproject.Debug.driver.xcl" 
+& "C:\Program Files\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "C:\Users\User\Desktop\projects\stm32Labs\Lab1\settings\iarproject.Debug.general.xcl" --backend -f "C:\Users\User\Desktop\projects\stm32Labs\Lab1\settings\iarproject.Debug.driver.xcl" 
 }
 else
 {
-& "C:\Program Files\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "C:\Users\User\Desktop\projects\microprocessors\Lab1\settings\iarproject.Debug.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\User\Desktop\projects\microprocessors\Lab1\settings\iarproject.Debug.driver.xcl" 
+& "C:\Program Files\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "C:\Users\User\Desktop\projects\stm32Labs\Lab1\settings\iarproject.Debug.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\User\Desktop\projects\stm32Labs\Lab1\settings\iarproject.Debug.driver.xcl" 
 }

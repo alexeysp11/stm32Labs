@@ -1,20 +1,36 @@
-"C:\Users\User\Desktop\projects\microprocessors\MyLab1\startupF411RE.cpp"
+"C:\Users\User\Desktop\projects\stm32Labs\MyLab1\startupF411RE.cpp"
 -std=c++17
 -ferror-limit=0
 -fbracket-depth=512
 -MD
 -MF
-C:\Users\User\Desktop\projects\microprocessors\MyLab1\Debug\Obj\startupF411RE.pbi.dep
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\Debug\Obj\startupF411RE.pbi.dep
 -o
 startupF411RE.pbi
 -I
-C:\Users\User\Desktop\projects\microprocessors\MyLab1
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\AHardware\Registers
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\AHardware\Registers\STM32F411
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\AHardware\Registers\STM32F411\FieldValues
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\Common
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc\c
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc\cpp
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\AHardware\Registers
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\AHardware\Registers\STM32F411
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\AHardware\Registers\STM32F411\FieldValues
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab1\Common
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
