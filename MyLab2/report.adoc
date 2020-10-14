@@ -247,7 +247,9 @@ int main()
   return 0;
 }
 ```
-ќбъ€снить полученный результат.
+
+ѕолученный результат: 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/TypeConversionAndDereferencing.png[]
 
 === явное преобразование типа 
 
@@ -265,7 +267,6 @@ int main()
   
   return 0;
 }
-
 ```
 
 === „исла с плавающей точкой
