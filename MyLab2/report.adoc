@@ -6,8 +6,8 @@
 - Создать глобальную переменную типа `unsigned short` и присвоить ей значение 65535
 - В функции main прибавить к данной переменной 1 - описать что получилось и почему.
 - Поменять тип переменной на `signed short` и присвоить ей значение 32767
-- В функции main прибавить к данной переменной 1 - описать что получилось и почему.
-- Не меняя тип переменной взять адрес переменной (оператор &) - вывести адрес переменной в 
+- В функции `main` прибавить к данной переменной 1 - описать что получилось и почему.
+- Не меняя тип переменной взять адрес переменной (оператор `&`) - вывести адрес переменной в 
 терминал
 - Не меняя переменной, явно преобразовать адрес переменной к типу указатель на `short`, 
 используя `reinterpret_cast` и присвоить локальной переменной типа `short*`. 
@@ -18,18 +18,18 @@ short* ptr = reinterpret_cast<short*>(&myVar) ;
 ```
 - Вывести в терминал значение указателя - пояснить что это за значение
 - Разыменовать указатель и вывести в терминал значение лежащее по адресу, указанному в указателе.
-- Сделать явное преобразование этого указателя к типу указателя на `int` `(int*)`
-- (Разыменовать указатель из предыдущего пункта типа `int*`). Вывести значение лежащее по 
+- Сделать явное преобразование этого указателя к типу указателя на `int` с помощью `(int*)`.
+- Разыменовать указатель из предыдущего пункта типа `int*`. Вывести значение лежащее по 
 адресу указателя типа `int*` из предыдущего пункта. Объяснить полученный результат
 - Заменить тип переменной с `unsigned short` на `short` и присвоить ей значение 65535
 - В функции `main` вывести значение переменной, посмотреть её значение и объяснить это.
-- Не меняя переменную в функции main сделать явное преобразование типа к `short`
+- Не меняя переменную в функции `main` сделать явное преобразование типа к `short`
 ```
 std::cout << static_cast<short>(myVar) << std::endl ;
 ```
-- объяснить полученный результат
-- Создать переменную типа float и присвоить ей значение `40'000'000'000F`;
-- Прибавить к этому значению 1.0f -  вывести значение в окно Watch - объяснить полученный 
+И оъяснить полученный результат.
+- Создать переменную типа `float` и присвоить ей значение `40'000'000'000F`;
+- Прибавить к этому значению `1.0f` -  вывести значение в окно Watch - объяснить полученный 
 результат
 - Заменить тип переменной `float` на `double`
 - Прибавить к этому значению `1.0f` - вывести в окно Watch - объяснить полученный результат. 
@@ -40,12 +40,14 @@ std::cout << static_cast<short>(myVar) << std::endl ;
 
 Создание проекта осуществляется следующим образом: 
 1. Зайдем во вкладку Project верхнего меню и нажмем на опцию Create New Project
-
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/CreateNewProject.png[]
 2. Создадим проект на С++ с файлом main.cpp
-
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/CreateMainFunc.png[]
 3. Добавим созданный проект в существующее пространство Workspace 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/AddExistingProject.png[]
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/AddExistingProjectToTheWkspce.png[]
 
-== Работа с глабальными переменными
+=== Работа с глабальными переменными
 
 Создадим глобальную переменную типа `unsigned short` и присвоим ей значение 65535. После чего 
 в функции main прибавим к данной переменной 1. 
@@ -90,9 +92,9 @@ int main()
 
 В данном случае переполнения не произошло. 
 
-== Работа с указателями на переменную 
+=== Работа с указателями на переменную 
 
-Не меняя тип переменной, возьмем адрес переменной (оператор &) и выведем этот адрес в терминал. 
+Не меняя тип переменной, возьмем адрес переменной (оператор `&`) и выведем этот адрес в терминал. 
 
 Для этого изменим код следующим образом: 
 ```
@@ -140,3 +142,119 @@ return 0;
 ```
 Вывести в терминал значение указателя - пояснить что это за значение.
 
+=== Разыменование указателя
+
+Разыменование указателя представляет выражение в виде `*имя_указателя`. 
+Эта операция позволяет получить объект по адресу, который хранится в указателе.
+
+
+Изменим код следующим образом: 
+```
+#include <iostream>
+
+using tMyVar = short unsigned int; 
+tMyVar myVar = 32767; 
+
+int main()
+{
+  tMyVar *ptrMyVar = &myVar;
+  
+  std::cout << "myVar = " << myVar << std::endl; 
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  
+  *ptrMyVar = 25;
+  std::cout << "Derefencing operator" << std::endl; 
+  std::cout << "myVar = " << myVar << std::endl; 
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  
+  return 0;
+}
+```
+Через выражение `*ptrMyVar` мы можем получить значение по адресу, который хранится 
+в указателе `ptrMyVar`, 
+а через выражение типа `*ptrMyVar = значение` вложить по этому адресу новое значение.
+
+И так как в данном случае указатель `ptrMyVar` указывает на переменную `myVar`, 
+то при изменении значения по адресу, на который указывает указатель, 
+также изменится и значение переменной `myVar`.
+
+=== Приведение типов 
+
+Изменим код следующим образом: 
+```
+#include <iostream>
+
+using tMyVar = short unsigned int; 
+tMyVar myVar = 32767; 
+
+int main()
+{
+  tMyVar *ptrMyVar = &myVar;
+  
+  std::cout << "myVar = " << myVar << std::endl; 
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  
+  *ptrMyVar = 25;
+  int *intPtrMyVar = (int*)ptrMyVar;
+  
+  std::cout << "Derefencing operator" << std::endl; 
+  std::cout << "myVar = " << myVar << std::endl; 
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  std::cout << "intPtrMyVar = " << intPtrMyVar << std::endl;
+  
+  return 0;
+}
+```
+
+Для того, чтобы разыменовать указатель, напишем следующий код: 
+```
+#include <iostream>
+
+using tMyVar = short unsigned int; 
+tMyVar myVar = 32767; 
+
+int main()
+{
+  tMyVar *ptrMyVar = &myVar;
+  
+  std::cout << "myVar = " << myVar << std::endl; 
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  
+  *ptrMyVar = 25;
+  std::cout << "Dereferncing" << std::endl; 
+  std::cout << "myVar = " << myVar << std::endl;
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  
+  int *intPtrMyVar = (int*)ptrMyVar;
+  *intPtrMyVar = 56;
+  
+  std::cout << "Type conversion and dereferncing" << std::endl; 
+  std::cout << "myVar = " << myVar << std::endl;
+  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  std::cout << "intPtrMyVar = " << intPtrMyVar << std::endl;
+  
+  return 0;
+}
+```
+Объяснить полученный результат.
+
+=== Явное преобразование типа 
+
+Изменим код следующим образом, для того, чтобы выполнить явное преобразование типа: 
+```
+#include <iostream>
+
+using tMyVar = short int; 
+tMyVar myVar = 65535; 
+
+int main()
+{
+  std::cout << "myVar = " << myVar << std::endl; 
+  std::cout << static_cast<short>(myVar) << std::endl;
+  
+  return 0;
+}
+
+```
+
+=== Числа с плавающей точкой

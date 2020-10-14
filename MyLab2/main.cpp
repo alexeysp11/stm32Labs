@@ -1,17 +1,13 @@
 #include <iostream>
 
-using tMyVar = short unsigned int; 
-tMyVar myVar = 32767; 
+float operator""_F(float);
+using tMyVar = float; 
+tMyVar myVar = 40'000'000'000F; 
 
 int main()
 {
-  //tMyVar* ptrMyVar = &myVar; 
-  short* ptrMyVar = reinterpret_cast<short*>(&myVar);
-  
-  myVar++; 
-  
   std::cout << "myVar = " << myVar << std::endl; 
-  std::cout << "ptrMyVar = " << ptrMyVar << std::endl; 
+  std::cout << "myVar + 1.0f = " << myVar + 1.0f << std::endl; 
   
-return 0;
+  return 0;
 }
