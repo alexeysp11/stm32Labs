@@ -1,13 +1,12 @@
 #include <iostream>
 
-float operator""_F(float);
-using tMyVar = float; 
-tMyVar myVar = 40'000'000'000F; 
+using tMyVar = short int;
+tMyVar myVar = 65535;
 
 int main()
 {
-  std::cout << "myVar = " << myVar << std::endl; 
-  std::cout << "myVar + 1.0f = " << myVar + 1.0f << std::endl; 
-  
+  std::cout << "myVar = " << myVar << std::endl;
+  std::cout << static_cast<short>(myVar) << std::endl;
+
   return 0;
 }

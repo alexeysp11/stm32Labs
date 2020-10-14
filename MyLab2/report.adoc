@@ -269,4 +269,7 @@ int main()
 }
 ```
 
+Полученный результат изображен на рисунке ниже: 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/static_cast.png[]
+
 === Числа с плавающей точкой
