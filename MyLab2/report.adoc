@@ -96,7 +96,7 @@ int main()
 image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/signed%20short%20int.png[]
 
 Полученное значение объясняется диапазоном, в котором определены значения (об этом есть статья 
-в include:https://en.wikipedia.org/wiki/C_data_types[Википедии]): типу `signed short int`, как и 
+в include::https://en.wikipedia.org/wiki/C_data_types[Википедии]): типу `signed short int`, как и 
 `unsigned short int` в памяти компьютера выделено определенное количество памяти (2 байта, или 
 16 бит). Беззнаковые числа имеют неотрицаетельные значения в диапазоне от 0 до 65535 
 включительно, в то время как знаковые числа одну половину памяти занимают отрицательные числа, 
