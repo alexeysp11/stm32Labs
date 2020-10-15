@@ -5,16 +5,6 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$PROJ_DIR$\main.cpp</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\ostream</file>
-            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
-            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
-            <file>$TOOLKIT_DIR$\config\linker\ST\stm32f411xE.icf</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\iostream</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\istream</file>
-            <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
             <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xlocnum</file>
@@ -85,51 +75,61 @@
             <file>$PROJ_DIR$\Debug\List\Lab2.map</file>
             <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
             <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+            <file>$PROJ_DIR$\main.cpp</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\ostream</file>
+            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
+            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
+            <file>$TOOLKIT_DIR$\config\linker\ST\stm32f411xE.icf</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\iostream</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\istream</file>
+            <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 70 77</file>
+                    <file> 60 67</file>
                 </tool>
             </outputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\main.cpp</name>
-            <outputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 69</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 53</file>
-                </tool>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 71</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICCARM</name>
-                    <file> 5 6 1 14 12 9 8 16 79 13 78 10 11 2 15 7 17 18 19 20 21 22 23 24 25 26 27 28 29 30 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 31 32 33 34 35 36 37</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\Debug\Exe\Lab2.out</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 77</file>
+                    <file> 67</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 4 69 75 76 74 3 73</file>
+                    <file> 74 59 65 66 64 73 63</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.cpp</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 59</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 61</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 43</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 75 76 71 4 2 79 78 6 69 3 68 0 1 72 5 77 7 8 9 10 11 12 13 14 15 16 17 18 19 20 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 21 22 23 24 25 26 27</file>
                 </tool>
             </inputs>
         </file>

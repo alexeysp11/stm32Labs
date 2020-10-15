@@ -1,12 +1,11 @@
 #include <iostream>
 
-using tMyVar = short int;
-tMyVar myVar = 65535;
+signed short int myVar = 32767; 
 
 int main()
 {
-  std::cout << "myVar = " << myVar << std::endl;
-  std::cout << static_cast<short>(myVar) << std::endl;
-
+  //myVar++; 
+  std::cout << "myVar = " << myVar << std::endl; 
+  
   return 0;
 }

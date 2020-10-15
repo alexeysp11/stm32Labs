@@ -72776,27 +72776,13 @@
     "scope": null
   },
   {
-    "ID": "c:@tMyVar",
-    "What": "TypeAliasDecl",
-    "defdec": "Def",
-    "display": "tMyVar",
-    "location": {
-      "column": "7",
-      "line": "3",
-      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\MyLab2\\main.cpp"
-    },
-    "name": "tMyVar",
-    "origin": "project_file",
-    "scope": null
-  },
-  {
     "ID": "c:@myVar",
     "What": "Variable",
     "defdec": "Def",
     "display": "myVar",
     "location": {
-      "column": "8",
-      "line": "4",
+      "column": "18",
+      "line": "3",
       "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\MyLab2\\main.cpp"
     },
     "name": "myVar",
@@ -72810,7 +72796,7 @@
     "display": "int main(void)",
     "location": {
       "column": "5",
-      "line": "6",
+      "line": "5",
       "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\MyLab2\\main.cpp"
     },
     "name": "main",
