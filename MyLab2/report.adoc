@@ -388,7 +388,18 @@ image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/FloatExpone
 
 Далее прибавим к этому значению `1.0f` и выведем значение в окно Watch: 
 ```
+#include <iostream>
 
+float myVar = 40'000'000'000.0F;
+
+int main()
+{
+  myVar += 1.0f;
+
+  std::cout << "myVar = " << myVar << std::endl;
+
+  return 0;
+}
 ```
 
 image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/FloatExponentPlusOne.png[]
