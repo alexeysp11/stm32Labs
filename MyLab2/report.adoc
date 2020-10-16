@@ -368,3 +368,57 @@ int main()
 image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/static_cast.png[]
 
 === Числа с плавающей точкой
+
+Создадим переменную типа `float` и присвоим ей значение `40'000'000'000.0F`: 
+```
+#include <iostream>
+
+float myVar = 40'000'000'000.0F; 
+
+int main()
+{
+  std::cout << "myVar = " << myVar << std::endl; 
+  
+  return 0;
+}
+```
+
+Значение, которое было получено в терминале представлено на рисунке ниже: 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/FloatExponent.png[]
+
+Далее прибавим к этому значению `1.0f` и выведем значение в окно Watch: 
+```
+
+```
+
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/FloatExponentPlusOne.png[]
+
+Как видно, результат не поменялся при увеличении переменной `myVar` на единицу, поскольку 
+переменная `myVar` представлена в экспоненциальной форме (на Википедии есть статьи, одна из 
+которых посвящена https://en.wikipedia.org/wiki/Computer_number_format[форматам представления чисел в компьютере], 
+а вторая - https://en.wikipedia.org/wiki/Single-precision_floating-point_format[составным частям чисел с плавающей точкой (знак, степень и мантисса)]). 
+
+Мантисса хранит в себе значимую часть представления числа (в нашем случае число 4), а степень - 
+степень, в которую необходимо возвести мантиссу, чтобы получить необходимое чиссло. 
+
+Увеличение переменной `myVar` на единицу, судя по всему, не является существенным, поскольку 
+мантисса числа скорее всего не поменялась. 
+
+Если изменить тип переменной `myVar` с `float` на `double`, то получим следующий код: 
+```
+#include <iostream>
+
+double myVar = 40'000'000'000.0F; 
+
+int main()
+{
+  myVar += 1.0f;
+  
+  std::cout << "myVar = " << myVar << std::endl; 
+  
+  return 0;
+}
+
+```
+Это даст результат, как показано на рисунке ниже: 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab2/img/FloatExponentToDouble.png[]

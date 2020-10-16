@@ -18781,7 +18781,7 @@
           {
             "ID": "c:@N@std@ST>2#T#T@num_put@F@put#t0.1#&$@N@std@S@ios_base#t0.0#L#1",
             "What": "CXXMethod",
-            "defdec": "Def",
+            "defdec": "Dec",
             "display": "_OutIt put(_OutIt, std::ios_base &, _Elem, long)",
             "location": {
               "column": "10",
@@ -18837,7 +18837,7 @@
           {
             "ID": "c:@N@std@ST>2#T#T@num_put@F@put#t0.1#&$@N@std@S@ios_base#t0.0#d#1",
             "What": "CXXMethod",
-            "defdec": "Dec",
+            "defdec": "Def",
             "display": "_OutIt put(_OutIt, std::ios_base &, _Elem, double)",
             "location": {
               "column": "10",
@@ -23115,6 +23115,20 @@
         "scope": null
       },
       {
+        "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#1*t0.0@T@type",
+        "What": "TypedefDecl",
+        "defdec": "Def",
+        "display": "_Ty",
+        "location": {
+          "column": "1",
+          "line": "247",
+          "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
+        },
+        "name": "type",
+        "origin": "system_include",
+        "scope": "std"
+      },
+      {
         "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#*t0.0@T@type",
         "What": "TypedefDecl",
         "defdec": "Def",
@@ -23144,20 +23158,6 @@
       },
       {
         "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#3*t0.0@T@type",
-        "What": "TypedefDecl",
-        "defdec": "Def",
-        "display": "_Ty",
-        "location": {
-          "column": "1",
-          "line": "247",
-          "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
-        },
-        "name": "type",
-        "origin": "system_include",
-        "scope": "std"
-      },
-      {
-        "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#1*t0.0@T@type",
         "What": "TypedefDecl",
         "defdec": "Def",
         "display": "_Ty",
@@ -66531,7 +66531,7 @@
           {
             "ID": "c:@N@std@ST>2#T#T@basic_ostream@F@operator<<#S#",
             "What": "CXXMethod",
-            "defdec": "Def",
+            "defdec": "Dec",
             "display": "std::basic_ostream::_Myt & operator<<(short)",
             "location": {
               "column": "19",
@@ -66539,76 +66539,6 @@
               "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
             },
             "name": "operator<<",
-            "origin": "system_include",
-            "scope": "std::basic_ostream"
-          },
-          {
-            "ID": "c:ostream@6396@N@std@ST>2#T#T@basic_ostream@F@operator<<#S#@_State",
-            "What": "VarDecl",
-            "defdec": "Def",
-            "display": "_State",
-            "location": {
-              "column": "23",
-              "line": "235",
-              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
-            },
-            "name": "_State",
-            "origin": "system_include",
-            "scope": "std::basic_ostream"
-          },
-          {
-            "ID": "c:ostream@6447@N@std@ST>2#T#T@basic_ostream@F@operator<<#S#@_Ok",
-            "What": "VarDecl",
-            "defdec": "Def",
-            "display": "_Ok",
-            "location": {
-              "column": "18",
-              "line": "236",
-              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
-            },
-            "name": "_Ok",
-            "origin": "system_include",
-            "scope": "std::basic_ostream"
-          },
-          {
-            "ID": "c:ostream@6543@N@std@ST>2#T#T@basic_ostream@F@operator<<#S#@_Nput_fac",
-            "What": "VarDecl",
-            "defdec": "Def",
-            "display": "_Nput_fac",
-            "location": {
-              "column": "20",
-              "line": "240",
-              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
-            },
-            "name": "_Nput_fac",
-            "origin": "system_include",
-            "scope": "std::basic_ostream"
-          },
-          {
-            "ID": "c:ostream@6613@N@std@ST>2#T#T@basic_ostream@F@operator<<#S#@_Bfl",
-            "What": "VarDecl",
-            "defdec": "Def",
-            "display": "_Bfl",
-            "location": {
-              "column": "26",
-              "line": "241",
-              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
-            },
-            "name": "_Bfl",
-            "origin": "system_include",
-            "scope": "std::basic_ostream"
-          },
-          {
-            "ID": "c:ostream@6683@N@std@ST>2#T#T@basic_ostream@F@operator<<#S#@_Tmp",
-            "What": "VarDecl",
-            "defdec": "Def",
-            "display": "_Tmp",
-            "location": {
-              "column": "12",
-              "line": "242",
-              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
-            },
-            "name": "_Tmp",
             "origin": "system_include",
             "scope": "std::basic_ostream"
           },
@@ -66727,7 +66657,7 @@
           {
             "ID": "c:@N@std@ST>2#T#T@basic_ostream@F@operator<<#d#",
             "What": "CXXMethod",
-            "defdec": "Dec",
+            "defdec": "Def",
             "display": "std::basic_ostream::_Myt & operator<<(double)",
             "location": {
               "column": "19",
@@ -66735,6 +66665,48 @@
               "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
             },
             "name": "operator<<",
+            "origin": "system_include",
+            "scope": "std::basic_ostream"
+          },
+          {
+            "ID": "c:ostream@11872@N@std@ST>2#T#T@basic_ostream@F@operator<<#d#@_State",
+            "What": "VarDecl",
+            "defdec": "Def",
+            "display": "_State",
+            "location": {
+              "column": "23",
+              "line": "423",
+              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
+            },
+            "name": "_State",
+            "origin": "system_include",
+            "scope": "std::basic_ostream"
+          },
+          {
+            "ID": "c:ostream@11923@N@std@ST>2#T#T@basic_ostream@F@operator<<#d#@_Ok",
+            "What": "VarDecl",
+            "defdec": "Def",
+            "display": "_Ok",
+            "location": {
+              "column": "18",
+              "line": "424",
+              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
+            },
+            "name": "_Ok",
+            "origin": "system_include",
+            "scope": "std::basic_ostream"
+          },
+          {
+            "ID": "c:ostream@12019@N@std@ST>2#T#T@basic_ostream@F@operator<<#d#@_Nput_fac",
+            "What": "VarDecl",
+            "defdec": "Def",
+            "display": "_Nput_fac",
+            "location": {
+              "column": "20",
+              "line": "428",
+              "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\ostream"
+            },
+            "name": "_Nput_fac",
             "origin": "system_include",
             "scope": "std::basic_ostream"
           },
@@ -72781,7 +72753,7 @@
     "defdec": "Def",
     "display": "myVar",
     "location": {
-      "column": "18",
+      "column": "8",
       "line": "3",
       "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\MyLab2\\main.cpp"
     },
