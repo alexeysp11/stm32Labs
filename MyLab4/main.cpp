@@ -1,74 +1,53 @@
-//#include <cstdint>            //for int types such as uint32_t
-#include "gpioaregisters.hpp" //for Gpioa
-#include "gpiocregisters.hpp" //for Gpioc
-#include "gpiobregisters.hpp" //for Gpiob
-#include "rccregisters.hpp"   //for RCC
-#include "tim2registers.hpp"   //for SPI2
-#include "nvicregisters.hpp"  //for NVIC
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
 
-using namespace std ;
-
-
-
-extern "C"
+int Test(int value, int value1, int value2, int value3, int value4, int value5)
 {
-  int __low_level_init(void)
-  {
-    //Switch on external 16 MHz oscillator
-    RCC::CR::HSEON::On::Set() ;
-    while (!RCC::CR::HSERDY::Ready::IsSet())
-    {
-
-    }
-    //Switch system clock on external oscillator
-    RCC::CFGR::SW::Hse::Set() ;
-    while (!RCC::CFGR::SWS::Hse::IsSet())
-    {
-
-    }
-    
-    
-    //Switch on clock on PortA and PortC, PortB
-    RCC::AHB1ENRPack<
-      RCC::AHB1ENR::GPIOCEN::Enable,
-      RCC::AHB1ENR::GPIOAEN::Enable
-      >::Set() ;
-    
-    RCC::APB1ENRPack<
-      RCC::APB1ENR::TIM2EN::Enable,  
-      >::Set() ;
-    
-    // LED1 on PortA.5, set PortA.5 as output
-    GPIOA::MODER::MODER5::Output::Set() ;
-        
-    
-    // LED2 on PortC.9, LED3 on PortC.8, LED4 on PortC.5 so set PortC.5,8,9 as output
-    GPIOC::MODERPack<
-      GPIOC::MODER::MODER5::Output,
-      GPIOC::MODER::MODER8::Output,
-      GPIOC::MODER::MODER9::Output
-    >::Set() ;
-        
-    
-     NVIC::ISER0::Write(1 << 28) ;
-     TIM2::PSC::Write(8000) ;
-     TIM2::DIER::UIE::Enable::Set() ;
-    return 1;
-  }
+  std::cout << value << " "  << std::endl;
+  return value ;
 }
 
 int main()
-{
-
-  TIM2::ARR::Write(1000) ;
-  TIM2::SR::UIF::NoUpdate::Set();
-  TIM2::CNT::Write(0);
-  TIM2::CR1::CEN::Enable::Set() ;  
+{  
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet())
+  {
+  }
+ 
+  RCC::CFGR::SW::Hse::Set();
   
-  for(;;)
+  while(!RCC::CFGR::SWS::Hse::IsSet())
   {
   }
   
-  return 0 ;
+  RCC::CR::HSION::Off::Set();
+  
+  //Подать тактирование на порт С
+  //*reinterpret_cast<std::uint32_t*>(0x40023830) = 1U << 2U ; 
+  volatile int t = 0;   
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  //Настроить PortC.5 на выход. Регистр PortC.MODER5, Адрес см. https://www.st.com/resource/en/datasheet/stm32f411re.pdf  стр 54
+  // Описание регистра см https://www.st.com/resource/en/reference_manual/dm00119316-stm32f411xce-advanced-armbased-32bit-mcus-stmicroelectronics.pdf стр. 157
+ // *reinterpret_cast<std::uint32_t* >(0x40020800) |= 1U << 10U;
+  
+  GPIOC::MODER::MODER5::Input::Set();
+  
+  //Вывести 1 в PortC.5. Регистр ODR м https://www.st.com/resource/en/reference_manual/dm00119316-stm32f411xce-advanced-armbased-32bit-mcus-stmicroelectronics.pdf стр. 159
+  //*reinterpret_cast<std::uint32_t* >(0x40020814) |= 1U << 5U; 
+  
+  for(;;)
+  {
+    for (int i= 0; i < 1000000 ; i ++)
+    {
+    }
+    
+    GPIOC::ODR::ODR5::High::Set() ;
+  
+    for (int i= 0; i < 1000000 ; i ++)
+    {
+    }
+    GPIOC::ODR::ODR5::Low::Set() ;
+  }
+  return 1 ;
 }
-

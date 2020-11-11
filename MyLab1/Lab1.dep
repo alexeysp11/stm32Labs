@@ -5,6 +5,32 @@
     <configuration>
         <name>Debug</name>
         <outputs>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpiocfieldvalues.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\rccfieldvalues.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\fieldvalue.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\fieldvaluebase.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\register.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\registerbase.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\registerfield.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\registertype.hpp</file>
+            <file>$PROJ_DIR$\Common\susudefs.hpp</file>
+            <file>$PROJ_DIR$\main.cpp</file>
+            <file>$PROJ_DIR$\startupF411RE.cpp</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\algorithm</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\exception</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\new</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\iosfwd</file>
+            <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
+            <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
+            <file>$TOOLKIT_DIR$\config\linker\ST\stm32f411xC.icf</file>
+            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+            <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
             <file>$TOOLKIT_DIR$\lib\dlpp7M_tl_nc.a</file>
             <file>$PROJ_DIR$\Debug\Obj\startupF411RE.o</file>
             <file>$PROJ_DIR$\Debug\Obj\startupF411RE.xcl</file>
@@ -51,77 +77,36 @@
             <file>$TOOLKIT_DIR$\inc\cpp\utility</file>
             <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\algorithm</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\exception</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\new</file>
-            <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpiocfieldvalues.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\rccfieldvalues.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\fieldvalue.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\fieldvaluebase.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\register.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\registerbase.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\registerfield.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\registertype.hpp</file>
-            <file>$PROJ_DIR$\Common\susudefs.hpp</file>
-            <file>$PROJ_DIR$\main.cpp</file>
-            <file>$PROJ_DIR$\startupF411RE.cpp</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\iosfwd</file>
-            <file>$TOOLKIT_DIR$\inc\c\string.h</file>
-            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
-            <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
-            <file>$TOOLKIT_DIR$\config\linker\ST\stm32f411xC.icf</file>
-            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
-            <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 5 6</file>
+                    <file> 31 32</file>
                 </tool>
             </outputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\Debug\Exe\Lab1.out</name>
-            <outputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 6</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 69 36 1 70 71 0 67 68</file>
-                </tool>
-            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\main.cpp</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 36</file>
+                    <file> 62</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 3</file>
+                    <file> 29</file>
                 </tool>
                 <tool>
                     <name>__cstat</name>
-                    <file> 4</file>
+                    <file> 30</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 53 51 56 11 9 12 13 17 15 18 16 14 30 20 19 28 26 10 27 25 29 7 32 31 8 21 24 22 57 23 55 62 46 39 45 47 50 49 48 37 42 43 65 40 44 34 66 35 38 41 33 60 59 61 58 54 52</file>
+                    <file> 2 0 5 37 35 38 39 43 41 44 42 40 56 46 45 54 52 36 53 51 55 33 58 57 34 47 50 48 6 49 4 11 14 65 71 15 18 17 16 63 68 69 19 66 70 60 20 61 64 67 59 9 8 10 7 3 1</file>
                 </tool>
             </inputs>
         </file>
@@ -130,13 +115,28 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 1</file>
+                    <file> 27</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 2</file>
+                    <file> 28</file>
                 </tool>
             </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\Lab1.out</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 32</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 23 62 27 24 25 26 21 22</file>
+                </tool>
+            </inputs>
         </file>
     </configuration>
     <configuration>

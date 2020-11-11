@@ -945,7 +945,7 @@
                 <expressions>
                     <item>myVar</item>
                     <item>ptrMyVar</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspace>
     <project>
-        <path>$WS_DIR$\Lab1\iarproject.ewp</path>
+        <path>$WS_DIR$\MyLab3\iarproject.ewp</path>
+    </project>
+    <project>
+        <path>$WS_DIR$\MyLab4\iarproject.ewp</path>
     </project>
     <project>
         <path>$WS_DIR$\MyLab1\Lab1.ewp</path>

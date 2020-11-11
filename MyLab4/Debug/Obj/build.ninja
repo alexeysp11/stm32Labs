@@ -1,4 +1,4 @@
-#Generating source browse information for project lab4
+#Generating source browse information for project iarproject
 
 
 #Abbreviations
@@ -21,8 +21,8 @@ rule browsedata
 
 #Build steps
 build main.pbi : index main.xcl
-build startup.pbi : index startup.xcl
-build lab4.pbd : link main.pbi startup.pbi
-build lab4.pbw : browsedata lab4.pbd
+build startupF411RE.pbi : index startupF411RE.xcl
+build iarproject.pbd : link main.pbi startupF411RE.pbi
+build iarproject.pbw : browsedata iarproject.pbd
 
 
