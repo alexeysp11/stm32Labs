@@ -241,7 +241,7 @@ RCC::PLLCFGR::PLLSRC::HseSource::Set();
 Далее необходимо установить нужную частоту. Для этого необходима схема тактирования 
 микроконроллера: 
 
-img::https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/ClockTree_stm32f411.png[]
+img:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/ClockTree_stm32f411.png[]
 
 Далее можно начать установку частоты: 
 ```
