@@ -98,6 +98,7 @@
             <file>$PROJ_DIR$\Debug\Obj\iarproject.pbd</file>
             <file>$TOOLKIT_DIR$\inc\cpp\exception</file>
             <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
+            <file>$PROJ_DIR$\AHardware\Registers\CortexM4\stkregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
@@ -111,6 +112,7 @@
             <file>$PROJ_DIR$\Common\utils.hpp</file>
             <file>$PROJ_DIR$\main.cpp</file>
             <file>$PROJ_DIR$\startupF411RE.cpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\CortexM4\FieldValues\stkfieldvalues.hpp</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
@@ -144,18 +146,18 @@
                     <file> 56 30 86</file>
                 </tool>
                 <tool>
-                    <name>__cstat</name>
-                    <file> 48</file>
-                </tool>
-                <tool>
                     <name>BICOMP</name>
                     <file> 0</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 48</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 94 80 96 28 81 61 5 15 71 27 70 33 87 36 18 25 20 88 66 37 31 92 65 89 23 26 52 58 97 7 95 102 29 84 69 6 74 50 91 55 22 35 42 12 77 63 68 45 72 17 82 100 99 101 98 93 43 83 64 67 79 44 57 85 54 73 38 39 10 34 2 19 60 53 21 13 3 16 51 1 59 46 62</file>
+                    <file> 95 80 97 28 81 61 5 15 71 27 70 33 87 36 18 25 20 88 66 37 31 92 65 89 23 26 52 58 98 7 96 103 29 84 69 6 74 50 91 55 22 35 42 12 77 63 68 45 72 17 82 101 100 102 99 94 43 83 64 67 79 44 57 85 54 73 38 39 10 34 2 19 60 53 21 13 3 16 51 1 59 46 62 93 107</file>
                 </tool>
             </inputs>
         </file>
@@ -167,12 +169,12 @@
                     <file> 78 75 24</file>
                 </tool>
                 <tool>
-                    <name>__cstat</name>
-                    <file> 49</file>
-                </tool>
-                <tool>
                     <name>BICOMP</name>
                     <file> 41</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 49</file>
                 </tool>
             </outputs>
         </file>

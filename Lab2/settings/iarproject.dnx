@@ -16,7 +16,7 @@
         <ShowSource>1</ShowSource>
     </Trace1>
     <DebugChecksum>
-        <Checksum>4038410202</Checksum>
+        <Checksum>3121657023</Checksum>
     </DebugChecksum>
     <Disassembly>
         <InstrCount>0</InstrCount>
@@ -35,7 +35,7 @@
         <ShowArgs>0</ShowArgs>
     </CallStack>
     <StLinkDriver>
-        <stlinkserialNo>15291067</stlinkserialNo>
+        <stlinkserialNo>47580367</stlinkserialNo>
         <stlinkfoundProbes />
         <stlinkResetStyle>0</stlinkResetStyle>
         <stlinkResetStrategy>0</stlinkResetStrategy>
@@ -147,7 +147,7 @@
     </DisassembleMode>
     <Breakpoints2>
         <Bp0>_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\RtosWrapper\main.cpp}.164.1" 0 0 1 "" 0 "" 0</Bp0>
-        <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\main.cpp}.62.1" 0 0 1 "" 0 "" 0</Bp1>
+        <Bp1>_ 0 "EMUL_CODE" "{$PROJ_DIR$\main.cpp}.0.1" 0 0 1 "" 0 "" 0</Bp1>
         <Count>2</Count>
     </Breakpoints2>
     <Aliases>

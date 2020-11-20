@@ -1,50 +1,378 @@
-= Lab1
+= Lab3
 
+== Задание 1 - Настроить внешний источник частоты HSE и подключить его на системную шину.
 
-=== Задание 1
-. Создать проект C++ c main.cpp
-. Подключить к проекту файл cstartup.cpp
-. Создать папки AbstractHardware/Registers/FiledValues, Common
-. Создать структуру проекта в соотвествии со структурой папок
-. Настроить STACK, HEAP
-. Скопировать проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1
-. Скопировать содержимое папки из папки AHardware/Registers и Common с проекта преподавателя в свою папку
-. Написать программу в main.cpp
-[source, cpp, linenums]
+Для подключения внешнего источника частоты HSE необходимо в модуле RCC выбрать 
+регистр CR и в поле HSEON включить внешний источник: 
+```
+RCC::CR::HSEON::On::Set();
+```
 
-----
-#include "gpiocregisters.hpp" //for GPIOC
-#include "rccregisters.hpp"   //for RCC
+Затем необходимо дождаться, пока в поле HSERDY регистра CR не запишется 1.
+Тем самым мы сможем убедиться в том, что источник частоты HSE стабилизировался. 
+Для этого воспользуемся пустым циклом while: 
+```
+while(!RCC::CR::HSERDY::Ready::IsSet())
+{
+}
+```
+или эквивалентно: 
+```
+while(!RCC::CR::HSERDY::Ready::IsSet());
+```
+
+Следующим этапом необходимо переключить системную частоту на тактирование нужным источником.
+Для этого с помощью поля SW регистра CFGR переключим источник: 
+```
+RCC::CFGR::SW::Hse::Set();
+```
+
+Далее нужно подождать, пока системная частота переключится на HSE источник.
+Для этого аналогичным образом воспользуемся 
+функцией while используя поле SWS, которое говорит о готовности внешнего источника, и ждем, 
+пока внешний источник не станет системным: 
+```
+while(!RCC::CFGR::SWS::Hse::IsSet());
+```
+
+После этого мы можем выключить внутреннюю частоту с помощью поля HSION: 
+```
+RCC::CR::HSION::Off::Set();
+```
+
+Далее используем бесконечный цикл, в котором реализуем моргание светодиодом с частотой в 1 Гц
+с помощью кастомной функции `sleep()` (на самом деле она была взята со StackOverflow), 
+реализующей задержку на заданное количество секунд, и 
+с помощью попеременного включения и выключения светодиода командами 
+`GPIOC::ODR::ODR5::High::Set();` и `GPIOC::ODR::ODR5::Low::Set();` соотвественно: 
+```
+sleep(1.0);
+GPIOC::ODR::ODR5::High::Set();
+
+sleep(1.0);
+GPIOC::ODR::ODR5::Low::Set();
+```
+
+Хотя задержку можно реализовать также с помощью пустого цикла `for`: 
+```
+for(int i = 0; i < 1000000; i++);
+```
+
+В целом код программы выглядит следующим образом: 
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+#include <ctime>
+
+void sleep(float seconds)
+{
+    clock_t startClock = clock();
+    float secondsAhead = seconds * CLOCKS_PER_SEC;
+    
+    // do nothing until the elapsed time has passed.
+    while(clock() < startClock+secondsAhead);
+    return;
+}
+
+int main()
+{  
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+ 
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+  
+  RCC::CR::HSION::Off::Set();
+  
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    sleep(1.0);
+    GPIOC::ODR::ODR5::High::Set();
+    
+    sleep(1.0);
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
+```
+
+В результате светодиод моргает примерно раз в секунду. 
+
+Запустим программу с использованием цикла для реализации задержки в 1 секунду: 
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
 
 int main()
 {
-  RCC::AHB1ENR::GPIOCEN::Enable::Set() ;
-  GPIOC::MODER::MODER5::Output::Set() ;
-  GPIOC::ODR::ODR5::Enable::Set() ;
-  GPIOC::ODR::ODR5::Disable::Set() ;
-  return 0 ;
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    for(int i = 0; i < 1000000; i++);
+    GPIOC::ODR::ODR5::High::Set();
+    
+    for(int i = 0; i < 1000000; i++);
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
 }
-----
-. Посмотреть видео: https://youtu.be/uC0jJGfDxtM
+```
 
-=== Задание 2
-. Откомпилировать и отлинковать программу
-. Загрузить программу в симуляторе
-. Сделать пошаговую отладку
-. Настроить Debugger на отладку через StLink
-. Подключить плату к компьютеру
-. Загрузить программу в плату
-. Выполнить пошаговую отладку
-. Описать полученный результат
-. Посмотреть видео: https://youtu.be/c7CasTJKw7o
+После загрузки кода в микроконтроллер, светодиод не моргает, а просто горит. 
+Хотя если поставить точки останова на строчках: 
+```
+GPIOC::ODR::ODR5::High::Set();
+```
+и
+```
+GPIOC::ODR::ODR5::Low::Set();
+```
+в бесконечном цикле `while`, то можно вручную зажигать и гасить светодиод.
 
-=== Задание 3
-. Запустить анализатор стека. Узнать рекомендуемый размер стека.
-. Изменить в проекте размер стека на рекомендуемый
-. Создать map файл
-. Описать что написано в map файле
-. Поставить размер кучи HEAP в 0. Объяснить почему так можно сделать. И почему STACK нельзя
-. Добавить проект в Git и сделать синхронизацию с GitHub
-. Сделать отчет по каждому пункту каждого задания в файле .adoc. Выложить файл в GitHub
-. Прислать ссылку на GitHub преподавателю для проверки
-. Посмотреть видео: https://youtu.be/TajLTcjBgIg
+В итоге, можно сделать вывод о том, что если необходимо реализовать задержку на микроконтроллере, 
+и стоит выбор между тем, чтобы использовать пустой цикл `for`, и тем, чтобы использовать 
+библиотеку `ctime`, то надежнее использовать второй вариант. 
+Потому что скорость выполнения пустого цикла зависит от тактовой частоты процессора, в то 
+время как библиотека `ctime` обеспечивает более корректные интервалы времени. 
+
+== Задание 2 - Настроить внутренний источник частоты HSI и подключить его на системную шину.
+
+Для включения внутреннего источника питания необходимо из предыдущего кода убрать команды 
+включения HSE источника. 
+Так как не подключен никакой источник питания, микроконтроллер работает от внутренней частоты. 
+Для наглядности проверки изменения источника подключим светодиод, который будет моргать с 
+частотой тактирования.
+
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+#include <ctime>
+
+void sleep(float seconds)
+{
+    clock_t startClock = clock();
+    float secondsAhead = seconds * CLOCKS_PER_SEC;
+    
+    // do nothing until the elapsed time has passed.
+    while(clock() < startClock+secondsAhead);
+    return;
+}
+
+int main()
+{
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    sleep(1.0);
+    GPIOC::ODR::ODR5::High::Set();
+    
+    sleep(1.0);
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
+```
+
+Запустим программу с использованием цикла для реализации задержки в 1 секунду: 
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+
+int main()
+{
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    for(int i = 0; i < 1000000; i++);
+    GPIOC::ODR::ODR5::High::Set();
+    
+    for(int i = 0; i < 1000000; i++);
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
+```
+
+Аналогичный результат, как при выполнении прошлого задания: после загрузки кода в 
+микроконтроллер, светодиод не моргает, а просто горит. 
+Хотя если поставить точки останова на строчках: 
+```
+GPIOC::ODR::ODR5::High::Set();
+```
+и
+```
+GPIOC::ODR::ODR5::Low::Set();
+```
+в бесконечном цикле `while`, то можно вручную зажигать и гасить светодиод.
+
+== Задание 3 - Настроить PIL источник тактовой частоты на 32 Мгц и подключить его на системную шину.
+
+Сначала включим внешний источник HSE, затем нужно дождаться момента, когда он стабилизируется: 
+```
+RCC::CR::HSEON::On::Set();
+while(!RCC::CR::HSERDY::Ready::IsSet());
+``` 
+
+Переключим на выбранный источник системную частоту.Дождемся переключения:
+```
+RCC::CFGR::SW::Hse::Set();
+while(!RCC::CFGR::SWS::Hse::IsSet());
+```
+
+Отключим внутренний источник HSI и переключим PLL на HSE с помощью регистра PLLCFGR: 
+```
+RCC::CR::HSION::Off::Set();
+RCC::PLLCFGR::PLLSRC::HseSource::Set();
+```
+
+Далее необходимо установить нужную частоту. Для этого необходима схема тактирования 
+микроконроллера: 
+
+img::https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/ClockTree_stm32f411.png[]
+
+Далее можно начать установку частоты: 
+```
+// Set VCO equal to 2 MHz => HSE / 4 = 8'000'000 / 4 
+RCC::PLLCFGR::PLLM0::Set(4U);
+
+// Set VCC Output equal to 128 MHz => VCO * 64 = 2'000'000 * 64
+RCC::PLLCFGR::PLLN0::Set(64U);
+
+// Set PLL Output equal to 32 Mhz => VCC / 4 = 128'000'000 / 4
+RCC::PLLCFGR::PLLP0::Pllp4::Set();
+```
+
+Активируем PLL и ждем, пока PLL не станет заблокированным: 
+```
+RCC::CR::PLLON::On::Set();
+while(RCC::CR::PLLRDY::Unlocked::IsSet());
+```
+
+Затем переключаем системный источник на полученную частоту и дожидаемся, пока системная 
+частота переключится на наш источник. 
+```
+RCC::CFGR::SW::Pll::Set();
+while(!RCC::CFGR::SWS::Pll::IsSet());
+```
+
+Код программы с использованием библиотеки `ctime` и кастомной функции задержки `sleep()`:
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+#include <ctime>
+
+void sleep(float seconds)
+{
+    clock_t startClock = clock();
+    float secondsAhead = seconds * CLOCKS_PER_SEC;
+    
+    // do nothing until the elapsed time has passed.
+    while(clock() < startClock+secondsAhead);
+    return;
+}
+
+int main()
+{  
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+ 
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+  
+  RCC::CR::HSION::Off::Set();
+  RCC::PLLCFGR::PLLSRC::HseSource::Set();
+  
+  // Set VCO equal to 2 MHz => HSE / 4 = 8'000'000 / 4 
+  RCC::PLLCFGR::PLLM0::Set(4U);
+  
+  // Set VCC Output equal to 128 MHz => VCO * 64 = 2'000'000 * 64
+  RCC::PLLCFGR::PLLN0::Set(64U);
+  
+  // Set PLL Output equal to 32 Mhz => VCC / 4 = 128'000'000 / 4
+  RCC::PLLCFGR::PLLP0::Pllp4::Set();
+  
+  RCC::CR::PLLON::On::Set();
+  while(RCC::CR::PLLRDY::Unlocked::IsSet());
+  
+  RCC::CFGR::SW::Pll::Set();
+  while(!RCC::CFGR::SWS::Pll::IsSet());
+  
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    sleep(1.0);
+    GPIOC::ODR::ODR5::High::Set();
+    
+    sleep(1.0);
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
+```
+
+Код той же программы с использованием пустых циклов представлен ниже: 
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+
+int main()
+{  
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+ 
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+  
+  RCC::CR::HSION::Off::Set();
+  RCC::PLLCFGR::PLLSRC::HseSource::Set();
+  
+  // Set VCO equal to 2 MHz => HSE / 4 = 8'000'000 / 4 
+  RCC::PLLCFGR::PLLM0::Set(4U);
+  
+  // Set VCC Output equal to 128 MHz => VCO * 64 = 2'000'000 * 64
+  RCC::PLLCFGR::PLLN0::Set(64U);
+  
+  // Set PLL Output equal to 32 Mhz => VCC / 4 = 128'000'000 / 4
+  RCC::PLLCFGR::PLLP0::Pllp4::Set();
+  
+  RCC::CR::PLLON::On::Set();
+  while(RCC::CR::PLLRDY::Unclocked::IsSet());
+  
+  RCC::CFGR::SW::Pll::Set();
+  while(!RCC::CFGR::SWS::Pll::IsSet());
+  
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    for(int i = 0; i < 1'000'000; i++);
+    GPIOC::ODR::ODR5::High::Set();
+    
+    for(int i = 0; i < 1'000'000; i++);
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
+```
+
+Аналогично результатам, полученным в ходе предыдущих двух заданий, при использовании 
+пустого цикла `for` мы получаем постоянно горящий светодиод, который с помощью точек останова
+можно включать и выключать. 
