@@ -1,4 +1,6 @@
 main.pbi: \
+  C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers\STM32F411\FieldValues\gpioafieldvalues.hpp \
+  C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers\STM32F411\gpioaregisters.hpp \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\errno.h \
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\cpp\cerrno \

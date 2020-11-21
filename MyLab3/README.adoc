@@ -258,7 +258,7 @@ RCC::PLLCFGR::PLLP0::Pllp4::Set();
 Активируем PLL и ждем, пока PLL не станет заблокированным: 
 ```
 RCC::CR::PLLON::On::Set();
-while(RCC::CR::PLLRDY::Unlocked::IsSet());
+while(RCC::CR::PLLRDY::Unсlocked::IsSet());
 ```
 
 Затем переключаем системный источник на полученную частоту и дожидаемся, пока системная 
@@ -306,7 +306,7 @@ int main()
   RCC::PLLCFGR::PLLP0::Pllp4::Set();
   
   RCC::CR::PLLON::On::Set();
-  while(RCC::CR::PLLRDY::Unlocked::IsSet());
+  while(RCC::CR::PLLRDY::Unсlocked::IsSet());
   
   RCC::CFGR::SW::Pll::Set();
   while(!RCC::CFGR::SWS::Pll::IsSet());

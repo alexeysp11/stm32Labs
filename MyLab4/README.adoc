@@ -1,50 +1,197 @@
-= Lab1
+= Lab4
 
+== Задание 
 
-=== Задание 1
-. Создать проект C++ c main.cpp
-. Подключить к проекту файл cstartup.cpp
-. Создать папки AbstractHardware/Registers/FiledValues, Common
-. Создать структуру проекта в соотвествии со структурой папок
-. Настроить STACK, HEAP
-. Скопировать проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1
-. Скопировать содержимое папки из папки AHardware/Registers и Common с проекта преподавателя в свою папку
-. Написать программу в main.cpp
-[source, cpp, linenums]
+Сделать программу, которая при нажатии кнопки UserButton на отладочной плате 
+http://www.waveshare.com/xnucleo-F411RE.htm меняет состояние всех 4 светодидов. 
 
-----
-#include "gpiocregisters.hpp" //for GPIOC
-#include "rccregisters.hpp"   //for RCC
+1. Тактирование производится от PLL на частоте 10 Мгц.
+2. По нажатию кнопки поменять состояние всех 4 светодиодов на противоположные
+3. Нажатие кнопки определяется по отпусканию кнопки, т.е. нужно определить, что кнопка прижата, 
+и дождаться пока она будет отжата - это будет будет означать, что кнопка нажата.
+
+== Выполнение задания
+
+Сначала включим внешний источник HSE, затем нужно дождаться момента, когда он стабилизируется: 
+```
+RCC::CR::HSEON::On::Set();
+while(!RCC::CR::HSERDY::Ready::IsSet());
+``` 
+
+Переключим на выбранный источник системную частоту.Дождемся переключения:
+```
+RCC::CFGR::SW::Hse::Set();
+while(!RCC::CFGR::SWS::Hse::IsSet());
+```
+
+Отключим внутренний источник HSI и переключим PLL на HSE с помощью регистра PLLCFGR: 
+```
+RCC::CR::HSION::Off::Set();
+RCC::PLLCFGR::PLLSRC::HseSource::Set();
+```
+
+Далее необходимо установить нужную частоту. Для этого необходима схема тактирования 
+микроконроллера: 
+
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/ClockTree_stm32f411.png[]
+
+Далее можно начать установку частоты: 
+```
+// Set VCO equal to 2 MHz => HSE / 4 = 8'000'000 / 4 
+RCC::PLLCFGR::PLLM0::Set(4U);
+
+// Set VCC Output equal to 128 MHz => VCO * 64 = 2'000'000 * 64
+RCC::PLLCFGR::PLLN0::Set(64U);
+
+// Set PLL Output equal to 32 Mhz => VCC / 4 = 128'000'000 / 4
+RCC::PLLCFGR::PLLP0::Pllp4::Set();
+```
+
+Активируем PLL и ждем, пока PLL не станет заблокированным: 
+```
+RCC::CR::PLLON::On::Set();
+while(RCC::CR::PLLRDY::Unсlocked::IsSet());
+```
+
+Затем переключаем системный источник на полученную частоту и дожидаемся, пока системная 
+частота переключится на наш источник. 
+```
+RCC::CFGR::SW::Pll::Set();
+while(!RCC::CFGR::SWS::Pll::IsSet());
+```
+
+Настроим порты для светодидов на выход, а порт для кнопки - на вход: 
+```
+RCC::AHB1ENR::GPIOCEN::Enable::Set();
+RCC::AHB1ENR::GPIOAEN::Enable::Set();
+GPIOC::MODER::MODER13::Input::Set();
+GPIOC::MODER::MODER5::Output::Set();
+GPIOC::MODER::MODER8::Output::Set();
+GPIOC::MODER::MODER9::Output::Set();
+GPIOA::MODER::MODER5::Output::Set();
+```
+
+С помощью булевой переменной `isPressed` можно контролировать то, нажата ли кнопка для того, 
+чтобы включить светодиоды, или для того, чтобы их выключить: 
+```
+bool isPressed = false;
+while(1)
+{
+if(GPIOC::IDR::IDR13::Low::IsSet() && isPressed)
+{
+  isPressed = false;
+  
+  if(GPIOC::ODR::ODR5::Low::IsSet())
+  {
+    GPIOC::BSRR::BS5::High::Write();
+    GPIOC::BSRR::BS9::High::Write();
+    GPIOC::BSRR::BS8::High::Write();
+    GPIOA::BSRR::BS5::High::Write();
+  }
+  else
+  {
+    GPIOC::BSRR::BR5::Low::Write();
+    GPIOC::BSRR::BR9::Low::Write();
+    GPIOC::BSRR::BR8::Low::Write();
+    GPIOA::BSRR::BR5::Low::Write();
+  }
+}
+
+if(GPIOC::IDR::IDR13::High::IsSet())
+  isPressed = true;
+}
+```
+
+Полный код программы представлен ниже: 
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+#include "gpioaregisters.hpp"
+
+void LEDsToggle()
+{
+  if(GPIOC::ODR::ODR5::Low::IsSet())
+  {
+    GPIOC::BSRR::BS5::High::Write();
+    GPIOC::BSRR::BS9::High::Write();
+    GPIOC::BSRR::BS8::High::Write();
+    GPIOA::BSRR::BS5::High::Write();
+  }
+  else
+  {
+    GPIOC::BSRR::BR5::Low::Write();
+    GPIOC::BSRR::BR9::Low::Write();
+    GPIOC::BSRR::BR8::Low::Write();
+    GPIOA::BSRR::BR5::Low::Write();
+  }
+}
 
 int main()
 {
-  RCC::AHB1ENR::GPIOCEN::Enable::Set() ;
-  GPIOC::MODER::MODER5::Output::Set() ;
-  GPIOC::ODR::ODR5::Enable::Set() ;
-  GPIOC::ODR::ODR5::Disable::Set() ;
-  return 0 ;
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+  
+  RCC::CR::HSION::Off::Set();
+
+  RCC::PLLCFGR::PLLSRC::HseSource::Set();
+
+  RCC::PLLCFGR::PLLM0::Set(4U);
+  RCC::PLLCFGR::PLLN0::Set(50U);
+  RCC::PLLCFGR::PLLP0::Pllp6::Set();
+
+  RCC::CR::PLLON::On::Set();
+
+  while(RCC::CR::PLLRDY::Unclocked::IsSet());
+
+  RCC::CFGR::SW::Pll::Set();
+  while(!RCC::CFGR::SWS::Pll::IsSet());
+
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  RCC::AHB1ENR::GPIOAEN::Enable::Set();
+  GPIOC::MODER::MODER13::Input::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  GPIOC::MODER::MODER8::Output::Set();
+  GPIOC::MODER::MODER9::Output::Set();
+  GPIOA::MODER::MODER5::Output::Set();
+  
+  bool isPressed = false;
+  while(1)
+  {
+    if(GPIOC::IDR::IDR13::Low::IsSet() && isPressed)
+    {
+      isPressed = false;
+      LEDsToggle();
+    }
+    
+    if(GPIOC::IDR::IDR13::High::IsSet())
+      isPressed = true;
+  }
+
+  return 1 ;
 }
-----
-. Посмотреть видео: https://youtu.be/uC0jJGfDxtM
+```
 
-=== Задание 2
-. Откомпилировать и отлинковать программу
-. Загрузить программу в симуляторе
-. Сделать пошаговую отладку
-. Настроить Debugger на отладку через StLink
-. Подключить плату к компьютеру
-. Загрузить программу в плату
-. Выполнить пошаговую отладку
-. Описать полученный результат
-. Посмотреть видео: https://youtu.be/c7CasTJKw7o
-
-=== Задание 3
-. Запустить анализатор стека. Узнать рекомендуемый размер стека.
-. Изменить в проекте размер стека на рекомендуемый
-. Создать map файл
-. Описать что написано в map файле
-. Поставить размер кучи HEAP в 0. Объяснить почему так можно сделать. И почему STACK нельзя
-. Добавить проект в Git и сделать синхронизацию с GitHub
-. Сделать отчет по каждому пункту каждого задания в файле .adoc. Выложить файл в GitHub
-. Прислать ссылку на GitHub преподавателю для проверки
-. Посмотреть видео: https://youtu.be/TajLTcjBgIg
+Стоит заметить, что в полном представлении кода программы часть кода: 
+```
+if(GPIOC::ODR::ODR5::Low::IsSet())
+{
+GPIOC::BSRR::BS5::High::Write();
+GPIOC::BSRR::BS9::High::Write();
+GPIOC::BSRR::BS8::High::Write();
+GPIOA::BSRR::BS5::High::Write();
+}
+else
+{
+GPIOC::BSRR::BR5::Low::Write();
+GPIOC::BSRR::BR9::Low::Write();
+GPIOC::BSRR::BR8::Low::Write();
+GPIOA::BSRR::BR5::Low::Write();
+}
+```
+выделена в отдельную функцию `LEDsToggle()`, переключающей светодиоды из выключенного состояния
+во включенное и наоборот. 
+Это сделано для того, чтобы было удобнее читать код функции `main()`. 

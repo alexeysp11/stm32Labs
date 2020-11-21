@@ -34,7 +34,7 @@ int main()
   RCC::PLLCFGR::PLLP0::Pllp4::Set();
   
   RCC::CR::PLLON::On::Set();
-  while(RCC::CR::PLLRDY::Unlocked::IsSet());
+  while(RCC::CR::PLLRDY::Unclocked::IsSet());
   
   RCC::CFGR::SW::Pll::Set();
   while(!RCC::CFGR::SWS::Pll::IsSet());
