@@ -1,50 +1,161 @@
-= Lab1
+= Lab5
 
+== Задание 
 
-=== Задание 1
-. Создать проект C++ c main.cpp
-. Подключить к проекту файл cstartup.cpp
-. Создать папки AbstractHardware/Registers/FiledValues, Common
-. Создать структуру проекта в соотвествии со структурой папок
-. Настроить STACK, HEAP
-. Скопировать проект преподавателя https://github.com/lamer0k/stm32Labs/tree/master/Lab1
-. Скопировать содержимое папки из папки AHardware/Registers и Common с проекта преподавателя в свою папку
-. Написать программу в main.cpp
-[source, cpp, linenums]
+1.Подключить микроконтроллер к внешнему источнику тактирования HSE.
 
-----
-#include "gpiocregisters.hpp" //for GPIOC
-#include "rccregisters.hpp"   //for RCC
+2.Написать программу моргания всеми 4 светодиодами на плате с периодом 0,5 с.
+
+3.По нажатию кнопки увеличить период моргания на 0,1 с.
+
+== Выполнение задания
+
+1. Для подключения микроконтроллера к внешнму источнику питания HSE необходимо выполнить 
+следующий алгоритм:
+
+- В модуле RCC выбрать регистр CR и в поле HSEON включить внешний источник
+- Дождаться готовности источника используя функцию while
+- Переключаем системную частоту на тактирование HSE источником.
+- Ждем пока системная частота переключится на HSE источник.
+- Выключаем внутреннюю частоту с помощью поля HSION 
+
+2. Напишем программу моргания светодиодами
+
+- Подключим порты А и С к шине тактирования и переведем их в состояние Enable.
+- Настроим ножку GPIOC13 на вход
+- Ножки GPIOC5, GPIOC8, GPIOC9 и GPIOА5 подключаются на выход.
+- Создадим бесконечный цикл
+- Запишем функцию задержки
+- При нажатии кнопки увеличиваем период моргания светодиодами на 0,1 с.
+- Вводим счетчик
+- Когда счетчик принимает значение периода, начинаем моргать светодиодами
+
+Для осушествления увеличения периода моргания воспользуемся функцией задержки. 
+Она реализуется с помощью таймера общего назначения TIM2. 
+Для этого выполним следующие действия:
+
+Подадим тактирование на модуль таймера. 
+Подключение к системе тактирование выполняется через регистр APB1ENR модуля RCC.​
+
+Установим источник генерации прерываний по событию переполнение с помощью бита URS в 
+регистре CR1​.
+
+Установим значение, до которого счетчик будет считать в регистре перезагрузке ARR​. 
+Для этого создадим переменную timerValue, которая рассчитывается по определенной формуле.
+
+Скинем флаг генерации прерывания UIF по событию в регистре SR​
+
+Установим начальное значение счетчика в 0 в регистре CNT​
+
+Запустим счетчик с помощью бита СEN в регистре CR1​
+
+С помощью функции while будем проверять пока не установится флаг генерации 
+прерывания по событию UIF в регистре SR​
+
+Как только флаг установлен счетчик останавливается и сбрасываем бит EN в регистре CR1.
+
+Сбрасываем флаг генерации прерывания UIF по событию в регистре SR.
+
+Таким образом, была получена программа, которая при нажатии кнопки увеличивает период моргания 
+светодиодом:
+
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include "gpioaregisters.hpp"
+#include <iostream>
+#include "tim2registers.hpp"
+
+constexpr std::uint32_t CpuClock = 8'000'000U;
+
+auto delay_ms(std::uint32_t period)
+{
+  // Update request source: 
+  // counter owerflow can generate an update interrupt
+  TIM2::CR1::URS::OverflowEvent::Set();
+  
+  const std::uint32_t timerValue = (CpuClock * 1000U) * period - 1U;
+  
+  // Wirte desired value to TIM2_ARR
+  TIM2::ARR::Write(timerValue);
+  
+  TIM2::SR::UIF::NoInterruptPending::Set();
+  
+  // Counter register
+  TIM2::CNT::Write(0U);  
+  
+  // Enable counter
+  TIM2::CR1::CEN::Enable::Set();
+  while(TIM2::SR::UIF::InterruptPending::IsSet());
+  
+  TIM2::CR1::CEN::Disable::Set();
+  
+  // Update interrupt flag
+  TIM2::SR::UIF::NoInterruptPending::Set();
+}
 
 int main()
 {
-  RCC::AHB1ENR::GPIOCEN::Enable::Set() ;
-  GPIOC::MODER::MODER5::Output::Set() ;
-  GPIOC::ODR::ODR5::Enable::Set() ;
-  GPIOC::ODR::ODR5::Disable::Set() ;
-  return 0 ;
+  unsigned int ButPeriod = 100U;
+  unsigned int LedsPeriod = 500U;
+  unsigned int counter = 0;
+
+  bool flag = false;
+  
+  // Enable external HSE clock and wait until it's stable
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+  
+  // Select HSE oscillator as system clock source
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+
+  // Set required pins and registers
+  RCC::APB1ENR::TIM2EN::Enable::Set();
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  RCC::AHB1ENR::GPIOAEN::Enable::Set();
+  GPIOC::MODER::MODER13::Input::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  GPIOA::MODER::MODER5::Output::Set();
+  GPIOC::MODER::MODER9::Output::Set();
+  GPIOC::MODER::MODER8::Output::Set();
+  
+  // Use block diagrams to implement main logic of the program!
+  while(1)
+  {
+    // Implement a delay using timer TIM2
+    delay_ms(ButPeriod);
+    
+    // If user pushed a button 
+    if(GPIOC::IDR::IDR13::Low::IsSet())
+    {
+      LedsPeriod += 100U;
+      counter = 0;
+    }
+    counter = counter + ButPeriod;
+    
+    if(counter >= LedsPeriod)
+    {
+      if(!flag)
+      {
+        GPIOC::BSRR::BS8::High::Write();
+        GPIOC::BSRR::BS9::High::Write();
+        GPIOC::BSRR::BS5::High::Write();
+        GPIOA::BSRR::BS5::High::Write();
+        flag = true;
+      }
+      else
+      {
+        GPIOC::BSRR::BR9::Low::Write();
+        GPIOC::BSRR::BR8::Low::Write();
+        GPIOC::BSRR::BR5::Low::Write();
+        GPIOA::BSRR::BR5::Low::Write();
+        flag = false;
+      }
+      
+      counter = 0;
+    }
+  }
+  return 1;
 }
-----
-. Посмотреть видео: https://youtu.be/uC0jJGfDxtM
-
-=== Задание 2
-. Откомпилировать и отлинковать программу
-. Загрузить программу в симуляторе
-. Сделать пошаговую отладку
-. Настроить Debugger на отладку через StLink
-. Подключить плату к компьютеру
-. Загрузить программу в плату
-. Выполнить пошаговую отладку
-. Описать полученный результат
-. Посмотреть видео: https://youtu.be/c7CasTJKw7o
-
-=== Задание 3
-. Запустить анализатор стека. Узнать рекомендуемый размер стека.
-. Изменить в проекте размер стека на рекомендуемый
-. Создать map файл
-. Описать что написано в map файле
-. Поставить размер кучи HEAP в 0. Объяснить почему так можно сделать. И почему STACK нельзя
-. Добавить проект в Git и сделать синхронизацию с GitHub
-. Сделать отчет по каждому пункту каждого задания в файле .adoc. Выложить файл в GitHub
-. Прислать ссылку на GitHub преподавателю для проверки
-. Посмотреть видео: https://youtu.be/TajLTcjBgIg
+```
