@@ -1,0 +1,527 @@
+# Lab5  
+
+## Прерывания по таймеру 
+
+Прерыванием называется реакция процессора на событие, требующее внимания со стороны программного 
+обеспечения. 
+Прерывания обычно используются для реализации многозадачности процессора. 
+Аппаратные устройства используют прерывания для обработки изменений электронного или 
+физического состояния, требующих внимания. 
+
+В секции `__low_level_init` можно разместить какой-то кусок программы (это может быть, например, 
+объявление периферии, как в нашем случае), который будет 
+выполняться до начала выполнения `main()`, а также до инициализаци всех глобальных переменных 
+и исполнения конструкторов глобальных экземпляров классов (последнее при использовании C++).
+
+О том, что такое `extern "C"`, и какую задачу выполняет эта конструкция, я прочитал 
+(здесь)[https://stackoverflow.com/questions/2403391/how-does-an-extern-c-declaration-work] и 
+(здесь)[https://en.wikipedia.org/wiki/Name_mangling]. 
+Все дело в том, что компилятор искажает имена функций, структур, классов и других типов данных. 
+Необходимость в этом возникает по большей части в объектно-ориентированных языках 
+программирования, когда язык позволяет различным объектам, классам или методам быть 
+определенными одним и тем же именем, если они находятся в разных пространствах имен. 
+Изменение имен необходимо в этих случаях ввиду того, что для каждого объекта, класса или метода, 
+которые имеют одно и то же имя, но находятся в разных пространствах имен, может потребоваться 
+отдельное специализированное соглашение о вызовах в машинном коде.
+
+Соответственно, использование конструкции `extern "C"` дает понять компилятору, что имя функции 
+`__low_level_init` менять не надо. 
+Именно использование `__low_level_init` в связке с `extern "C"` позволит настроить периферийные 
+устройства до начала выполнения функции `main()`. 
+
+Код файла `main.cpp` представлен ниже: 
+```
+#include "gpiocregisters.hpp" // for GPIOC
+#include "rccregisters.hpp"   // for RCC
+#include "tim2registers.hpp"  // for TIM2
+#include "nvicregisters.hpp"  // for NVIC
+
+using namespace std;
+
+extern "C"
+{
+  int __low_level_init(void)
+  {
+    RCC::AHB1ENR::GPIOCEN::Enable::Set();
+    GPIOC::MODER::MODER8::Output::Set(); 
+    
+    RCC::APB1ENR::TIM2EN::Enable::Set();
+    TIM2::PSC::Write(16'000); 
+    
+    TIM2::ARR::Write(1000U);
+    TIM2::CNT::Write(0U);
+    
+    NVIC::ISER0::Write(1U << 28U);
+    TIM2::DIER::UIE::Enable::Set();
+    
+    return 1;
+  }
+}
+
+int main()
+{
+  TIM2::CR1::CEN::Enable::Set();
+  while(1);
+  
+  return 0;
+}
+```
+
+В вектор прерываний `__vector_table[]` записываем информацию о том, какой обработчик прерываний 
+нужно вызвать. Например, для почти всех внешних прерываний был вызван фиктивный (англ. dummy) 
+обработчик прерываний `DummyHandler`, который, по сути, реализует лишь функцию задержки. 
+Для прерывания по таймеру `TIM2` был вызван обработчик прерываний `MyTim2InterruptHandler`.
+
+Стоит отметить, что тип вектора прерываний `__vector_table[]` представляет собой объединение. 
+
+Полный код файла `startup.cpp` представлен ниже:
+```
+#include "interrupthandler.hpp"  //for InterruptHandler
+
+extern "C" void __iar_program_start(void) ;
+
+using tIntFunct = void(*)();
+using tIntVectItem = union {tIntFunct __fun; void * __ptr;};
+#pragma segment = "CSTACK"
+#pragma location = ".intvec"
+const tIntVectItem __vector_table[] =
+{
+  { .__ptr = __sfe( "CSTACK" ) }, 
+    __iar_program_start, 
+
+  InterruptHandler::DummyHandler,
+  InterruptHandler::DummyHandler,
+  InterruptHandler::DummyHandler,
+  InterruptHandler::DummyHandler,
+  InterruptHandler::DummyHandler,
+  0,
+  0,
+  0,
+  0,
+  InterruptHandler::DummyHandler,
+  InterruptHandler::DummyHandler,
+  0,
+  InterruptHandler::DummyHandler,
+  InterruptHandler::DummyHandler,
+  //External Interrupts
+  InterruptHandler::DummyHandler,         //Window Watchdog
+  InterruptHandler::DummyHandler,         //PVD through EXTI Line detect/EXTI16
+  InterruptHandler::DummyHandler,   //Tamper and Time Stamp/EXTI21 
+  InterruptHandler::DummyHandler,         //RTC Wakeup/EXTI22 
+  InterruptHandler::DummyHandler,             //FLASH
+  InterruptHandler::DummyHandler,               //RCC
+  InterruptHandler::DummyHandler,         //EXTI Line 0
+  InterruptHandler::DummyHandler,         //EXTI Line 1
+  InterruptHandler::DummyHandler,         //EXTI Line 2
+  InterruptHandler::DummyHandler,        //EXTI Line 3
+  InterruptHandler::DummyHandler,         //EXTI Line 4
+  InterruptHandler::DummyHandler,       //DMA1 Stream 0
+  InterruptHandler::DummyHandler,       //DMA1 Stream 1
+  InterruptHandler::DummyHandler,       //DMA1 Stream 2
+  InterruptHandler::DummyHandler,       //DMA1 Stream 3
+  InterruptHandler::DummyHandler,       //DMA1 Stream 4
+  InterruptHandler::DummyHandler,      //DMA1 Stream 5
+  InterruptHandler::DummyHandler,      //DMA1 Stream 6
+  InterruptHandler::DummyHandler,              //ADC1
+  0,   //USB High Priority
+  0,    //USB Low  Priority
+  0,               //DAC
+  0,              //COMP through EXTI Line
+  InterruptHandler::DummyHandler,         //EXTI Line 9..5
+  InterruptHandler::DummyHandler,              //TIM9/TIM1 Break interrupt 
+  InterruptHandler::DummyHandler,             //TIM10/TIM1 Update interrupt
+  InterruptHandler::DummyHandler,             //TIM11/TIM1 Trigger/Commutation interrupts
+  InterruptHandler::DummyHandler,			   //TIM1 Capture Compare interrupt
+  InterruptHandler::MyTim2InterruptHandler,         //TIM2  	
+  InterruptHandler::DummyHandler,         //TIM3
+  InterruptHandler::DummyHandler,        ////TIM4
+};
+
+extern "C" void __cmain(void) ;
+extern "C" __weak void __iar_init_core(void) ;
+extern "C" __weak void __iar_init_vfp(void) ;
+
+#pragma required = __vector_table
+void __iar_program_start(void) {
+  __iar_init_core() ;
+  __iar_init_vfp() ;
+  __cmain() ;
+}
+```
+
+Объектно-ориентированный подход позволяет легче проектировать сложную (комплексную) программу, 
+которая обладает большим и разнообразным функционалом.
+Это достигается с помощью разбивания программы на отдельные пространства имен и классы таким 
+образом, чтобы человек, продумывающий архитектуру программы, имел дело не с большим множеством 
+разрозненных функций, которые вызывают друг друга по сложной цепочке, а с объектами и классами, 
+которые в свою очередь обладают отдельными свойствами (переменными разного типа, хранящие 
+информацию о ключевых параметрах объекта) и методами (функциями, выполняющими некоторые 
+операции над свойствами). Например: 
+- некоторый абстракный человек - это класс, 
+- конкретный человек, которого зовут Саймон, - это объект, 
+- имя Саймона - это свойство, 
+- произнесение фразы "Привет, я Саймон" - это метод. 
+
+Так и в нашей программе. 
+Класс `InterruptHandler`, отвечающий за обработку прерываний имеет 2 статических публичных 
+метода (т.е. таких методов, которые видны в пределах всей программы и для использования 
+которых не нужно создавать экземпляр класса `InterruptHandler`): `DummyHandler()` и 
+`MyTim2InterruptHandler()`. 
+
+Код файла `interrupthandler.cpp` представлен ниже:
+```
+#ifndef REGISTERS_INTERRUPTHANDLER_HPP
+#define REGISTERS_INTERRUPTHANDLER_HPP
+
+
+#include "tim2registers.hpp"  //for TIM2
+#include "gpiocregisters.hpp"  //for GPIOC
+
+class InterruptHandler {
+  public:
+    static void DummyHandler() { for(;;) {} }
+    
+    static void MyTim2InterruptHandler()
+    {
+      if (TIM2::SR::UIF::UpdatePending::IsSet() && TIM2::DIER::UIE::Enable::IsSet())
+      {
+        TIM2::SR::UIF::NoUpdate::Set();
+        GPIOC::ODR::Toggle(1U << 8U);
+      }
+    }
+};
+
+#endif //REGISTERS_INTERRUPTHANDLER_HPP
+```
+
+## Новогодняя елочка
+
+Задание представлено на рисунке ниже: 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/Lab5EmptyInterrupt/img/task02.png
+
+Для начала скорректируем программу из предыдущего задания так, чтобы моргали 4 светодиода. 
+Для этого в файле `main.cpp` в конструкции `extern "C"` в функции `__low_level_init` настроим 
+4 сведтодиода на выход: 
+```
+RCC::AHB1ENR::GPIOCEN::Enable::Set();
+RCC::AHB1ENR::GPIOAEN::Enable::Set();
+GPIOC::MODER::MODER5::Output::Set();
+GPIOC::MODER::MODER8::Output::Set();
+GPIOC::MODER::MODER9::Output::Set();
+GPIOA::MODER::MODER5::Output::Set();
+```
+и в обработчике прерываний `MyTim2InterruptHandler` заменим строчку 
+```
+GPIOC::ODR::Toggle(1U << 8U);
+```
+на следующий кусок кода: 
+```
+// Toggle LEDs
+GPIOC::ODR::Toggle(1U << 5U);
+GPIOC::ODR::Toggle(1U << 8U);
+GPIOC::ODR::Toggle(1U << 9U);
+GPIOA::ODR::Toggle(1U << 5U);
+```
+
+Теперь уже моргают все 4 светодиода. 
+
+Далее добавим в `main()` реакцию на нажатие кнопки (без прерывания), которая позволит зажигать 
+и гасить светодиоды. 
+
+Если мы определим класс `LightEmittingDiodes`, который помогает реализовать поведение светодиодов,
+то он будет выглядеть следующим образом: 
+```
+#include "gpiocregisters.hpp" //for GPIOC
+#include "gpioaregisters.hpp" //for GPIOA
+
+class LightEmittingDiodes
+{
+  public: 
+    static void ReactOnButton()
+    {
+      bool isPressed = false; 
+      
+      // If user pushed a button
+      if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
+      {
+        isPressed = true;
+
+        if(GPIOC::ODR::ODR5::Low::IsSet())
+        {
+          LightEmittingDiodes::ToggleDiodes(1);
+        }
+        else
+        {
+          LightEmittingDiodes::ToggleDiodes(0);
+        }
+      }
+      
+      if(GPIOC::IDR::IDR13::High::IsSet())
+          isPressed = false;
+    }
+    
+private:
+    static void ToggleDiodes(int on)
+    {
+      if(on == 1)
+      {
+        GPIOC::BSRR::BS5::High::Write();
+        GPIOC::BSRR::BS9::High::Write();
+        GPIOC::BSRR::BS8::High::Write();
+        GPIOA::BSRR::BS5::High::Write();
+      }
+      else
+      {
+        GPIOC::BSRR::BR5::Low::Write();
+        GPIOC::BSRR::BR9::Low::Write();
+        GPIOC::BSRR::BR8::Low::Write();
+        GPIOA::BSRR::BR5::Low::Write();
+      }
+    }
+};
+```
+
+В данном примере класс `LightEmittingDiodes` обладает одним публичным методом и одним приватным 
+методом. 
+Это значит следующее: в пределах программы будет виден только один метод этого класса - 
+`ReactOnButton()`, в то время как метод переключения диодов `ToggleDiodes()` будет виден только 
+в пределах класса `LightEmittingDiodes`. 
+
+Это позволяет не нарушать принцип инкапсуляции, т.е. запрещает другим частям программы 
+взаимодействовать с этим методом, менять его содержимое (например, другой разработчик может 
+случайно изменить содержимое этого метода из совершенно другой части программы, и в самый 
+неподходящий момент появится баг, который будет очень выловить сложно). 
+Соответственно, использование принципа инкапсуляции дает большой контроль над реализацией 
+корректного поведения программы.
+
+Помимо этого оба метода этого класса являются статическим (они помечены ключевым словом `static`). 
+Согласно (Википедии)[https://en.wikipedia.org/wiki/Static_(keyword)],
+статический метод, который предназначен для всех экземпляров класса, а не для какого-то 
+конкретного экземпляра. 
+
+Метод, объявленный как статический, может быть вызван без создания экземпляра класса. 
+В нашем случае, подход с использованием статических методов значительно облегчает задачу 
+построения структуры программы (мы имеем дело не с разрозненными функциями, а с классами, 
+которые делят программу на т.н. зоны ответственности), а также нам не нужно создавать 
+различные сущности класса (потому что в этом нет необходимости: нам не нужен полиморфизм, 
+т.е. множественность поведения; нам просто нужно разделить программу на части и реализовать 
+одну модель поведения).
+
+После чего в функции `main()` вызовем функцию реакции на нажатие кнопки: 
+```
+int main()
+{
+  //TIM2::CR1::CEN::Enable::Set();
+  
+  while(1)
+  {
+    LightEmittingDiodes::ReactOnButton();
+  }
+  
+  return 0;
+}
+```
+
+
+Далее сделаем елочку: для этого раскомментируем `TIM2::CR1::CEN::Enable::Set()` и закомментируем 
+`LightEmittingDiodes::ReactOnButton()`. 
+Теперь функция `main()` будет выглядеть следующим образом: 
+```
+int main()
+{
+  TIM2::CR1::CEN::Enable::Set();
+  
+  while(1)
+  {
+    //LightEmittingDiodes::ReactOnButton();
+  }
+  
+  return 0;
+}
+```
+
+В обработчике прерываний напишем следующий код: 
+```
+static void MyTim2InterruptHandler()
+{
+  if (TIM2::SR::UIF::UpdatePending::IsSet() && TIM2::DIER::UIE::Enable::IsSet())
+  {
+	TIM2::SR::UIF::NoUpdate::Set();
+	
+	static int i = 0; 
+	static int forward = 1; 
+	
+	// Toggle LEDs
+	switch(i)
+	{
+	  case 0: 
+		if(forward == 1) i++;
+		else { i = 0; forward = 1; };
+		GPIOC::ODR::Toggle(1U << 5U);
+		break;
+	  case 1: 
+		GPIOC::ODR::Toggle(1U << 8U);
+		if(forward == 1) i++;
+		else i--;
+		break;
+	  case 2: 
+		GPIOC::ODR::Toggle(1U << 9U);
+		if(forward == 1) i++;
+		else i--;
+		break;
+	  case 3: 
+		GPIOA::ODR::Toggle(1U << 5U);
+		if(forward == 1) { i = 3; forward = 0; }
+		else i--;
+		break;
+	}
+  }
+}
+```
+
+Далее нам нужно соединить обработчик прерываний и реакцию на кнопку. 
+Для этого раскомментируем `LightEmittingDiodes::ReactOnButton()` в функции `main()`, в функции 
+`ReactOnButton()` будем вызывать другой метод, который будет отвечать за изменение настроек 
+таймера - `ChangeFrequency()`. 
+
+Функция, отвечющая за смену частоты моргания светодиодом, приведена ниже: 
+```
+static void ChangeFrequency()
+{
+  int min = 50; 
+  int max = 1000; 
+  static int oldDelay_ms = 1000; 
+  static bool forward = 0; 
+  
+  // Set new delay
+  int newDelay_ms;
+  if (forward == 0)
+	newDelay_ms  = oldDelay_ms - 50; 
+  else
+	newDelay_ms  = oldDelay_ms + 50; 
+  
+  // If new delay is equal to min or max, change direction 
+  if (newDelay_ms == min) 
+	forward = 1; 
+  if (newDelay_ms == max)
+	forward = 0; 
+  
+  // Write new prescaler to TIM2_PSC
+  int prescaler = TIM2::PSC::Get();
+  int newPrescaler = prescaler * newDelay_ms / oldDelay_ms;
+  TIM2::PSC::Write(newPrescaler); 
+  oldDelay_ms = newDelay_ms;
+}
+```
+
+Эту функцию мы будем вызывать из `ReactOnButton()` вместо функции `ToggleDiodes()`. 
+Функции `ToggleDiodes()` нам больше не понадобится, мы ее реализовывали для того, чтобы 
+убидеться, что кнопки реагируют на нажатие. Поэтому мы его можем убрать. 
+
+Полный код класса `LightEmittingDiodes` представлен ниже: 
+```
+#include "gpiocregisters.hpp" //for GPIOC
+#include "gpioaregisters.hpp" //for GPIOA
+
+class LightEmittingDiodes
+{
+  public: 
+    static void ReactOnButton()
+    {
+      bool isPressed = false; 
+      
+      // If user pushed a button
+      if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
+      {
+        isPressed = true;
+
+        if(GPIOC::ODR::ODR5::Low::IsSet())
+          LightEmittingDiodes::ChangeFrequency();
+        else
+          LightEmittingDiodes::ChangeFrequency();
+      }
+      
+      if(GPIOC::IDR::IDR13::High::IsSet())
+          isPressed = false;
+    }
+    
+  private:
+    static void ChangeFrequency()
+    {
+      int min = 50; 
+      int max = 1000; 
+      static int oldDelay_ms = 1000; 
+      static bool forward = 0; 
+      
+      // Set new delay
+      int newDelay_ms;
+      if (forward == 0)
+        newDelay_ms  = oldDelay_ms - 50; 
+      else
+        newDelay_ms  = oldDelay_ms + 50; 
+      
+      // If new delay is equal to min or max, change direction 
+      if (newDelay_ms == min) 
+        forward = 1; 
+      if (newDelay_ms == max)
+        forward = 0; 
+      
+      // Write new prescaler to TIM2_PSC
+      int prescaler = TIM2::PSC::Get();
+      int newPrescaler = prescaler * newDelay_ms / oldDelay_ms;
+      TIM2::PSC::Write(newPrescaler); 
+      oldDelay_ms = newDelay_ms;
+    }
+};
+```
+
+Файл, содержащий функцию `main()`, выглядит следующим образом: 
+```
+#include "gpiocregisters.hpp" //for GPIOC
+#include "gpioaregisters.hpp" //for GPIOA
+#include "rccregisters.hpp"   //for RCC
+#include "tim2registers.hpp"   //for SPI2
+#include "nvicregisters.hpp"  //for NVIC
+#include "LightEmittingDiodes.hpp"  // for LEDs
+
+using namespace std;
+
+extern "C"
+{
+  int __low_level_init(void)
+  {
+    RCC::AHB1ENR::GPIOCEN::Enable::Set();
+    RCC::AHB1ENR::GPIOAEN::Enable::Set();
+    GPIOC::MODER::MODER13::Input::Set();
+    GPIOC::MODER::MODER5::Output::Set();
+    GPIOC::MODER::MODER8::Output::Set();
+    GPIOC::MODER::MODER9::Output::Set();
+    GPIOA::MODER::MODER5::Output::Set();
+    
+    RCC::APB1ENR::TIM2EN::Enable::Set();
+    TIM2::PSC::Write(16'000); 
+    
+    TIM2::ARR::Write(1000U);
+    TIM2::CNT::Write(0U);
+    
+    NVIC::ISER0::Write(1U << 28U);
+    TIM2::DIER::UIE::Enable::Set();
+    
+    return 1;
+  }
+}
+
+int main()
+{
+  TIM2::CR1::CEN::Enable::Set();
+  
+  while(1)
+  {
+    LightEmittingDiodes::ReactOnButton();
+  }
+  
+  return 0;
+}
+```
+
+Файл, содержащий вектор прерываний остается без изменений. 

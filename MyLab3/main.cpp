@@ -44,10 +44,10 @@ int main()
   
   while(1)
   {
-    sleep(1.0);
+    for(int i = 0; i < 100'000'000; i++);
     GPIOC::ODR::ODR5::High::Set();
     
-    sleep(1.0);
+    for(int i = 0; i < 1'000'000; i++);
     GPIOC::ODR::ODR5::Low::Set();
   }
   return 1 ;
