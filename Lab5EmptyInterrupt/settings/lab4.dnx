@@ -37,10 +37,10 @@
     <StLinkDriver>
         <stlinkserialNo>47580367</stlinkserialNo>
         <stlinkfoundProbes />
-        <CStepIntDis>_ 0</CStepIntDis>
-        <LeaveTargetRunning>_ 0</LeaveTargetRunning>
         <stlinkResetStyle>0</stlinkResetStyle>
         <stlinkResetStrategy>0</stlinkResetStrategy>
+        <CStepIntDis>_ 0</CStepIntDis>
+        <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </StLinkDriver>
     <SWOTraceHWSettings>
         <OverrideDefaultClocks>0</OverrideDefaultClocks>
@@ -120,13 +120,6 @@
         <ShowTimeSum>1</ShowTimeSum>
         <SumSortOrder>0</SumSortOrder>
     </EventLog>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Bp0>_ 1 "EMUL_CODE" "{$PROJ_DIR$\AbstractHardware\LightEmittingDiodes.hpp}.58.7" 0 0 1 "" 0 "" 0</Bp0>
-        <Count>1</Count>
-    </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -136,14 +129,6 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
-    <Aliases>
-        <A0>_ "D:\Git\stm32Labs\Lab4\AbstractHardware\InterruptHandler\interrupthandler.hpp" ""</A0>
-        <A1>_ "D:\Git\stm32Labs\Lab4\AbstractHardware\Registers\fieldvaluebase.hpp" ""</A1>
-        <A2>_ "D:\Git\stm32Labs\Lab4\AbstractHardware\Registers\registerbase.hpp" ""</A2>
-        <A3>_ "D:\Git\stm32Labs\Lab4\startup.cpp" "C:\Users\User\Desktop\projects\stm32Labs\Lab5EmptyInterrupt\startup.cpp"</A3>
-        <Count>4</Count>
-        <SuppressDialog>0</SuppressDialog>
-    </Aliases>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>3</Mode>
@@ -157,4 +142,18 @@
     <CallStackStripe>
         <ShowTiming>1</ShowTiming>
     </CallStackStripe>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
+    <Aliases>
+        <A0>_ "D:\Git\stm32Labs\Lab4\AbstractHardware\InterruptHandler\interrupthandler.hpp" ""</A0>
+        <A1>_ "D:\Git\stm32Labs\Lab4\AbstractHardware\Registers\fieldvaluebase.hpp" ""</A1>
+        <A2>_ "D:\Git\stm32Labs\Lab4\AbstractHardware\Registers\registerbase.hpp" ""</A2>
+        <A3>_ "D:\Git\stm32Labs\Lab4\startup.cpp" "C:\Users\User\Desktop\projects\stm32Labs\Lab5EmptyInterrupt\startup.cpp"</A3>
+        <Count>4</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
 </settings>

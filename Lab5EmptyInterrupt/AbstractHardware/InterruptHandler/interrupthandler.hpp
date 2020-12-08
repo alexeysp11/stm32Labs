@@ -34,17 +34,17 @@ class InterruptHandler {
           case 1: 
             GPIOC::ODR::Toggle(1U << 8U);
             if(forward == 1) i++;
-            else i --;
+            else i--;
             break;
           case 2: 
             GPIOC::ODR::Toggle(1U << 9U);
             if(forward == 1) i++;
-            else i --;
+            else i--;
             break;
           case 3: 
             GPIOA::ODR::Toggle(1U << 5U);
             if(forward == 1) { i = 3; forward = 0; }
-            else i --;
+            else i--;
             break;
         }
       }

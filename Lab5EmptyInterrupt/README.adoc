@@ -14,8 +14,8 @@
 и исполнения конструкторов глобальных экземпляров классов (последнее при использовании C++).
 
 О том, что такое `extern "C"`, и какую задачу выполняет эта конструкция, я прочитал 
-(здесь)[https://stackoverflow.com/questions/2403391/how-does-an-extern-c-declaration-work] и 
-(здесь)[https://en.wikipedia.org/wiki/Name_mangling]. 
+link:https://stackoverflow.com/questions/2403391/how-does-an-extern-c-declaration-work[здесь] и 
+link:https://en.wikipedia.org/wiki/Name_mangling[здесь]. 
 Все дело в том, что компилятор искажает имена функций, структур, классов и других типов данных. 
 Необходимость в этом возникает по большей части в объектно-ориентированных языках 
 программирования, когда язык позволяет различным объектам, классам или методам быть 
@@ -197,7 +197,7 @@ class InterruptHandler {
 ## Новогодняя елочка
 
 Задание представлено на рисунке ниже: 
-image:https://github.com/alexeysp11/stm32Labs/blob/master/Lab5EmptyInterrupt/img/task02.png
+image:https://github.com/alexeysp11/stm32Labs/blob/master/Lab5EmptyInterrupt/img/task02.png[]
 
 Для начала скорректируем программу из предыдущего задания так, чтобы моргали 4 светодиода. 
 Для этого в файле `main.cpp` в конструкции `extern "C"` в функции `__low_level_init` настроим 
@@ -295,7 +295,7 @@ private:
 корректного поведения программы.
 
 Помимо этого оба метода этого класса являются статическим (они помечены ключевым словом `static`). 
-Согласно (Википедии)[https://en.wikipedia.org/wiki/Static_(keyword)],
+Согласно link:https://en.wikipedia.org/wiki/Static_(keyword)[Википедии],
 статический метод, который предназначен для всех экземпляров класса, а не для какого-то 
 конкретного экземпляра. 
 
