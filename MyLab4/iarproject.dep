@@ -5,18 +5,7 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
-            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\float.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cfloat</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xxexception</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpioaregisters.hpp</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xstddef</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\rccfieldvalues.hpp</file>
             <file>$PROJ_DIR$\stm32f411xE.icf</file>
@@ -96,7 +85,7 @@
             <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xtr1common</file>
             <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpioaregisters.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpioafieldvalues.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
@@ -110,14 +99,25 @@
             <file>$PROJ_DIR$\Common\utils.hpp</file>
             <file>$PROJ_DIR$\main.cpp</file>
             <file>$PROJ_DIR$\startupF411RE.cpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpioafieldvalues.hpp</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
+            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\float.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cfloat</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xxexception</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 55 20 21</file>
+                    <file> 44 9 10</file>
                 </tool>
             </outputs>
         </file>
@@ -126,13 +126,13 @@
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 20 21</file>
+                    <file> 9 10</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 14 58 57 15 16 17 18 19</file>
+                    <file> 3 47 46 4 5 6 7 8</file>
                 </tool>
             </inputs>
         </file>
@@ -141,17 +141,17 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 49 50 58</file>
+                    <file> 39</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 54</file>
+                    <file> 43</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 93 13 95 61 59 60 62 8 71 70 88 87 10 9 4 2 6 3 7 90 89 5 66 68 69 63 12 73 96 74 94 101 75 76 0 1 65 64 72 11 67 78 82 86 83 80 79 77 84 85 81 99 98 100 97 92 22 34 33 26 23 31 37 30 35 24 32 28 29 25 27 36 41 39 42 38 40 43 44 45 46 47 48 91 105</file>
+                    <file> 82 2 84 50 48 49 51 102 60 59 77 76 104 103 98 96 100 97 101 79 78 99 55 57 58 52 1 62 85 63 83 90 64 65 94 95 54 53 61 105 56 67 71 75 72 69 68 66 73 74 70 88 87 89 86 81 11 23 22 15 12 20 26 19 24 13 21 17 18 14 16 25 30 28 31 27 29 32 33 34 35 36 37 0 80</file>
                 </tool>
             </inputs>
         </file>
@@ -160,11 +160,11 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 51 52 57</file>
+                    <file> 40 41 46</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 53</file>
+                    <file> 42</file>
                 </tool>
             </outputs>
         </file>

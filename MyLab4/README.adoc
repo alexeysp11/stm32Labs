@@ -73,34 +73,6 @@ GPIOA::MODER::MODER5::Output::Set();
 
 С помощью булевой переменной `isPressed` можно контролировать то, нажата ли кнопка для того, 
 чтобы включить светодиоды, или для того, чтобы их выключить: 
-```
-bool isPressed = false;
-while(1)
-{
-if(GPIOC::IDR::IDR13::Low::IsSet() && isPressed)
-{
-  isPressed = false;
-  
-  if(GPIOC::ODR::ODR5::Low::IsSet())
-  {
-    GPIOC::BSRR::BS5::High::Write();
-    GPIOC::BSRR::BS9::High::Write();
-    GPIOC::BSRR::BS8::High::Write();
-    GPIOA::BSRR::BS5::High::Write();
-  }
-  else
-  {
-    GPIOC::BSRR::BR5::Low::Write();
-    GPIOC::BSRR::BR9::Low::Write();
-    GPIOC::BSRR::BR8::Low::Write();
-    GPIOA::BSRR::BR5::Low::Write();
-  }
-}
-
-if(GPIOC::IDR::IDR13::High::IsSet())
-  isPressed = true;
-}
-```
 
 Полный код программы представлен ниже: 
 ```
@@ -109,14 +81,15 @@ if(GPIOC::IDR::IDR13::High::IsSet())
 #include <iostream>
 #include "gpioaregisters.hpp"
 
-void LEDsToggle()
+bool LEDsToggle(bool currentlyOn)
 {
-  if(GPIOC::ODR::ODR5::Low::IsSet())
+  if(!currentlyOn)
   {
     GPIOC::BSRR::BS5::High::Write();
     GPIOC::BSRR::BS9::High::Write();
     GPIOC::BSRR::BS8::High::Write();
     GPIOA::BSRR::BS5::High::Write();
+    currentlyOn = 1; 
   }
   else
   {
@@ -124,7 +97,10 @@ void LEDsToggle()
     GPIOC::BSRR::BR9::Low::Write();
     GPIOC::BSRR::BR8::Low::Write();
     GPIOA::BSRR::BR5::Low::Write();
+    currentlyOn = 0; 
   }
+  
+  return currentlyOn; 
 }
 
 int main()
@@ -158,40 +134,20 @@ int main()
   GPIOC::MODER::MODER9::Output::Set();
   GPIOA::MODER::MODER5::Output::Set();
   
-  bool isPressed = false;
+  bool isPressed = 0;
+  static bool currentlyOn = 0;
   while(1)
   {
-    if(GPIOC::IDR::IDR13::Low::IsSet() && isPressed)
+    if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
     {
-      isPressed = false;
-      LEDsToggle();
+      isPressed = 1;
+      currentlyOn = LEDsToggle(currentlyOn);
     }
-    
     if(GPIOC::IDR::IDR13::High::IsSet())
-      isPressed = true;
+      isPressed = 0;
+	
   }
 
   return 1 ;
 }
 ```
-
-Стоит заметить, что в полном представлении кода программы часть кода: 
-```
-if(GPIOC::ODR::ODR5::Low::IsSet())
-{
-GPIOC::BSRR::BS5::High::Write();
-GPIOC::BSRR::BS9::High::Write();
-GPIOC::BSRR::BS8::High::Write();
-GPIOA::BSRR::BS5::High::Write();
-}
-else
-{
-GPIOC::BSRR::BR5::Low::Write();
-GPIOC::BSRR::BR9::Low::Write();
-GPIOC::BSRR::BR8::Low::Write();
-GPIOA::BSRR::BR5::Low::Write();
-}
-```
-выделена в отдельную функцию `LEDsToggle()`, переключающей светодиоды из выключенного состояния
-во включенное и наоборот. 
-Это сделано для того, чтобы было удобнее читать код функции `main()`. 

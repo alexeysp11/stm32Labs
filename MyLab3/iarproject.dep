@@ -5,17 +5,6 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
-            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\float.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\cfloat</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xxexception</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xstddef</file>
@@ -89,6 +78,17 @@
             <file>$TOOLKIT_DIR$\inc\cpp\cerrno</file>
             <file>$TOOLKIT_DIR$\inc\c\errno.h</file>
             <file>$PROJ_DIR$\Debug\List\main.s</file>
+            <file>$PROJ_DIR$\Debug\List\main.lst</file>
+            <file>$TOOLKIT_DIR$\inc\c\xatomic.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cassert</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdio</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\limits</file>
+            <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xtr1common</file>
+            <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
+            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
@@ -102,54 +102,54 @@
             <file>$PROJ_DIR$\Common\utils.hpp</file>
             <file>$PROJ_DIR$\main.cpp</file>
             <file>$PROJ_DIR$\startupF411RE.cpp</file>
-            <file>$PROJ_DIR$\Debug\List\main.lst</file>
-            <file>$TOOLKIT_DIR$\inc\c\xatomic.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cassert</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdio</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\limits</file>
-            <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xtr1common</file>
+            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\float.h</file>
         </outputs>
-        <file>
-            <name>$PROJ_DIR$\Debug\Exe\iarproject.out</name>
-            <outputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 54 55</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 15 28 27 16 17 18 19 20</file>
-                </tool>
-            </inputs>
-        </file>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 25 54 55</file>
+                    <file> 43 44 14</file>
                 </tool>
             </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\iarproject.out</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 43 44</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 4 17 16 5 6 7 8 9</file>
+                </tool>
+            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\main.cpp</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 83 97 28</file>
+                    <file> 72 73 17</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 24</file>
+                    <file> 13</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 85 14 87 31 29 30 32 9 41 40 102 101 11 10 5 3 7 4 8 0 103 6 36 38 39 33 13 43 88 44 86 93 45 46 1 2 35 34 42 12 37 48 52 100 53 50 49 47 98 99 51 91 90 92 89 84 56 68 67 60 57 65 71 64 69 58 66 62 63 59 61 70 75 73 76 72 74 77 78 79 80 81 82</file>
+                    <file> 85 3 87 20 18 19 21 102 30 29 78 77 0 103 98 83 100 97 101 80 79 99 25 27 28 22 2 32 88 33 86 93 34 35 81 82 24 23 31 1 26 37 41 76 42 39 38 36 74 75 40 91 90 92 89 84 45 57 56 49 46 54 60 53 58 47 55 51 52 48 50 59 64 62 65 61 63 66 67 68 69 70 71</file>
                 </tool>
             </inputs>
         </file>
@@ -158,11 +158,11 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 21 22 27</file>
+                    <file> 10 11 16</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 23</file>
+                    <file> 12</file>
                 </tool>
             </outputs>
         </file>
