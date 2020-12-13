@@ -160,7 +160,7 @@ void __iar_program_start(void) {
 - некоторый абстракный человек - это класс, 
 - конкретный человек, которого зовут Саймон, - это объект, 
 - имя Саймона - это свойство, 
-- произнесение фразы "Привет, я Саймон" - это метод. 
+- произнесение фразы "Меня зовут Саймон" - это метод. 
 
 Так и в нашей программе. 
 Класс `InterruptHandler`, отвечающий за обработку прерываний имеет 2 статических публичных 
@@ -239,25 +239,19 @@ class LightEmittingDiodes
   public: 
     static void ReactOnButton()
     {
-      bool isPressed = false; 
+      static bool isPressed = 0; 
+      static bool currentlyOn = 0; 
       
       // If user pushed a button
       if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
       {
-        isPressed = true;
-
-        if(GPIOC::ODR::ODR5::Low::IsSet())
-        {
-          LightEmittingDiodes::ToggleDiodes(1);
-        }
-        else
-        {
-          LightEmittingDiodes::ToggleDiodes(0);
-        }
+        isPressed = 1;
+        currentlyOn = !currentlyOn; 
+        LightEmittingDiodes::ToggleDiodes(currentlyOn);
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())
-          isPressed = false;
+        isPressed = 0;
     }
     
 private:
@@ -281,6 +275,21 @@ private:
 };
 ```
 
+Строчка 
+```
+currentlyOn = !currentlyOn;
+```
+переключает состояние статической булевой переменной `currentlyOn` на противоположное.
+
+То есть можно сказать, что эта строчка 
+эквивалентна выражению
+```
+if (!currentlyOn)
+	currentlyOn = 1; 
+else 
+	currentlyOn = 0; 
+```
+
 В данном примере класс `LightEmittingDiodes` обладает одним публичным методом и одним приватным 
 методом. 
 Это значит следующее: в пределах программы будет виден только один метод этого класса - 
@@ -288,9 +297,7 @@ private:
 в пределах класса `LightEmittingDiodes`. 
 
 Это позволяет не нарушать принцип инкапсуляции, т.е. запрещает другим частям программы 
-взаимодействовать с этим методом, менять его содержимое (например, другой разработчик может 
-случайно изменить содержимое этого метода из совершенно другой части программы, и в самый 
-неподходящий момент появится баг, который будет очень выловить сложно). 
+взаимодействовать с этим методом, менять его содержимое. 
 Соответственно, использование принципа инкапсуляции дает большой контроль над реализацией 
 корректного поведения программы.
 
@@ -321,7 +328,6 @@ int main()
   return 0;
 }
 ```
-
 
 Далее сделаем елочку: для этого раскомментируем `TIM2::CR1::CEN::Enable::Set()` и закомментируем 
 `LightEmittingDiodes::ReactOnButton()`. 
@@ -434,11 +440,7 @@ class LightEmittingDiodes
       if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
       {
         isPressed = true;
-
-        if(GPIOC::ODR::ODR5::Low::IsSet())
-          LightEmittingDiodes::ChangeFrequency();
-        else
-          LightEmittingDiodes::ChangeFrequency();
+        LightEmittingDiodes::ChangeFrequency();
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())

@@ -22,6 +22,12 @@ C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers\CortexM4
 -I
 C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers\CortexM4\FieldValues
 -I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab4\Application\LED
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab4\Application\Button
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Port
+-I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc\c
@@ -39,6 +45,12 @@ C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers
 C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers\CortexM4
 -I
 C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Registers\CortexM4\FieldValues
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab4\Application\LED
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab4\Application\Button
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab4\AHardware\Port
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

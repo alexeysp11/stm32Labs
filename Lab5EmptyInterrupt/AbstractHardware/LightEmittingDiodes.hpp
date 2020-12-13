@@ -6,48 +6,40 @@ class LightEmittingDiodes
   public: 
     static void ReactOnButton()
     {
-      bool isPressed = false; 
+      static bool isPressed = 0; 
+      static bool currentlyOn = 0; 
       
       // If user pushed a button
       if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
       {
-        isPressed = true;
-
-        if(GPIOC::ODR::ODR5::Low::IsSet())
-        {
-          //LightEmittingDiodes::ToggleDiodes();
-          LightEmittingDiodes::ChangeFrequency();
-        }
-        else
-        {
-          //LightEmittingDiodes::ToggleDiodes();
-          LightEmittingDiodes::ChangeFrequency();
-        }
+        isPressed = 1;
+        currentlyOn = !currentlyOn; 
+        LightEmittingDiodes::ToggleDiodes(currentlyOn);
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())
-          isPressed = false;
+        isPressed = 0;
     }
     
 private:
-    // I implemented ToggleDiodes() in order to ensure if buttons work correctly
-    static void ToggleDiodes(bool on)
+  // I implemented ToggleDiodes() in order to ensure if buttons work correctly
+  static void ToggleDiodes(bool on)
+  {
+    if(on == 1)
     {
-      if(on == 1)
-      {
-        GPIOC::BSRR::BS5::High::Write();
-        GPIOC::BSRR::BS9::High::Write();
-        GPIOC::BSRR::BS8::High::Write();
-        GPIOA::BSRR::BS5::High::Write();
-      }
-      else
-      {
-        GPIOC::BSRR::BR5::Low::Write();
-        GPIOC::BSRR::BR9::Low::Write();
-        GPIOC::BSRR::BR8::Low::Write();
-        GPIOA::BSRR::BR5::Low::Write();
-      }
+      GPIOC::BSRR::BS5::High::Write();
+      GPIOC::BSRR::BS9::High::Write();
+      GPIOC::BSRR::BS8::High::Write();
+      GPIOA::BSRR::BS5::High::Write();
     }
+    else
+    {
+      GPIOC::BSRR::BR5::Low::Write();
+      GPIOC::BSRR::BR9::Low::Write();
+      GPIOC::BSRR::BR8::Low::Write();
+      GPIOA::BSRR::BR5::Low::Write();
+    }
+  }
     
     static void ChangeFrequency()
     {

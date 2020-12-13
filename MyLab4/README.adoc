@@ -5,7 +5,7 @@
 Сделать программу, которая при нажатии кнопки UserButton на отладочной плате 
 http://www.waveshare.com/xnucleo-F411RE.htm меняет состояние всех 4 светодидов. 
 
-1. Тактирование производится от PLL на частоте 10 Мгц.
+1. Тактирование производится от PLL на частоте 10 МГц.
 2. По нажатию кнопки поменять состояние всех 4 светодиодов на противоположные
 3. Нажатие кнопки определяется по отпусканию кнопки, т.е. нужно определить, что кнопка прижата, 
 и дождаться пока она будет отжата - это будет будет означать, что кнопка нажата.
@@ -60,94 +60,381 @@ RCC::CFGR::SW::Pll::Set();
 while(!RCC::CFGR::SWS::Pll::IsSet());
 ```
 
-Настроим порты для светодидов на выход, а порт для кнопки - на вход: 
+Выполним эти действия внутри блока `extern "C"` и внутри функции `int __low_level_init(void)`:
+```
+extern "C"
+{
+  int __low_level_init(void)
+  {
+    RCC::CR::HSEON::On::Set();
+    while(!RCC::CR::HSERDY::Ready::IsSet());
+
+    RCC::CFGR::SW::Hse::Set();
+    while(!RCC::CFGR::SWS::Hse::IsSet());
+    
+    RCC::CR::HSION::Off::Set();
+
+    RCC::PLLCFGR::PLLSRC::HseSource::Set();
+
+    RCC::PLLCFGR::PLLM0::Set(4U);
+    RCC::PLLCFGR::PLLN0::Set(50U);
+    RCC::PLLCFGR::PLLP0::Pllp6::Set();
+
+    RCC::CR::PLLON::On::Set();
+
+    while(RCC::CR::PLLRDY::Unclocked::IsSet());
+
+    RCC::CFGR::SW::Pll::Set();
+    while(!RCC::CFGR::SWS::Pll::IsSet());
+  }
+}
+```
+
+Такой шаг позволит выполнить необходимую настройку тактирования еще до начала выполнения 
+функции `main()`. 
+
+Далее выполним разделение программы на условные зоны ответственности. 
+Для решения поставленной задачи мы можем выделить 4 класса: 
+1. Светодиод (`LED`); 
+2. Кнопка (`Button`); 
+3. Порт (`Port`); 
+4. Абстракная сущность самого задания (назовем её `ToggleLedOnPressingButton`) - переключение 
+светодиодов в ответ на нажатие кнопки.
+
+Сначала реализуем моргание светодидом с помощью класса `Port`. 
+Для этого настроим порты для светодидов на выход: 
 ```
 RCC::AHB1ENR::GPIOCEN::Enable::Set();
 RCC::AHB1ENR::GPIOAEN::Enable::Set();
-GPIOC::MODER::MODER13::Input::Set();
 GPIOC::MODER::MODER5::Output::Set();
 GPIOC::MODER::MODER8::Output::Set();
 GPIOC::MODER::MODER9::Output::Set();
 GPIOA::MODER::MODER5::Output::Set();
 ```
+Эта настройка должна производиться в приватном методе. 
 
-С помощью булевой переменной `isPressed` можно контролировать то, нажата ли кнопка для того, 
-чтобы включить светодиоды, или для того, чтобы их выключить: 
-
-Полный код программы представлен ниже: 
+В целом класс `Port` может быть определен следующим образом: 
 ```
-#include "rccregisters.hpp"
+#pragma once 
+#include <cstdint>
 #include "gpiocregisters.hpp"
-#include <iostream>
 #include "gpioaregisters.hpp"
 
-bool LEDsToggle(bool currentlyOn)
+template<typename Reg>
+class Port
 {
-  if(!currentlyOn)
+public: 
+  void Toggle(uint8_t num)
   {
-    GPIOC::BSRR::BS5::High::Write();
-    GPIOC::BSRR::BS9::High::Write();
-    GPIOC::BSRR::BS8::High::Write();
-    GPIOA::BSRR::BS5::High::Write();
-    currentlyOn = 1; 
-  }
-  else
-  {
-    GPIOC::BSRR::BR5::Low::Write();
-    GPIOC::BSRR::BR9::Low::Write();
-    GPIOC::BSRR::BR8::Low::Write();
-    GPIOA::BSRR::BR5::Low::Write();
-    currentlyOn = 0; 
+    ConfigurePorts();
+    Reg::ODR::Toggle(1U << 8U);
   }
   
-  return currentlyOn; 
+private: 
+  uint8_t num; 
+  
+  void ConfigurePorts()
+  {
+    RCC::AHB1ENR::GPIOCEN::Enable::Set();
+    RCC::AHB1ENR::GPIOAEN::Enable::Set();
+    GPIOC::MODER::MODER5::Output::Set();
+    GPIOC::MODER::MODER8::Output::Set();
+    GPIOC::MODER::MODER9::Output::Set();
+    GPIOA::MODER::MODER5::Output::Set();
+  }
+};
+```
+
+В функции `main()` инициализируем сущность класса `Port` и передадим в метод `Toggle()`
+номер порта в качестве аргумента:
+```
+int main()
+{
+  Port<GPIOC> port; 
+  
+  while(1)
+  {
+    port.Toggle(8);
+  }
+
+  return 0 ;
+}
+```
+
+Далее опишем класс `LED`: 
+```
+#pragma once 
+#include <cstdint>
+#include "port.hpp"
+
+template<typename Reg, uint8_t numPort>
+class LED
+{
+public:
+  void Toggle()
+  {
+    Port<Reg> port;
+    port.Toggle(numPort); 
+  }
+};
+```
+
+И по аналогии с классом `Port`, в функции `main()` инициализируем сущность класса `LED`: 
+```
+int main()
+{
+  LED<GPIOC, 8> led_1; 
+  
+  while(1)
+  {
+    led_1.Toggle();
+  }
+
+  return 0 ;
+}
+```
+
+Далее таким же образом опишем класс `Button`:
+```
+#pragma once 
+#include <cstdint>
+#include "port.hpp"
+#include "LED.hpp"
+
+template<typename Reg>
+class Button
+{
+  public:
+    template<class T> void IsPressed(T) {}
+    void ReactOnPushing()
+    {
+      static bool isPressed = 0;
+      
+      Port<Reg> port;
+      
+      if(port.IsPressed() && !isPressed)
+      {
+        isPressed = 1;
+        
+        LED<GPIOC, 5> led_1; 
+        LED<GPIOC, 8> led_2; 
+        LED<GPIOC, 9> led_3; 
+        LED<GPIOA, 5> led_4; 
+        
+        led_1.Toggle();
+        led_2.Toggle();
+        led_3.Toggle();
+        led_4.Toggle();
+      }
+      
+      if(!port.IsPressed())
+        isPressed = 0;
+    }
+};
+```
+
+В классе `Port` определим метод `IsPressed()` и настроим порт на определение нажатия кнопки: 
+```
+#pragma once 
+#include <cstdint>
+#include "gpiocregisters.hpp"
+#include "gpioaregisters.hpp"
+
+template<typename Reg>
+class Port
+{
+public: 
+  void Toggle(uint8_t num)
+  {
+    ConfigurePorts();
+    Reg::ODR::Toggle(1U << num);
+  }
+  
+  bool IsPressed()
+  {
+    ConfigurePorts();
+    return Reg::IDR::IDR13::Low::IsSet();
+  }
+  
+private: 
+  uint8_t num; 
+  
+  void ConfigurePorts()
+  {
+    RCC::AHB1ENR::GPIOCEN::Enable::Set();
+    RCC::AHB1ENR::GPIOAEN::Enable::Set();
+    GPIOC::MODER::MODER13::Input::Set();
+    GPIOC::MODER::MODER5::Output::Set();
+    GPIOC::MODER::MODER8::Output::Set();
+    GPIOC::MODER::MODER9::Output::Set();
+    GPIOA::MODER::MODER5::Output::Set();
+  }
+};
+```
+
+Изменим функцию `main()` следующим образом: 
+```
+int main()
+{
+  Button<GPIOC> button; 
+  
+  while(1)
+  {
+    button.ReactOnPushing();
+  }
+
+  return 0 ;
+}
+```
+
+Помимо того, нужно определить нажатие кнопки по отпусканию кнопки, т.е. нужно определить, 
+что кнопка прижата, и дождаться пока она будет отжата - это будет будет означать, что кнопка 
+нажата.
+Для этого просто добавим пустой цикл `while(port.IsPressed())`, который не будет ничего делать
+до того момента, пока кнопка не станет отжата.  
+
+Полный код функции `main()` представлен ниже: 
+```
+// #include <iostream>
+#include "rccregisters.hpp"
+#include "button.hpp"
+
+extern "C"
+{
+  int __low_level_init(void)
+  {
+    RCC::CR::HSEON::On::Set();
+    while(!RCC::CR::HSERDY::Ready::IsSet());
+
+    RCC::CFGR::SW::Hse::Set();
+    while(!RCC::CFGR::SWS::Hse::IsSet());
+    
+    RCC::CR::HSION::Off::Set();
+
+    RCC::PLLCFGR::PLLSRC::HseSource::Set();
+
+    RCC::PLLCFGR::PLLM0::Set(4U);
+    RCC::PLLCFGR::PLLN0::Set(50U);
+    RCC::PLLCFGR::PLLP0::Pllp6::Set();
+
+    RCC::CR::PLLON::On::Set();
+
+    while(RCC::CR::PLLRDY::Unclocked::IsSet());
+
+    RCC::CFGR::SW::Pll::Set();
+    while(!RCC::CFGR::SWS::Pll::IsSet());
+    
+    return 1; 
+  }
 }
 
 int main()
 {
-  RCC::CR::HSEON::On::Set();
-  while(!RCC::CR::HSERDY::Ready::IsSet());
-
-  RCC::CFGR::SW::Hse::Set();
-  while(!RCC::CFGR::SWS::Hse::IsSet());
+  Button<GPIOC> button; 
   
-  RCC::CR::HSION::Off::Set();
-
-  RCC::PLLCFGR::PLLSRC::HseSource::Set();
-
-  RCC::PLLCFGR::PLLM0::Set(4U);
-  RCC::PLLCFGR::PLLN0::Set(50U);
-  RCC::PLLCFGR::PLLP0::Pllp6::Set();
-
-  RCC::CR::PLLON::On::Set();
-
-  while(RCC::CR::PLLRDY::Unclocked::IsSet());
-
-  RCC::CFGR::SW::Pll::Set();
-  while(!RCC::CFGR::SWS::Pll::IsSet());
-
-  RCC::AHB1ENR::GPIOCEN::Enable::Set();
-  RCC::AHB1ENR::GPIOAEN::Enable::Set();
-  GPIOC::MODER::MODER13::Input::Set();
-  GPIOC::MODER::MODER5::Output::Set();
-  GPIOC::MODER::MODER8::Output::Set();
-  GPIOC::MODER::MODER9::Output::Set();
-  GPIOA::MODER::MODER5::Output::Set();
-  
-  bool isPressed = 0;
-  static bool currentlyOn = 0;
   while(1)
   {
-    if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
-    {
-      isPressed = 1;
-      currentlyOn = LEDsToggle(currentlyOn);
-    }
-    if(GPIOC::IDR::IDR13::High::IsSet())
-      isPressed = 0;
-	
+    button.ReactOnPushing();
   }
 
-  return 1 ;
+  return 0 ;
 }
+```
+
+Полный код класса `Button` представлен ниже: 
+```
+#pragma once 
+#include <cstdint>
+#include "port.hpp"
+#include "LED.hpp"
+
+template<typename Reg>
+class Button
+{
+  public:
+    template<class T> void IsPressed(T) {}
+    void ReactOnPushing()
+    {
+      static bool isPressed = 0;
+      
+      Port<Reg> port;
+      
+      if(port.IsPressed() && !isPressed)
+      {
+        while(port.IsPressed()); 
+        
+        isPressed = 1;
+        
+        LED<GPIOC, 5> led_1; 
+        LED<GPIOC, 8> led_2; 
+        LED<GPIOC, 9> led_3; 
+        LED<GPIOA, 5> led_4; 
+        
+        led_1.Toggle();
+        led_2.Toggle();
+        led_3.Toggle();
+        led_4.Toggle();
+      }
+      
+      if(!port.IsPressed())
+        isPressed = 0;
+    }
+};
+```
+
+Полный код класса `LED` представлен ниже:
+```
+#pragma once 
+#include <cstdint>
+#include "port.hpp"
+
+template<typename Reg, uint8_t numPort>
+class LED
+{
+public:
+  void Toggle()
+  {
+    Port<Reg> port;
+    port.Toggle(numPort); 
+  }
+};
+```
+
+Полный код класса `Port` представлен ниже:
+```
+#pragma once 
+#include <cstdint>
+#include "gpiocregisters.hpp"
+#include "gpioaregisters.hpp"
+
+template<typename Reg>
+class Port
+{
+public: 
+  void Toggle(uint8_t num)
+  {
+    ConfigurePorts();
+    Reg::ODR::Toggle(1U << num);
+  }
+  
+  bool IsPressed()
+  {
+    ConfigurePorts();
+    return Reg::IDR::IDR13::Low::IsSet();
+  }
+  
+private: 
+  uint8_t num; 
+  
+  void ConfigurePorts()
+  {
+    RCC::AHB1ENR::GPIOCEN::Enable::Set();
+    RCC::AHB1ENR::GPIOAEN::Enable::Set();
+    GPIOC::MODER::MODER13::Input::Set();
+    GPIOC::MODER::MODER5::Output::Set();
+    GPIOC::MODER::MODER8::Output::Set();
+    GPIOC::MODER::MODER9::Output::Set();
+    GPIOA::MODER::MODER5::Output::Set();
+  }
+};
 ```

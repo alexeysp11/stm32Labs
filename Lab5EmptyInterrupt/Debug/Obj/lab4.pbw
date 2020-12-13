@@ -11476,90 +11476,6 @@
     "scope": null
   },
   {
-    "ID": "c:ysizet.h@111@macro@_YSIZET_H",
-    "What": "MacroDef",
-    "defdec": "Def",
-    "display": "_YSIZET_H",
-    "location": {
-      "column": "9",
-      "line": "5",
-      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
-    },
-    "name": "_YSIZET_H",
-    "origin": "system_include",
-    "scope": null
-  },
-  {
-    "ID": "c:ysizet.h@277@macro@_SIZE_T",
-    "What": "MacroDef",
-    "defdec": "Def",
-    "display": "_SIZE_T",
-    "location": {
-      "column": "11",
-      "line": "16",
-      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
-    },
-    "name": "_SIZE_T",
-    "origin": "system_include",
-    "scope": null
-  },
-  {
-    "ID": "c:ysizet.h@296@macro@_STD_USING_SIZE_T",
-    "What": "MacroDef",
-    "defdec": "Def",
-    "display": "_STD_USING_SIZE_T",
-    "location": {
-      "column": "11",
-      "line": "17",
-      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
-    },
-    "name": "_STD_USING_SIZE_T",
-    "origin": "system_include",
-    "scope": null
-  },
-  {
-    "ID": "c:ysizet.h@T@size_t",
-    "What": "Typedef",
-    "defdec": "Def",
-    "display": "_Sizet",
-    "location": {
-      "column": "18",
-      "line": "18",
-      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
-    },
-    "name": "size_t",
-    "origin": "system_include",
-    "scope": null
-  },
-  {
-    "ID": "c:ysizet.h@359@macro@__DATA_PTR_MEM_HELPER1__",
-    "What": "MacroDef",
-    "defdec": "Def",
-    "display": "__DATA_PTR_MEM_HELPER1__",
-    "location": {
-      "column": "9",
-      "line": "21",
-      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
-    },
-    "name": "__DATA_PTR_MEM_HELPER1__",
-    "origin": "system_include",
-    "scope": null
-  },
-  {
-    "ID": "c:ysizet.h@T@__data_size_t",
-    "What": "Typedef",
-    "defdec": "Def",
-    "display": "unsigned int",
-    "location": {
-      "column": "1",
-      "line": "23",
-      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
-    },
-    "name": "__data_size_t",
-    "origin": "system_include",
-    "scope": null
-  },
-  {
     "ID": "c:type_traits@113@macro@_TYPE_TRAITS_",
     "What": "MacroDef",
     "defdec": "Def",
@@ -12107,7 +12023,7 @@
                                 "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                 "What": "ClassTemplatePartialSpecialization",
                                 "defdec": "Def",
-                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const>",
+                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const volatile &>",
                                 "location": {
                                   "column": "1",
                                   "line": "113",
@@ -12118,7 +12034,7 @@
                                     "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                     "What": "ClassTemplatePartialSpecialization",
                                     "defdec": "Def",
-                                    "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const &>",
+                                    "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const>",
                                     "location": {
                                       "column": "1",
                                       "line": "113",
@@ -12129,7 +12045,7 @@
                                         "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                         "What": "ClassTemplatePartialSpecialization",
                                         "defdec": "Def",
-                                        "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const &&>",
+                                        "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const &>",
                                         "location": {
                                           "column": "1",
                                           "line": "113",
@@ -12140,7 +12056,7 @@
                                             "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                             "What": "ClassTemplatePartialSpecialization",
                                             "defdec": "Def",
-                                            "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const volatile &>",
+                                            "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const volatile>",
                                             "location": {
                                               "column": "1",
                                               "line": "113",
@@ -12151,7 +12067,7 @@
                                                 "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                                 "What": "ClassTemplatePartialSpecialization",
                                                 "defdec": "Def",
-                                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const volatile>",
+                                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types...) __attribute__((thiscall)) const &&>",
                                                 "location": {
                                                   "column": "1",
                                                   "line": "113",
@@ -12354,7 +12270,7 @@
                                 "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                 "What": "ClassTemplatePartialSpecialization",
                                 "defdec": "Def",
-                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const volatile>",
+                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const &&>",
                                 "location": {
                                   "column": "1",
                                   "line": "127",
@@ -12365,7 +12281,7 @@
                                     "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                     "What": "ClassTemplatePartialSpecialization",
                                     "defdec": "Def",
-                                    "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const volatile &>",
+                                    "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const volatile>",
                                     "location": {
                                       "column": "1",
                                       "line": "127",
@@ -12376,7 +12292,7 @@
                                         "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                         "What": "ClassTemplatePartialSpecialization",
                                         "defdec": "Def",
-                                        "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const volatile &&>",
+                                        "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const &>",
                                         "location": {
                                           "column": "1",
                                           "line": "127",
@@ -12387,7 +12303,7 @@
                                             "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                             "What": "ClassTemplatePartialSpecialization",
                                             "defdec": "Def",
-                                            "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const &&>",
+                                            "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const volatile &>",
                                             "location": {
                                               "column": "1",
                                               "line": "127",
@@ -12398,7 +12314,7 @@
                                                 "ID": "c:@N@std@SP>3#T#T#pT@_Is_memfunptr># ",
                                                 "What": "ClassTemplatePartialSpecialization",
                                                 "defdec": "Def",
-                                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const &>",
+                                                "display": "_Is_memfunptr<_Ret (_Arg0::*)(_Types..., ...) const volatile &&>",
                                                 "location": {
                                                   "column": "1",
                                                   "line": "127",
@@ -12954,6 +12870,20 @@
         "scope": null
       },
       {
+        "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#*t0.0@T@type",
+        "What": "TypedefDecl",
+        "defdec": "Def",
+        "display": "_Ty",
+        "location": {
+          "column": "1",
+          "line": "247",
+          "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
+        },
+        "name": "type",
+        "origin": "system_include",
+        "scope": "std"
+      },
+      {
         "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#1*t0.0@T@type",
         "What": "TypedefDecl",
         "defdec": "Def",
@@ -12996,24 +12926,10 @@
         "scope": "std"
       },
       {
-        "ID": "c:type_traits@N@std@SP>1#T@remove_pointer>#*t0.0@T@type",
-        "What": "TypedefDecl",
-        "defdec": "Def",
-        "display": "_Ty",
-        "location": {
-          "column": "1",
-          "line": "247",
-          "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
-        },
-        "name": "type",
-        "origin": "system_include",
-        "scope": "std"
-      },
-      {
-        "ID": "c:@N@std@SP>1#T@remove_pointer>#*t0.0",
+        "ID": "c:@N@std@SP>1#T@remove_pointer>#3*t0.0",
         "What": "ClassTemplatePartialSpecialization",
         "defdec": "Def",
-        "display": "remove_pointer<_Ty *>",
+        "display": "remove_pointer<_Ty *const volatile>",
         "location": {
           "column": "1",
           "line": "247",
@@ -13021,10 +12937,10 @@
         },
         "members": [
           {
-            "ID": "c:@N@std@SP>1#T@remove_pointer>#2*t0.0",
+            "ID": "c:@N@std@SP>1#T@remove_pointer>#*t0.0",
             "What": "ClassTemplatePartialSpecialization",
             "defdec": "Def",
-            "display": "remove_pointer<_Ty *volatile>",
+            "display": "remove_pointer<_Ty *>",
             "location": {
               "column": "1",
               "line": "247",
@@ -13032,10 +12948,10 @@
             },
             "members": [
               {
-                "ID": "c:@N@std@SP>1#T@remove_pointer>#1*t0.0",
+                "ID": "c:@N@std@SP>1#T@remove_pointer>#2*t0.0",
                 "What": "ClassTemplatePartialSpecialization",
                 "defdec": "Def",
-                "display": "remove_pointer<_Ty *const>",
+                "display": "remove_pointer<_Ty *volatile>",
                 "location": {
                   "column": "1",
                   "line": "247",
@@ -13043,10 +12959,10 @@
                 },
                 "members": [
                   {
-                    "ID": "c:@N@std@SP>1#T@remove_pointer>#3*t0.0",
+                    "ID": "c:@N@std@SP>1#T@remove_pointer>#1*t0.0",
                     "What": "ClassTemplatePartialSpecialization",
                     "defdec": "Def",
-                    "display": "remove_pointer<_Ty *const volatile>",
+                    "display": "remove_pointer<_Ty *const>",
                     "location": {
                       "column": "1",
                       "line": "247",
@@ -14675,10 +14591,10 @@
         "scope": null
       },
       {
-        "ID": "c:@N@std@S@add_reference>#2v",
+        "ID": "c:@N@std@S@add_reference>#1v",
         "What": "Struct",
         "defdec": "Def",
-        "display": "add_reference<volatile void>",
+        "display": "add_reference<const void>",
         "location": {
           "column": "1",
           "line": "943",
@@ -14686,10 +14602,10 @@
         },
         "members": [
           {
-            "ID": "c:@N@std@S@add_reference>#1v",
+            "ID": "c:@N@std@S@add_reference>#3v",
             "What": "Struct",
             "defdec": "Def",
-            "display": "add_reference<const void>",
+            "display": "add_reference<const volatile void>",
             "location": {
               "column": "1",
               "line": "943",
@@ -14697,10 +14613,10 @@
             },
             "members": [
               {
-                "ID": "c:@N@std@S@add_reference>#3v",
+                "ID": "c:@N@std@S@add_reference>#2v",
                 "What": "Struct",
                 "defdec": "Def",
-                "display": "add_reference<const volatile void>",
+                "display": "add_reference<volatile void>",
                 "location": {
                   "column": "1",
                   "line": "943",
@@ -14718,6 +14634,20 @@
                       "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
                     },
                     "members": [
+                      {
+                        "ID": "c:type_traits@N@std@S@add_reference>#2v@T@type",
+                        "What": "TypedefDecl",
+                        "defdec": "Def",
+                        "display": "volatile void",
+                        "location": {
+                          "column": "1",
+                          "line": "943",
+                          "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
+                        },
+                        "name": "type",
+                        "origin": "system_include",
+                        "scope": "std::add_reference::add_reference::add_reference::add_reference"
+                      },
                       {
                         "ID": "c:type_traits@N@std@S@add_reference>#1v@T@type",
                         "What": "TypedefDecl",
@@ -14751,20 +14681,6 @@
                         "What": "TypedefDecl",
                         "defdec": "Def",
                         "display": "void",
-                        "location": {
-                          "column": "1",
-                          "line": "943",
-                          "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\cpp\\type_traits"
-                        },
-                        "name": "type",
-                        "origin": "system_include",
-                        "scope": "std::add_reference::add_reference::add_reference::add_reference"
-                      },
-                      {
-                        "ID": "c:type_traits@N@std@S@add_reference>#2v@T@type",
-                        "What": "TypedefDecl",
-                        "defdec": "Def",
-                        "display": "volatile void",
                         "location": {
                           "column": "1",
                           "line": "943",
@@ -32376,7 +32292,7 @@
             "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
             "What": "ClassTemplatePartialSpecialization",
             "defdec": "Def",
-            "display": "_Is_function<_Ret (_Types...) const>",
+            "display": "_Is_function<_Ret (_Types...)>",
             "location": {
               "column": "1",
               "line": "582",
@@ -32387,7 +32303,7 @@
                 "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                 "What": "ClassTemplatePartialSpecialization",
                 "defdec": "Def",
-                "display": "_Is_function<_Ret (_Types...) const &>",
+                "display": "_Is_function<_Ret (_Types...) volatile>",
                 "location": {
                   "column": "1",
                   "line": "582",
@@ -32398,7 +32314,7 @@
                     "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                     "What": "ClassTemplatePartialSpecialization",
                     "defdec": "Def",
-                    "display": "_Is_function<_Ret (_Types...) const &&>",
+                    "display": "_Is_function<_Ret (_Types...) &>",
                     "location": {
                       "column": "1",
                       "line": "582",
@@ -32409,7 +32325,7 @@
                         "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                         "What": "ClassTemplatePartialSpecialization",
                         "defdec": "Def",
-                        "display": "_Is_function<_Ret (_Types...) const volatile>",
+                        "display": "_Is_function<_Ret (_Types...) volatile &>",
                         "location": {
                           "column": "1",
                           "line": "582",
@@ -32420,7 +32336,7 @@
                             "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                             "What": "ClassTemplatePartialSpecialization",
                             "defdec": "Def",
-                            "display": "_Is_function<_Ret (_Types...) const volatile &&>",
+                            "display": "_Is_function<_Ret (_Types...) &&>",
                             "location": {
                               "column": "1",
                               "line": "582",
@@ -32431,7 +32347,7 @@
                                 "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                                 "What": "ClassTemplatePartialSpecialization",
                                 "defdec": "Def",
-                                "display": "_Is_function<_Ret (_Types...)>",
+                                "display": "_Is_function<_Ret (_Types...) volatile &&>",
                                 "location": {
                                   "column": "1",
                                   "line": "582",
@@ -32442,7 +32358,7 @@
                                     "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                                     "What": "ClassTemplatePartialSpecialization",
                                     "defdec": "Def",
-                                    "display": "_Is_function<_Ret (_Types...) volatile>",
+                                    "display": "_Is_function<_Ret (_Types...) const volatile>",
                                     "location": {
                                       "column": "1",
                                       "line": "582",
@@ -32453,7 +32369,7 @@
                                         "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                                         "What": "ClassTemplatePartialSpecialization",
                                         "defdec": "Def",
-                                        "display": "_Is_function<_Ret (_Types...) &>",
+                                        "display": "_Is_function<_Ret (_Types...) const volatile &&>",
                                         "location": {
                                           "column": "1",
                                           "line": "582",
@@ -32464,7 +32380,7 @@
                                             "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                                             "What": "ClassTemplatePartialSpecialization",
                                             "defdec": "Def",
-                                            "display": "_Is_function<_Ret (_Types...) volatile &>",
+                                            "display": "_Is_function<_Ret (_Types...) const>",
                                             "location": {
                                               "column": "1",
                                               "line": "582",
@@ -32475,7 +32391,7 @@
                                                 "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                                                 "What": "ClassTemplatePartialSpecialization",
                                                 "defdec": "Def",
-                                                "display": "_Is_function<_Ret (_Types...) &&>",
+                                                "display": "_Is_function<_Ret (_Types...) const &>",
                                                 "location": {
                                                   "column": "1",
                                                   "line": "582",
@@ -32486,7 +32402,7 @@
                                                     "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1)",
                                                     "What": "ClassTemplatePartialSpecialization",
                                                     "defdec": "Def",
-                                                    "display": "_Is_function<_Ret (_Types...) volatile &&>",
+                                                    "display": "_Is_function<_Ret (_Types...) const &&>",
                                                     "location": {
                                                       "column": "1",
                                                       "line": "582",
@@ -32609,7 +32525,7 @@
             "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
             "What": "ClassTemplatePartialSpecialization",
             "defdec": "Def",
-            "display": "_Is_function<_Ret (_Types..., ...) const>",
+            "display": "_Is_function<_Ret (_Types..., ...)>",
             "location": {
               "column": "1",
               "line": "594",
@@ -32620,7 +32536,7 @@
                 "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                 "What": "ClassTemplatePartialSpecialization",
                 "defdec": "Def",
-                "display": "_Is_function<_Ret (_Types..., ...) const &>",
+                "display": "_Is_function<_Ret (_Types..., ...) volatile>",
                 "location": {
                   "column": "1",
                   "line": "594",
@@ -32631,7 +32547,7 @@
                     "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                     "What": "ClassTemplatePartialSpecialization",
                     "defdec": "Def",
-                    "display": "_Is_function<_Ret (_Types..., ...) const &&>",
+                    "display": "_Is_function<_Ret (_Types..., ...) &>",
                     "location": {
                       "column": "1",
                       "line": "594",
@@ -32642,7 +32558,7 @@
                         "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                         "What": "ClassTemplatePartialSpecialization",
                         "defdec": "Def",
-                        "display": "_Is_function<_Ret (_Types..., ...) const volatile>",
+                        "display": "_Is_function<_Ret (_Types..., ...) volatile &>",
                         "location": {
                           "column": "1",
                           "line": "594",
@@ -32653,7 +32569,7 @@
                             "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                             "What": "ClassTemplatePartialSpecialization",
                             "defdec": "Def",
-                            "display": "_Is_function<_Ret (_Types..., ...) const volatile &&>",
+                            "display": "_Is_function<_Ret (_Types..., ...) &&>",
                             "location": {
                               "column": "1",
                               "line": "594",
@@ -32664,7 +32580,7 @@
                                 "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                                 "What": "ClassTemplatePartialSpecialization",
                                 "defdec": "Def",
-                                "display": "_Is_function<_Ret (_Types..., ...)>",
+                                "display": "_Is_function<_Ret (_Types..., ...) volatile &&>",
                                 "location": {
                                   "column": "1",
                                   "line": "594",
@@ -32675,7 +32591,7 @@
                                     "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                                     "What": "ClassTemplatePartialSpecialization",
                                     "defdec": "Def",
-                                    "display": "_Is_function<_Ret (_Types..., ...) volatile>",
+                                    "display": "_Is_function<_Ret (_Types..., ...) const volatile>",
                                     "location": {
                                       "column": "1",
                                       "line": "594",
@@ -32686,7 +32602,7 @@
                                         "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                                         "What": "ClassTemplatePartialSpecialization",
                                         "defdec": "Def",
-                                        "display": "_Is_function<_Ret (_Types..., ...) &>",
+                                        "display": "_Is_function<_Ret (_Types..., ...) const volatile &&>",
                                         "location": {
                                           "column": "1",
                                           "line": "594",
@@ -32697,7 +32613,7 @@
                                             "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                                             "What": "ClassTemplatePartialSpecialization",
                                             "defdec": "Def",
-                                            "display": "_Is_function<_Ret (_Types..., ...) volatile &>",
+                                            "display": "_Is_function<_Ret (_Types..., ...) const>",
                                             "location": {
                                               "column": "1",
                                               "line": "594",
@@ -32708,7 +32624,7 @@
                                                 "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                                                 "What": "ClassTemplatePartialSpecialization",
                                                 "defdec": "Def",
-                                                "display": "_Is_function<_Ret (_Types..., ...) &&>",
+                                                "display": "_Is_function<_Ret (_Types..., ...) const &>",
                                                 "location": {
                                                   "column": "1",
                                                   "line": "594",
@@ -32719,7 +32635,7 @@
                                                     "ID": "c:@N@std@SP>2#T#pT@_Is_function>#Ft0.0(#Pt0.1).",
                                                     "What": "ClassTemplatePartialSpecialization",
                                                     "defdec": "Def",
-                                                    "display": "_Is_function<_Ret (_Types..., ...) volatile &&>",
+                                                    "display": "_Is_function<_Ret (_Types..., ...) const &&>",
                                                     "location": {
                                                       "column": "1",
                                                       "line": "594",
@@ -32844,6 +32760,90 @@
       }
     ],
     "name": "std",
+    "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:ysizet.h@111@macro@_YSIZET_H",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "_YSIZET_H",
+    "location": {
+      "column": "9",
+      "line": "5",
+      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
+    },
+    "name": "_YSIZET_H",
+    "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:ysizet.h@277@macro@_SIZE_T",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "_SIZE_T",
+    "location": {
+      "column": "11",
+      "line": "16",
+      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
+    },
+    "name": "_SIZE_T",
+    "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:ysizet.h@296@macro@_STD_USING_SIZE_T",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "_STD_USING_SIZE_T",
+    "location": {
+      "column": "11",
+      "line": "17",
+      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
+    },
+    "name": "_STD_USING_SIZE_T",
+    "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:ysizet.h@T@size_t",
+    "What": "Typedef",
+    "defdec": "Def",
+    "display": "_Sizet",
+    "location": {
+      "column": "18",
+      "line": "18",
+      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
+    },
+    "name": "size_t",
+    "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:ysizet.h@359@macro@__DATA_PTR_MEM_HELPER1__",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "__DATA_PTR_MEM_HELPER1__",
+    "location": {
+      "column": "9",
+      "line": "21",
+      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
+    },
+    "name": "__DATA_PTR_MEM_HELPER1__",
+    "origin": "system_include",
+    "scope": null
+  },
+  {
+    "ID": "c:ysizet.h@T@__data_size_t",
+    "What": "Typedef",
+    "defdec": "Def",
+    "display": "unsigned int",
+    "location": {
+      "column": "1",
+      "line": "23",
+      "path": "C:\\Program Files\\IAR Systems\\Embedded Workbench 8.3\\arm\\inc\\c\\ysizet.h"
+    },
+    "name": "__data_size_t",
     "origin": "system_include",
     "scope": null
   },
@@ -39298,6 +39298,80 @@
     "scope": null
   },
   {
+    "ID": "c:accessmode.hpp@90@macro@REGISTERS_ACCESSMODE_HPP",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "REGISTERS_ACCESSMODE_HPP",
+    "location": {
+      "column": "9",
+      "line": "6",
+      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
+    },
+    "name": "REGISTERS_ACCESSMODE_HPP",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
+    "ID": "c:@S@NoAccess",
+    "What": "Struct",
+    "defdec": "Def",
+    "display": "NoAccess",
+    "location": {
+      "column": "8",
+      "line": "8",
+      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
+    },
+    "members": [],
+    "name": "NoAccess",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
+    "ID": "c:@S@WriteMode",
+    "What": "Struct",
+    "defdec": "Def",
+    "display": "WriteMode",
+    "location": {
+      "column": "8",
+      "line": "9",
+      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
+    },
+    "members": [],
+    "name": "WriteMode",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
+    "ID": "c:@S@ReadMode",
+    "What": "Struct",
+    "defdec": "Def",
+    "display": "ReadMode",
+    "location": {
+      "column": "8",
+      "line": "10",
+      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
+    },
+    "members": [],
+    "name": "ReadMode",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
+    "ID": "c:@S@ReadWriteMode",
+    "What": "Struct",
+    "defdec": "Def",
+    "display": "ReadWriteMode",
+    "location": {
+      "column": "8",
+      "line": "11",
+      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
+    },
+    "members": [],
+    "name": "ReadWriteMode",
+    "origin": "user_include",
+    "scope": null
+  },
+  {
     "ID": "c:nvicregisters.hpp@386@macro@NVICREGISTERS_HPP",
     "What": "MacroDef",
     "defdec": "Def",
@@ -42719,80 +42793,6 @@
       }
     ],
     "name": "NVIC",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:accessmode.hpp@90@macro@REGISTERS_ACCESSMODE_HPP",
-    "What": "MacroDef",
-    "defdec": "Def",
-    "display": "REGISTERS_ACCESSMODE_HPP",
-    "location": {
-      "column": "9",
-      "line": "6",
-      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
-    },
-    "name": "REGISTERS_ACCESSMODE_HPP",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@S@NoAccess",
-    "What": "Struct",
-    "defdec": "Def",
-    "display": "NoAccess",
-    "location": {
-      "column": "8",
-      "line": "8",
-      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
-    },
-    "members": [],
-    "name": "NoAccess",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@S@WriteMode",
-    "What": "Struct",
-    "defdec": "Def",
-    "display": "WriteMode",
-    "location": {
-      "column": "8",
-      "line": "9",
-      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
-    },
-    "members": [],
-    "name": "WriteMode",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@S@ReadMode",
-    "What": "Struct",
-    "defdec": "Def",
-    "display": "ReadMode",
-    "location": {
-      "column": "8",
-      "line": "10",
-      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
-    },
-    "members": [],
-    "name": "ReadMode",
-    "origin": "user_include",
-    "scope": null
-  },
-  {
-    "ID": "c:@S@ReadWriteMode",
-    "What": "Struct",
-    "defdec": "Def",
-    "display": "ReadWriteMode",
-    "location": {
-      "column": "8",
-      "line": "11",
-      "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\Registers\\accessmode.hpp"
-    },
-    "members": [],
-    "name": "ReadWriteMode",
     "origin": "user_include",
     "scope": null
   },
@@ -54482,16 +54482,30 @@
         "scope": "LightEmittingDiodes"
       },
       {
-        "ID": "c:LightEmittingDiodes.hpp@176@S@LightEmittingDiodes@F@ReactOnButton#S@isPressed",
+        "ID": "c:@S@LightEmittingDiodes@F@ReactOnButton#S@isPressed",
         "What": "VarDecl",
         "defdec": "Def",
         "display": "isPressed",
         "location": {
-          "column": "12",
+          "column": "19",
           "line": "9",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "isPressed",
+        "origin": "user_include",
+        "scope": "LightEmittingDiodes"
+      },
+      {
+        "ID": "c:@S@LightEmittingDiodes@F@ReactOnButton#S@currentlyOn",
+        "What": "VarDecl",
+        "defdec": "Def",
+        "display": "currentlyOn",
+        "location": {
+          "column": "19",
+          "line": "10",
+          "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
+        },
+        "name": "currentlyOn",
         "origin": "user_include",
         "scope": "LightEmittingDiodes"
       },
@@ -54501,8 +54515,8 @@
         "defdec": "Def",
         "display": "void ToggleDiodes(bool)",
         "location": {
-          "column": "17",
-          "line": "34",
+          "column": "15",
+          "line": "26",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "ToggleDiodes",
@@ -54516,7 +54530,7 @@
         "display": "void ChangeFrequency(void)",
         "location": {
           "column": "17",
-          "line": "52",
+          "line": "44",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "ChangeFrequency",
@@ -54524,13 +54538,13 @@
         "scope": "LightEmittingDiodes"
       },
       {
-        "ID": "c:LightEmittingDiodes.hpp@1345@S@LightEmittingDiodes@F@ChangeFrequency#S@min",
+        "ID": "c:LightEmittingDiodes.hpp@1129@S@LightEmittingDiodes@F@ChangeFrequency#S@min",
         "What": "VarDecl",
         "defdec": "Def",
         "display": "min",
         "location": {
           "column": "11",
-          "line": "54",
+          "line": "46",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "min",
@@ -54538,13 +54552,13 @@
         "scope": "LightEmittingDiodes"
       },
       {
-        "ID": "c:LightEmittingDiodes.hpp@1367@S@LightEmittingDiodes@F@ChangeFrequency#S@max",
+        "ID": "c:LightEmittingDiodes.hpp@1151@S@LightEmittingDiodes@F@ChangeFrequency#S@max",
         "What": "VarDecl",
         "defdec": "Def",
         "display": "max",
         "location": {
           "column": "11",
-          "line": "55",
+          "line": "47",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "max",
@@ -54558,7 +54572,7 @@
         "display": "oldDelay_ms",
         "location": {
           "column": "18",
-          "line": "56",
+          "line": "48",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "oldDelay_ms",
@@ -54572,7 +54586,7 @@
         "display": "forward",
         "location": {
           "column": "19",
-          "line": "57",
+          "line": "49",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "forward",
@@ -54580,13 +54594,13 @@
         "scope": "LightEmittingDiodes"
       },
       {
-        "ID": "c:LightEmittingDiodes.hpp@1495@S@LightEmittingDiodes@F@ChangeFrequency#S@newDelay_ms",
+        "ID": "c:LightEmittingDiodes.hpp@1279@S@LightEmittingDiodes@F@ChangeFrequency#S@newDelay_ms",
         "What": "VarDecl",
         "defdec": "Def",
         "display": "newDelay_ms",
         "location": {
           "column": "11",
-          "line": "60",
+          "line": "52",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "newDelay_ms",
@@ -54594,13 +54608,13 @@
         "scope": "LightEmittingDiodes"
       },
       {
-        "ID": "c:LightEmittingDiodes.hpp@1874@S@LightEmittingDiodes@F@ChangeFrequency#S@prescaler",
+        "ID": "c:LightEmittingDiodes.hpp@1658@S@LightEmittingDiodes@F@ChangeFrequency#S@prescaler",
         "What": "VarDecl",
         "defdec": "Def",
         "display": "prescaler",
         "location": {
           "column": "11",
-          "line": "73",
+          "line": "65",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "prescaler",
@@ -54608,13 +54622,13 @@
         "scope": "LightEmittingDiodes"
       },
       {
-        "ID": "c:LightEmittingDiodes.hpp@1915@S@LightEmittingDiodes@F@ChangeFrequency#S@newPrescaler",
+        "ID": "c:LightEmittingDiodes.hpp@1699@S@LightEmittingDiodes@F@ChangeFrequency#S@newPrescaler",
         "What": "VarDecl",
         "defdec": "Def",
         "display": "newPrescaler",
         "location": {
           "column": "11",
-          "line": "74",
+          "line": "66",
           "path": "C:\\Users\\User\\Desktop\\projects\\stm32Labs\\Lab5EmptyInterrupt\\AbstractHardware\\LightEmittingDiodes.hpp"
         },
         "name": "newPrescaler",

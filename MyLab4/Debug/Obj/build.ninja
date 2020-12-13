@@ -20,9 +20,11 @@ rule browsedata
 
 
 #Build steps
+build button.pbi : index button.xcl
+build LED.pbi : index LED.xcl
 build main.pbi : index main.xcl
 build startupF411RE.pbi : index startupF411RE.xcl
-build iarproject.pbd : link main.pbi startupF411RE.pbi
+build iarproject.pbd : link button.pbi LED.pbi main.pbi startupF411RE.pbi
 build iarproject.pbw : browsedata iarproject.pbd
 
 

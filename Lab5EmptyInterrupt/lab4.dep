@@ -7,13 +7,6 @@
         <outputs>
             <file>$PROJ_DIR$\AbstractHardware\Atomic\atomicutils.hpp</file>
             <file>$PROJ_DIR$\AbstractHardware\InterruptHandler\interrupthandler.hpp</file>
-            <file>$PROJ_DIR$\Debug\Obj\lab4.pbd</file>
-            <file>$PROJ_DIR$\Debug\Exe\lab4.out</file>
-            <file>$TOOLKIT_DIR$\inc\c\assert.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xtr1common</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\initializer_list</file>
             <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
             <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
             <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
@@ -35,6 +28,10 @@
             <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
             <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
             <file>$PROJ_DIR$\Debug\List\lab4.map</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\startup.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\startup.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
             <file>$PROJ_DIR$\AbstractHardware\Registers\STM32F411\FieldValues\gpioafieldvalues.hpp</file>
             <file>$PROJ_DIR$\AbstractHardware\Registers\STM32F411\FieldValues\gpiocfieldvalues.hpp</file>
             <file>$PROJ_DIR$\AbstractHardware\Registers\STM32F411\FieldValues\nvicfieldvalues.hpp</file>
@@ -56,32 +53,20 @@
             <file>$PROJ_DIR$\Common\susudefs.hpp</file>
             <file>$PROJ_DIR$\main.cpp</file>
             <file>$PROJ_DIR$\startup.cpp</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
-            <file>$PROJ_DIR$\Debug\Obj\startup.o</file>
-            <file>$PROJ_DIR$\Debug\Obj\startup.xcl</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\lab4.pbd</file>
+            <file>$PROJ_DIR$\Debug\Exe\lab4.out</file>
+            <file>$TOOLKIT_DIR$\inc\c\assert.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xtr1common</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\initializer_list</file>
         </outputs>
-        <file>
-            <name>$PROJ_DIR$\Debug\Exe\lab4.out</name>
-            <outputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 29</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 23 51 52 24 25 26 27 28</file>
-                </tool>
-            </inputs>
-        </file>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 3 29</file>
+                    <file> 49 22</file>
                 </tool>
             </outputs>
         </file>
@@ -90,17 +75,17 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 51</file>
+                    <file> 23</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 54</file>
+                    <file> 26</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 36 31 41 20 11 14 10 5 6 19 17 42 15 16 18 12 13 8 7 40 48 45 22 4 0 21 9 44 46 43 35 30 38 33 39 34 37 32 47</file>
+                    <file> 33 28 38 13 4 7 3 51 52 12 10 39 8 9 11 5 6 54 53 37 45 42 15 50 0 14 2 41 43 40 32 27 35 30 36 31 34 29 44</file>
                 </tool>
             </inputs>
         </file>
@@ -109,17 +94,32 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 52</file>
+                    <file> 24</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 53</file>
+                    <file> 25</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 1 39 34 41 20 11 14 10 5 6 19 17 42 15 16 18 12 13 8 7 40 48 45 22 4 0 21 9 44 46 43 35 30 36 31</file>
+                    <file> 1 36 31 38 13 4 7 3 51 52 12 10 39 8 9 11 5 6 54 53 37 45 42 15 50 0 14 2 41 43 40 32 27 33 28</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\lab4.out</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 22</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 16 23 24 17 18 19 20 21</file>
                 </tool>
             </inputs>
         </file>
