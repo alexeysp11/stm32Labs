@@ -12,12 +12,6 @@ RCC::CR::HSEON::On::Set();
 Тем самым мы сможем убедиться в том, что источник частоты HSE стабилизировался. 
 Для этого воспользуемся пустым циклом while: 
 ```
-while(!RCC::CR::HSERDY::Ready::IsSet())
-{
-}
-```
-или эквивалентно: 
-```
 while(!RCC::CR::HSERDY::Ready::IsSet());
 ```
 
@@ -40,67 +34,15 @@ while(!RCC::CFGR::SWS::Hse::IsSet());
 RCC::CR::HSION::Off::Set();
 ```
 
-Далее используем бесконечный цикл, в котором реализуем моргание светодиодом с частотой в 1 Гц
-с помощью кастомной функции `sleep()` (на самом деле она была взята со StackOverflow), 
-реализующей задержку на заданное количество секунд, и 
-с помощью попеременного включения и выключения светодиода командами 
-`GPIOC::ODR::ODR5::High::Set();` и `GPIOC::ODR::ODR5::Low::Set();` соотвественно: 
-```
-sleep(1.0);
-GPIOC::ODR::ODR5::High::Set();
-
-sleep(1.0);
-GPIOC::ODR::ODR5::Low::Set();
-```
-
 Хотя задержку можно реализовать также с помощью пустого цикла `for`: 
 ```
 for(int i = 0; i < 1000000; i++);
 ```
 
-В целом код программы выглядит следующим образом: 
-```
-#include "rccregisters.hpp"
-#include "gpiocregisters.hpp"
-#include <iostream>
-#include <ctime>
-
-void sleep(float seconds)
-{
-    clock_t startClock = clock();
-    float secondsAhead = seconds * CLOCKS_PER_SEC;
-    
-    // do nothing until the elapsed time has passed.
-    while(clock() < startClock+secondsAhead);
-    return;
-}
-
-int main()
-{  
-  RCC::CR::HSEON::On::Set();
-  while(!RCC::CR::HSERDY::Ready::IsSet());
- 
-  RCC::CFGR::SW::Hse::Set();
-  while(!RCC::CFGR::SWS::Hse::IsSet());
-  
-  RCC::CR::HSION::Off::Set();
-  
-  RCC::AHB1ENR::GPIOCEN::Enable::Set();
-  GPIOC::MODER::MODER5::Output::Set();
-  
-  while(1)
-  {
-    sleep(1.0);
-    GPIOC::ODR::ODR5::High::Set();
-    
-    sleep(1.0);
-    GPIOC::ODR::ODR5::Low::Set();
-  }
-  return 1 ;
-}
-```
-
-В результате светодиод моргает примерно раз в секунду. 
+Количество итераций в цикле определяется количеством тактов микропроцессора, необходимых для 
+того, чтобы пройти один такой цикл `for`. 
+Если посмотреть на схему тактирования микроконроллера, то можно : 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/ClockTree_stm32f411.png[]
 
 Запустим программу с использованием цикла для реализации задержки в 1 секунду: 
 ```
@@ -109,16 +51,24 @@ int main()
 #include <iostream>
 
 int main()
-{
+{  
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+
+  RCC::CR::HSION::Off::Set();
+
   RCC::AHB1ENR::GPIOCEN::Enable::Set();
   GPIOC::MODER::MODER5::Output::Set();
   
   while(1)
   {
-    for(int i = 0; i < 1000000; i++);
+    for(int i = 0; i < 1'000'000; i++);
     GPIOC::ODR::ODR5::High::Set();
     
-    for(int i = 0; i < 1000000; i++);
+    for(int i = 0; i < 1'000'000; i++);
     GPIOC::ODR::ODR5::Low::Set();
   }
   return 1 ;
@@ -126,7 +76,12 @@ int main()
 ```
 
 После загрузки кода в микроконтроллер, светодиод не моргает, а просто горит. 
-Хотя если поставить точки останова на строчках: 
+Причин у этого может быть несколько: включенная настройка оптимизации кода, 
+
+Я проверил в настройках 
+image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/Optimizations.png[]
+
+Если поставить точки останова на строчках: 
 ```
 GPIOC::ODR::ODR5::High::Set();
 ```
@@ -134,56 +89,86 @@ GPIOC::ODR::ODR5::High::Set();
 ```
 GPIOC::ODR::ODR5::Low::Set();
 ```
-в бесконечном цикле `while`, то можно вручную зажигать и гасить светодиод.
+то можно вручную зажигать и гасить светодиод.
 
-В итоге, можно сделать вывод о том, что если необходимо реализовать задержку на микроконтроллере, 
-и стоит выбор между тем, чтобы использовать пустой цикл `for`, и тем, чтобы использовать 
-библиотеку `ctime`, то надежнее использовать второй вариант. 
-Потому что скорость выполнения пустого цикла зависит от тактовой частоты процессора, в то 
-время как библиотека `ctime` обеспечивает более корректные интервалы времени. 
+То есть, при отладке программа работает хорошо. 
+Это значит, что на участке кода, где происходит моргание светодиодом, нет логических ошибок. 
+Однако становится непонятно, почему в реальном времени не происходит переключение состояния 
+светодиодов. 
+
+Узнаем, за сколько тактов исполняется одна итерация (за 8 тактов). 
+Для этого . 
+
+Мы можем внутри цикла `for` использовать ассеблерную вставку `asm volatile("")`, которая не 
+выполняет никаких действий, т.е.: 
+```
+for(int i = 0; i < 1'000'000; i++)
+{
+  asm volatile("");
+}
+```
+
+Если мы загрузим этот код в микронтроллер и запустим его, то светодиод начал моргать
+Но моргает он немного чаще. 
+
+Узнаем, за какое количество тактов испоняется пустой цикл (за 6 тактов).
+
+Далее, чтобы выбрать нужное количество итераций, мы должны произвести некоторые расчеты: 
+1. Для исполнения одной и той же задачи, с использованием `asm volatile("")` 
+затратилось на 2 такта меньше, чем с использованием пустого цикла. 
+Из этого следует, что для того, чтобы исполнить с использованием `asm volatile("")` тот же 
+кусок кода за то же время, нужно увеличить количество итеараций на 25%, т.е.: 
+```
+for(int i = 0; i < 1'250'000; i++)
+{
+  asm volatile("");
+}
+```
+
+Полный код представлен ниже: 
+```
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+
+int main()
+{  
+  RCC::CR::HSEON::On::Set();
+  while(!RCC::CR::HSERDY::Ready::IsSet());
+
+  RCC::CFGR::SW::Hse::Set();
+  while(!RCC::CFGR::SWS::Hse::IsSet());
+
+  RCC::CR::HSION::Off::Set();
+
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    for(int i = 0; i < 1'250'000; i++)
+    {
+      asm volatile("");
+    }
+    GPIOC::ODR::ODR5::High::Set();
+    
+    for(int i = 0; i < 1'250'000; i++)
+    {
+      asm volatile("");
+    }
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
+```
 
 == Задание 2 - Настроить внутренний источник частоты HSI и подключить его на системную шину.
 
 Для включения внутреннего источника питания необходимо из предыдущего кода убрать команды 
 включения HSE источника. 
 Так как не подключен никакой источник питания, микроконтроллер работает от внутренней частоты. 
-Для наглядности проверки изменения источника подключим светодиод, который будет моргать с 
-частотой тактирования.
 
-```
-#include "rccregisters.hpp"
-#include "gpiocregisters.hpp"
-#include <iostream>
-#include <ctime>
-
-void sleep(float seconds)
-{
-    clock_t startClock = clock();
-    float secondsAhead = seconds * CLOCKS_PER_SEC;
-    
-    // do nothing until the elapsed time has passed.
-    while(clock() < startClock+secondsAhead);
-    return;
-}
-
-int main()
-{
-  RCC::AHB1ENR::GPIOCEN::Enable::Set();
-  GPIOC::MODER::MODER5::Output::Set();
-  
-  while(1)
-  {
-    sleep(1.0);
-    GPIOC::ODR::ODR5::High::Set();
-    
-    sleep(1.0);
-    GPIOC::ODR::ODR5::Low::Set();
-  }
-  return 1 ;
-}
-```
-
-Запустим программу с использованием цикла для реализации задержки в 1 секунду: 
+Запустим программу, реализованную в предыдущем пункте: 
 ```
 #include "rccregisters.hpp"
 #include "gpiocregisters.hpp"
@@ -196,56 +181,109 @@ int main()
   
   while(1)
   {
-    for(int i = 0; i < 1000000; i++);
+    for(int i = 0; i < 1'250'000; i++)
+    {
+      asm volatile("");
+    }
     GPIOC::ODR::ODR5::High::Set();
     
-    for(int i = 0; i < 1000000; i++);
+    for(int i = 0; i < 1'250'000; i++)
+    {
+      asm volatile("");
+    }
     GPIOC::ODR::ODR5::Low::Set();
   }
   return 1 ;
 }
 ```
 
-Аналогичный результат, как при выполнении прошлого задания: после загрузки кода в 
-микроконтроллер, светодиод не моргает, а просто горит. 
-Хотя если поставить точки останова на строчках: 
+Светодиод начал моргать чаще. 
+Это связано с тем, что у внутреннего источника тактирования тактовая частота равна 16 МГц, т.е. 
+в два раза больше. 
+
+Увеличим количество итераций в цикле `for` в два раза, чтобы добиться моргания светодиодом 
+раз в 1 сек.: 
 ```
-GPIOC::ODR::ODR5::High::Set();
+#include "rccregisters.hpp"
+#include "gpiocregisters.hpp"
+#include <iostream>
+
+int main()
+{
+  RCC::AHB1ENR::GPIOCEN::Enable::Set();
+  GPIOC::MODER::MODER5::Output::Set();
+  
+  while(1)
+  {
+    for(int i = 0; i < 2'500'000; i++)
+    {
+      asm volatile("");
+    }
+    GPIOC::ODR::ODR5::High::Set();
+    
+    for(int i = 0; i < 2'500'000; i++)
+    {
+      asm volatile("");
+    }
+    GPIOC::ODR::ODR5::Low::Set();
+  }
+  return 1 ;
+}
 ```
-и
-```
-GPIOC::ODR::ODR5::Low::Set();
-```
-в бесконечном цикле `while`, то можно вручную зажигать и гасить светодиод.
+
+Сейчас светодиод уже начал моргать приблизительно раз в секунду. 
 
 == Задание 3 - Настроить PIL источник тактовой частоты на 32 Мгц и подключить его на системную шину.
 
-Сначала включим внешний источник HSE, затем нужно дождаться момента, когда он стабилизируется: 
+PLL (phase lock loop) представляет собой систему с обратной связью, комбинирующая VCO 
+(англ. voltage-controlled oscillator - генератор, управляемый напряжением) и фазовый компаратор 
+таким образом, чтобы генерировался сигнал с постоянным фазовым сдвигом относительно референтного 
+сигнала. 
+PLL могут быть использованы для того, чтобы генерировать стабильный высокочастотный выходной 
+сигнал ((источник)[https://www.analog.com/media/en/training-seminars/tutorials/MT-086.pdf]). 
+
+На рисунке ниже представлена упрощенная схема работы PLL: 
+image:https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D1%8F_%D0%B0%D0%B2%D1%82%D0%BE%D0%BF%D0%BE%D0%B4%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0_%D1%87%D0%B0%D1%81%D1%82%D0%BE%D1%82%D1%8B#/media/%D0%A4%D0%B0%D0%B9%D0%BB:PhaseLockedLoop.svg[]
+
+Фазовый детектор сравнивает фазы двух входных сигналов (обычно равных или близких частот). 
+На вход фазового детектора подаются два сигнала, фазы которых нужно сравнить, на выходе 
+фазового детектора формируется сигнал, пропорциональный фазовому сдвигу входных сигналов. 
+
+Генератор, управляемый напряжением (ГУН; англ. VCO) — электронный генератор, частота колебаний 
+которого зависит от подаваемого на генератор управляющего напряжения. 
+
+Далее частота сигнала, полученная на выходе VCO умножается (или делится) на некоторый 
+коэффициент и идёт на второй вход фазового детектора для сравнения с референтным сигналом. 
+И цикл повторяется снова - до тех пор, пока частота на выходе VCO не перестанет изменяться. 
+
+Генерация сигнала на выходе VCO постоянной частоты означает, что цикл закмкнулся (в англоязычной 
+терминологии говорят "The loop is locked"). 
+Таким образом, вне зависимости от того, какой будет фазовый сдвиг между референтным сигналом 
+и сигналом с выхода VCO, на выходе PLL будет генерироваться сигнал с постоянным фазовым сдвигом 
+относительно референтного сигнала. 
+
+Сначала включим внешний источник `HSE`, затем нужно дождаться момента, когда он стабилизируется: 
 ```
 RCC::CR::HSEON::On::Set();
 while(!RCC::CR::HSERDY::Ready::IsSet());
 ``` 
 
-Переключим на выбранный источник системную частоту.Дождемся переключения:
+Переключим на выбранный источник системную частоту и дождемся переключения:
 ```
 RCC::CFGR::SW::Hse::Set();
 while(!RCC::CFGR::SWS::Hse::IsSet());
 ```
 
-Отключим внутренний источник HSI и переключим PLL на HSE с помощью регистра PLLCFGR: 
+Отключим внутренний источник `HSI` и переключим `PLL` на `HSE` с помощью регистра `PLLCFGR`: 
 ```
 RCC::CR::HSION::Off::Set();
 RCC::PLLCFGR::PLLSRC::HseSource::Set();
 ```
 
-Далее необходимо установить нужную частоту. Для этого необходима схема тактирования 
-микроконроллера: 
-
-image:https://github.com/alexeysp11/stm32Labs/blob/master/MyLab3/img/ClockTree_stm32f411.png[]
-
 Далее можно начать установку частоты: 
 ```
-// Set VCO equal to 2 MHz => HSE / 4 = 8'000'000 / 4 
+// Set VCO (Voltage Controller Oscillator) equal to 2 MHz  
+// HSE / 4 = 8'000'000 / 4 = 2'000'000
 RCC::PLLCFGR::PLLM0::Set(4U);
 
 // Set VCC Output equal to 128 MHz => VCO * 64 = 2'000'000 * 64
@@ -255,7 +293,7 @@ RCC::PLLCFGR::PLLN0::Set(64U);
 RCC::PLLCFGR::PLLP0::Pllp4::Set();
 ```
 
-Активируем PLL и ждем, пока PLL не станет заблокированным: 
+Активируем PLL и ждем, пока цикл на PLL не замкнется (пока не стабилизируется фазовый сдвиг): 
 ```
 RCC::CR::PLLON::On::Set();
 while(RCC::CR::PLLRDY::Unсlocked::IsSet());
@@ -266,64 +304,6 @@ while(RCC::CR::PLLRDY::Unсlocked::IsSet());
 ```
 RCC::CFGR::SW::Pll::Set();
 while(!RCC::CFGR::SWS::Pll::IsSet());
-```
-
-Код программы с использованием библиотеки `ctime` и кастомной функции задержки `sleep()`:
-```
-#include "rccregisters.hpp"
-#include "gpiocregisters.hpp"
-#include <iostream>
-#include <ctime>
-
-void sleep(float seconds)
-{
-    clock_t startClock = clock();
-    float secondsAhead = seconds * CLOCKS_PER_SEC;
-    
-    // do nothing until the elapsed time has passed.
-    while(clock() < startClock+secondsAhead);
-    return;
-}
-
-int main()
-{  
-  RCC::CR::HSEON::On::Set();
-  while(!RCC::CR::HSERDY::Ready::IsSet());
- 
-  RCC::CFGR::SW::Hse::Set();
-  while(!RCC::CFGR::SWS::Hse::IsSet());
-  
-  RCC::CR::HSION::Off::Set();
-  RCC::PLLCFGR::PLLSRC::HseSource::Set();
-  
-  // Set VCO equal to 2 MHz => HSE / 4 = 8'000'000 / 4 
-  RCC::PLLCFGR::PLLM0::Set(4U);
-  
-  // Set VCC Output equal to 128 MHz => VCO * 64 = 2'000'000 * 64
-  RCC::PLLCFGR::PLLN0::Set(64U);
-  
-  // Set PLL Output equal to 32 Mhz => VCC / 4 = 128'000'000 / 4
-  RCC::PLLCFGR::PLLP0::Pllp4::Set();
-  
-  RCC::CR::PLLON::On::Set();
-  while(RCC::CR::PLLRDY::Unсlocked::IsSet());
-  
-  RCC::CFGR::SW::Pll::Set();
-  while(!RCC::CFGR::SWS::Pll::IsSet());
-  
-  RCC::AHB1ENR::GPIOCEN::Enable::Set();
-  GPIOC::MODER::MODER5::Output::Set();
-  
-  while(1)
-  {
-    sleep(1.0);
-    GPIOC::ODR::ODR5::High::Set();
-    
-    sleep(1.0);
-    GPIOC::ODR::ODR5::Low::Set();
-  }
-  return 1 ;
-}
 ```
 
 Код той же программы с использованием пустых циклов представлен ниже: 
@@ -363,16 +343,20 @@ int main()
   
   while(1)
   {
-    for(int i = 0; i < 1'000'000; i++);
+    for(int i = 0; i < 1'250'000; i++)
+    {
+      asm volatile("");
+    }
     GPIOC::ODR::ODR5::High::Set();
     
-    for(int i = 0; i < 1'000'000; i++);
+    for(int i = 0; i < 1'250'000; i++)
+    {
+      asm volatile("");
+    }
     GPIOC::ODR::ODR5::Low::Set();
   }
   return 1 ;
 }
 ```
 
-Аналогично результатам, полученным в ходе предыдущих двух заданий, при использовании 
-пустого цикла `for` мы получаем постоянно горящий светодиод, который с помощью точек останова
-можно включать и выключать. 
+Загрузим программу в микроконтроллер, теперь светодиод моргает очень часто. 

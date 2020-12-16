@@ -5,7 +5,35 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpioaregisters.hpp</file>
+            <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpioafieldvalues.hpp</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
+            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\float.h</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cfloat</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xxexception</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\xstddef</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\rccfieldvalues.hpp</file>
+            <file>$PROJ_DIR$\stm32f411xE.icf</file>
+            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+            <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
+            <file>$TOOLKIT_DIR$\lib\dlpp7M_tl_nc.a</file>
+            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
+            <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
+            <file>$PROJ_DIR$\Debug\List\iarproject.map</file>
+            <file>$PROJ_DIR$\Debug\List\iarproject.log</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpiocfieldvalues.hpp</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\ios</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\clocale</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\cwctype</file>
+            <file>$TOOLKIT_DIR$\inc\cpp\ostream</file>
             <file>$TOOLKIT_DIR$\inc\c\wctype.h</file>
             <file>$TOOLKIT_DIR$\inc\c\xctype.h</file>
             <file>$TOOLKIT_DIR$\inc\c\xlocale_lconv.h</file>
@@ -69,9 +97,7 @@
             <file>$TOOLKIT_DIR$\inc\cpp\limits</file>
             <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xtr1common</file>
-            <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpioafieldvalues.hpp</file>
-            <file>$PROJ_DIR$\..\MyLab4\main.cpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpioaregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
             <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
@@ -85,74 +111,47 @@
             <file>$PROJ_DIR$\Common\utils.hpp</file>
             <file>$PROJ_DIR$\main.cpp</file>
             <file>$PROJ_DIR$\startupF411RE.cpp</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xmemory0</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdint</file>
-            <file>$TOOLKIT_DIR$\inc\c\limits.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\climits</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cstdlib</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cmath</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
-            <file>$TOOLKIT_DIR$\inc\c\float.h</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cfloat</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xxexception</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\xstddef</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\rccfieldvalues.hpp</file>
-            <file>$PROJ_DIR$\stm32f411xE.icf</file>
-            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
-            <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
-            <file>$TOOLKIT_DIR$\lib\dlpp7M_tl_nc.a</file>
-            <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
-            <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
-            <file>$PROJ_DIR$\Debug\List\iarproject.map</file>
-            <file>$PROJ_DIR$\Debug\List\iarproject.log</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\FieldValues\gpiocfieldvalues.hpp</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\ios</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\clocale</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\cwctype</file>
-            <file>$TOOLKIT_DIR$\inc\cpp\ostream</file>
         </outputs>
-        <file>
-            <name>[ROOT_NODE]</name>
-            <outputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 100 101 29</file>
-                </tool>
-            </outputs>
-        </file>
         <file>
             <name>$PROJ_DIR$\Debug\Exe\iarproject.out</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 100 101</file>
+                    <file> 22 23</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 94 32 31 95 96 97 98 99</file>
+                    <file> 16 60 59 17 18 19 20 21</file>
                 </tool>
             </inputs>
+        </file>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 22 23 57</file>
+                </tool>
+            </outputs>
         </file>
         <file>
             <name>$PROJ_DIR$\main.cpp</name>
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 23 24 32</file>
+                    <file> 51 52 60</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 28</file>
+                    <file> 56</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 68 93 70 35 33 34 36 88 45 44 62 61 90 89 84 82 86 83 87 64 63 85 40 42 43 37 92 47 71 48 69 76 49 50 80 81 39 38 46 91 41 52 56 60 57 54 53 51 58 59 55 74 73 75 72 67 102 8 7 106 103 5 11 4 9 104 6 2 3 105 1 10 15 13 16 12 14 17 18 19 20 21 22 0 65</file>
+                    <file> 94 15 96 63 61 62 64 10 73 72 90 89 12 11 6 4 8 5 9 0 91 7 68 70 71 65 14 75 97 76 95 102 77 78 2 3 67 66 74 13 69 80 84 88 85 82 81 79 86 87 83 100 99 101 98 93 24 36 35 28 25 33 39 32 37 26 34 30 31 27 29 38 43 41 44 40 42 45 46 47 48 49 50 92 1</file>
                 </tool>
             </inputs>
         </file>
@@ -161,11 +160,11 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 25 26 31</file>
+                    <file> 53 54 59</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 27</file>
+                    <file> 55</file>
                 </tool>
             </outputs>
         </file>
