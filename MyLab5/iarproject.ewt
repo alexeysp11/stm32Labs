@@ -2574,6 +2574,9 @@
     </group>
     <group>
         <name>Application</name>
+        <file>
+            <name>$PROJ_DIR$\Application\LED\LED.hpp</name>
+        </file>
     </group>
     <group>
         <name>Common</name>
@@ -2586,6 +2589,9 @@
     </group>
     <file>
         <name>$PROJ_DIR$\main.cpp</name>
+        <configuration>
+            <name>Debug</name>
+        </configuration>
     </file>
     <file>
         <name>$PROJ_DIR$\startupF411RE.cpp</name>
