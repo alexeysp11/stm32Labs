@@ -7,8 +7,8 @@ auto delay_100ms()
 {
   TIM2::CR1::URS::OverflowEvent::Set();
 
-  TIM2::PSC::Set(8000U);
-  TIM2::ARR::Write(100U);
+  TIM2::PSC::Set(7999U);
+  TIM2::ARR::Write(99U);
   TIM2::CNT::Write(0U);
 
   TIM2::SR::UIF::NoInterruptPending::Set();
