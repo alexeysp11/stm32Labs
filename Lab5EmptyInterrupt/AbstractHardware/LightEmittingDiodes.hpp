@@ -7,14 +7,12 @@ class LightEmittingDiodes
     static void ReactOnButton()
     {
       static bool isPressed = 0; 
-      static bool currentlyOn = 0; 
       
       // If user pushed a button
       if(GPIOC::IDR::IDR13::Low::IsSet() && !isPressed)
       {
         isPressed = 1;
-        currentlyOn = !currentlyOn; 
-        LightEmittingDiodes::ToggleDiodes(currentlyOn);
+        LightEmittingDiodes::ChangeFrequency();
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())
@@ -22,25 +20,6 @@ class LightEmittingDiodes
     }
     
 private:
-  // I implemented ToggleDiodes() in order to ensure if buttons work correctly
-  static void ToggleDiodes(bool on)
-  {
-    if(on == 1)
-    {
-      GPIOC::BSRR::BS5::High::Write();
-      GPIOC::BSRR::BS9::High::Write();
-      GPIOC::BSRR::BS8::High::Write();
-      GPIOA::BSRR::BS5::High::Write();
-    }
-    else
-    {
-      GPIOC::BSRR::BR5::Low::Write();
-      GPIOC::BSRR::BR9::Low::Write();
-      GPIOC::BSRR::BR8::Low::Write();
-      GPIOA::BSRR::BR5::Low::Write();
-    }
-  }
-    
     static void ChangeFrequency()
     {
       int min = 50; 
