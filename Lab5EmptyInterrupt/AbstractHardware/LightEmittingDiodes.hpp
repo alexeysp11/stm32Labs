@@ -16,34 +16,40 @@ class LightEmittingDiodes
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())
+      {
         isPressed = 0;
+      }
     }
     
 private:
     static void ChangeFrequency()
     {
-      int min = 50; 
-      int max = 1000; 
-      static int oldDelay_ms = 1000; 
-      static bool forward = 0; 
+      int min = 49; 
+      int max = 999; 
       
-      // Set new delay
-      int newDelay_ms;
-      if (forward == 0)
-        newDelay_ms  = oldDelay_ms - 50; 
+      // We assume that at initial point delay is equal to 1000 ms. 
+      // So variable called isForward should be equal to 1 at initial point 
+      // because a few steps later we need to toggle it. 
+      static bool isForward = 1; 
+      int currentDelay_ms = TIM2::ARR::Get();
+      
+      // If this function was invoked, you should anyway update TIM2_CNT.
+      TIM2::CNT::Write(0);
+      
+      // If delay is equal to min or max, change direction and start counting from zero.
+      if (TIM2::ARR::Get() == min || TIM2::ARR::Get() == max) 
+      {
+        isForward = !isForward; 
+      }
+      
+      // Set new delay.
+      if (isForward == 0)
+      {
+        TIM2::ARR::Write(TIM2::ARR::Get() - 50); 
+      }
       else
-        newDelay_ms  = oldDelay_ms + 50; 
-      
-      // If new delay is equal to min or max, change direction 
-      if (newDelay_ms == min) 
-        forward = 1; 
-      if (newDelay_ms == max)
-        forward = 0; 
-      
-      // Write new prescaler to TIM2_PSC
-      int prescaler = TIM2::PSC::Get();
-      int newPrescaler = prescaler * newDelay_ms / oldDelay_ms;
-      TIM2::PSC::Write(newPrescaler); 
-      oldDelay_ms = newDelay_ms;
+      {
+        TIM2::ARR::Write(TIM2::ARR::Get() + 50); 
+      }
     }
 };

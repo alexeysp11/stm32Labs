@@ -23,7 +23,7 @@ extern "C"
     RCC::APB1ENR::TIM2EN::Enable::Set();
     TIM2::PSC::Write(15'999); 
     
-    TIM2::ARR::Write(999U);
+    TIM2::ARR::Write(1000U);
     TIM2::CNT::Write(0U);
     
     NVIC::ISER0::Write(1U << 28U);

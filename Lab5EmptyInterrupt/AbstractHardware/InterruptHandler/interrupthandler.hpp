@@ -21,30 +21,60 @@ class InterruptHandler {
         TIM2::SR::UIF::NoUpdate::Set();
         
         static int i = 0; 
-        static int forward = 1; 
+        static bool isForward = 1; 
         
         // Toggle LEDs
         switch(i)
         {
           case 0: 
-            if(forward == 1) i++;
-            else { i = 0; forward = 1; };
+            if(isForward == 1) 
+            {
+              i++;
+            }
+            else 
+            { 
+              i = 0; 
+              isForward = 1; 
+            }
+            
             GPIOC::ODR::Toggle(1U << 5U);
             break;
           case 1: 
+            if(isForward == 1) 
+            {
+              i++;
+            }
+            else 
+            {
+              i--;
+            }
+            
             GPIOC::ODR::Toggle(1U << 8U);
-            if(forward == 1) i++;
-            else i--;
             break;
           case 2: 
+            if(isForward == 1) 
+            {
+              i++;
+            }
+            else 
+            {
+              i--;
+            }
+            
             GPIOC::ODR::Toggle(1U << 9U);
-            if(forward == 1) i++;
-            else i--;
             break;
           case 3: 
+            if(isForward == 1) 
+            { 
+              i = 3; 
+              isForward = 0; 
+            }
+            else 
+            {
+              i--;
+            }
+            
             GPIOA::ODR::Toggle(1U << 5U);
-            if(forward == 1) { i = 3; forward = 0; }
-            else i--;
             break;
         }
       }

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.40.2.214/W32 for ARM                  19/Dec/2020  14:37:56
+# IAR ELF Linker V8.40.2.214/W32 for ARM                  23/Dec/2020  02:28:54
 # Copyright 2007-2019 IAR Systems AB.
 #
 #    Output file  =
@@ -8,7 +8,7 @@
 #    Map file     =
 #        C:\Users\User\Desktop\projects\stm32Labs\Lab5EmptyInterrupt\Debug\List\lab4.map
 #    Command line =
-#        -f C:\Users\User\AppData\Local\Temp\EWAD68.tmp
+#        -f C:\Users\User\AppData\Local\Temp\EWB9CA.tmp
 #        (C:\Users\User\Desktop\projects\stm32Labs\Lab5EmptyInterrupt\Debug\Obj\main.o
 #        C:\Users\User\Desktop\projects\stm32Labs\Lab5EmptyInterrupt\Debug\Obj\startup.o
 #        --no_out_extension -o
@@ -60,7 +60,7 @@ initialize by copy { rw };
   .intvec            const     0x800'0000    0xbc  startup.o [1]
                              - 0x800'00bc    0xbc
 
-"P1":                                       0x400
+"P1":                                       0x3f8
   .text              ro code   0x800'00bc    0xb4  startup.o [1]
   .text              ro code   0x800'0170    0x10  startup.o [1]
   .text              ro code   0x800'0180    0x10  startup.o [1]
@@ -70,16 +70,16 @@ initialize by copy { rw };
   .text              ro code   0x800'01c0    0x5c  main.o [1]
   .text              ro code   0x800'021c     0xc  main.o [1]
   .text              ro code   0x800'0228     0xc  main.o [1]
-  .text              ro code   0x800'0234    0x54  main.o [1]
-  .text              ro code   0x800'0288    0x14  main.o [1]
-  .text              ro code   0x800'029c    0x14  main.o [1]
-  .text              ro code   0x800'02b0    0x10  main.o [1]
-  .text              ro code   0x800'02c0    0x14  main.o [1]
-  .text              ro code   0x800'02d4    0x14  main.o [1]
-  .text              ro code   0x800'02e8    0x14  main.o [1]
-  .text              ro code   0x800'02fc    0x14  main.o [1]
-  .text              ro code   0x800'0310    0x14  main.o [1]
-  .text              ro code   0x800'0324     0xc  main.o [1]
+  .text              ro code   0x800'0234     0xc  main.o [1]
+  .text              ro code   0x800'0240    0x54  main.o [1]
+  .text              ro code   0x800'0294    0x14  main.o [1]
+  .text              ro code   0x800'02a8    0x14  main.o [1]
+  .text              ro code   0x800'02bc    0x10  main.o [1]
+  .text              ro code   0x800'02cc    0x14  main.o [1]
+  .text              ro code   0x800'02e0    0x14  main.o [1]
+  .text              ro code   0x800'02f4    0x14  main.o [1]
+  .text              ro code   0x800'0308    0x14  main.o [1]
+  .text              ro code   0x800'031c    0x14  main.o [1]
   .text              ro code   0x800'0330     0xc  main.o [1]
   .text              ro code   0x800'033c     0xc  main.o [1]
   .text              ro code   0x800'0348    0x14  main.o [1]
@@ -98,30 +98,29 @@ initialize by copy { rw };
   .text              ro code   0x800'047c     0xa  cexit.o [4]
   .text              ro code   0x800'0488    0x14  exit.o [5]
   .text              ro code   0x800'049c    0x10  startup.o [1]
-  Initializer bytes  const     0x800'04ac    0x10  <for P2-1>
-  .rodata            const     0x800'04bc     0x0  copy_init3.o [4]
-                             - 0x800'04bc   0x400
+  Initializer bytes  const     0x800'04ac     0x8  <for P2-1>
+  .rodata            const     0x800'04b4     0x0  copy_init3.o [4]
+                             - 0x800'04b4   0x3f8
 
-"P2", part 1 of 2:                           0x10
-  P2-1                        0x2000'0000     0xe  <Init block>
-    .data            inited   0x2000'0000     0x4  main.o [1]
-    .data            inited   0x2000'0004     0x4  startup.o [1]
-    .bss             inited   0x2000'0008     0x4  startup.o [1]
-    .bss             inited   0x2000'000c     0x1  main.o [1]
-    .bss             inited   0x2000'000d     0x1  main.o [1]
-                            - 0x2000'000e     0xe
+"P2", part 1 of 2:                            0x8
+  P2-1                        0x2000'0000     0x7  <Init block>
+    .bss             inited   0x2000'0000     0x4  startup.o [1]
+    .data            inited   0x2000'0004     0x1  main.o [1]
+    .data            inited   0x2000'0005     0x1  startup.o [1]
+    .bss             inited   0x2000'0006     0x1  main.o [1]
+                            - 0x2000'0007     0x7
 
 "P2", part 2 of 2:                         0x2000
-  CSTACK                      0x2000'0010  0x2000  <Block>
-    CSTACK           uninit   0x2000'0010  0x2000  <Block tail>
-                            - 0x2000'2010  0x2000
+  CSTACK                      0x2000'0008  0x2000  <Block>
+    CSTACK           uninit   0x2000'0008  0x2000  <Block tail>
+                            - 0x2000'2008  0x2000
 
 Unused ranges:
 
          From           To      Size
          ----           --      ----
-   0x800'04bc   0x807'ffff  0x7'fb44
-  0x2000'2010  0x2001'ffff  0x1'dff0
+   0x800'04b4   0x807'ffff  0x7'fb4c
+  0x2000'2008  0x2001'ffff  0x1'dff8
 
 
 *******************************************************************************
@@ -131,10 +130,10 @@ Unused ranges:
           Address      Size
           -------      ----
 Copy (__iar_copy_init3)
-    1 source range, total size 0x10 (114% of destination):
-           0x800'04ac  0x10
-    1 destination range, total size 0xe:
-          0x2000'0000   0xe
+    1 source range, total size 0x8 (114% of destination):
+           0x800'04ac   0x8
+    1 destination range, total size 0x7:
+          0x2000'0000   0x7
 
 
 
@@ -149,10 +148,10 @@ command line/config:
     Total:
 
 C:\Users\User\Desktop\projects\stm32Labs\Lab5EmptyInterrupt\Debug\Obj: [1]
-    main.o              518        6        6
-    startup.o           278      196        8
+    main.o              518        2        2
+    startup.o           278      193        5
     -----------------------------------------
-    Total:              796      202       14
+    Total:              796      195        7
 
 dl7M_tln.a: [2]
     exit.o                4
@@ -179,9 +178,9 @@ shb_l.a: [5]
     Total:               20        1
 
     Gaps                  5        2
-    Linker created                22    8'192
+    Linker created                21    8'192
 ---------------------------------------------
-    Grand Total:        985      227    8'206
+    Grand Total:        985      219    8'199
 
 
 *******************************************************************************
@@ -193,26 +192,24 @@ Entry                       Address  Size  Type      Object
 .iar.init_table$$Base    0x800'0440         --   Gb  - Linker created -
 .iar.init_table$$Limit   0x800'0454         --   Gb  - Linker created -
 ?main                    0x800'0459        Code  Gb  cmain.o [4]
-CSTACK$$Base            0x2000'0010         --   Gb  - Linker created -
-CSTACK$$Limit           0x2000'2010         --   Gb  - Linker created -
+CSTACK$$Base            0x2000'0008         --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'2008         --   Gb  - Linker created -
 InterruptHandler::DummyHandler()
                          0x800'0455   0x2  Code  Gb  startup.o [1]
 InterruptHandler::MyTim2InterruptHandler()
                          0x800'00bd  0xb4  Code  Gb  startup.o [1]
-InterruptHandler::MyTim2InterruptHandler()::forward
-                        0x2000'0004   0x4  Data  Gb  startup.o [1]
 InterruptHandler::MyTim2InterruptHandler()::i
-                        0x2000'0008   0x4  Data  Gb  startup.o [1]
+                        0x2000'0000   0x4  Data  Gb  startup.o [1]
+InterruptHandler::MyTim2InterruptHandler()::isForward
+                        0x2000'0005   0x1  Data  Gb  startup.o [1]
 LightEmittingDiodes::ChangeFrequency()
                          0x800'01c1  0x5c  Code  Gb  main.o [1]
-LightEmittingDiodes::ChangeFrequency()::forward
-                        0x2000'000d   0x1  Data  Gb  main.o [1]
-LightEmittingDiodes::ChangeFrequency()::oldDelay_ms
-                        0x2000'0000   0x4  Data  Gb  main.o [1]
+LightEmittingDiodes::ChangeFrequency()::isForward
+                        0x2000'0004   0x1  Data  Gb  main.o [1]
 LightEmittingDiodes::ReactOnButton()
                          0x800'039d  0x30  Code  Gb  main.o [1]
 LightEmittingDiodes::ReactOnButton()::isPressed
-                        0x2000'000c   0x1  Data  Gb  main.o [1]
+                        0x2000'0006   0x1  Data  Gb  main.o [1]
 Region$$Table$$Base      0x800'0440         --   Gb  - Linker created -
 Region$$Table$$Limit     0x800'0454         --   Gb  - Linker created -
 __cmain                  0x800'0459        Code  Gb  cmain.o [4]
@@ -222,7 +219,7 @@ __iar_data_init3         0x800'03f5  0x28  Code  Gb  data_init.o [4]
 __iar_debug_exceptions   0x800'047a   0x1  Data  Gb  unwind_debug.o [5]
 __iar_init_vfp           0x800'041d        Code  Gb  fpinit_M.o [3]
 __iar_program_start      0x800'049d  0x10  Code  Gb  startup.o [1]
-__low_level_init         0x800'0235  0x48  Code  Gb  main.o [1]
+__low_level_init         0x800'0241  0x48  Code  Gb  main.o [1]
 __vector_table           0x800'0000  0xbc  Data  Lc  startup.o [1]
 _call_main               0x800'0465        Code  Gb  cmain.o [4]
 _exit                    0x800'047d        Code  Gb  cexit.o [4]
@@ -236,25 +233,25 @@ bool FieldValueBase<TIM2_DIER_UIE_Values<TIM2::DIER, (unsigned int)0, (unsigned 
 bool FieldValueBase<TIM2_SR_UIF_Values<TIM2::SR, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2SRBase>, TIM2::TIM2SRBase, (unsigned int)1>::IsSet<ReadWriteMode, void>()
                          0x800'0171  0x10  Code  Gb  startup.o [1]
 exit                     0x800'0477   0x4  Code  Gb  exit.o [2]
-main                     0x800'027d   0xc  Code  Gb  main.o [1]
-unsigned int RegisterBase<(unsigned int)1073741864, (unsigned int)32, ReadWriteMode>::Get<ReadWriteMode, void>()
+main                     0x800'0289   0xc  Code  Gb  main.o [1]
+unsigned int RegisterBase<(unsigned int)1073741868, (unsigned int)32, ReadWriteMode>::Get<ReadWriteMode, void>()
                          0x800'021d   0xc  Code  Gb  main.o [1]
 void FieldValueBase<GPIOA_MODER_MODER15_Values<GPIOA::MODER, (unsigned int)10, (unsigned int)2, ReadWriteMode, GPIOA::GPIOAMODERBase>, GPIOA::GPIOAMODERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'02fd  0x14  Code  Gb  main.o [1]
+                         0x800'0309  0x14  Code  Gb  main.o [1]
 void FieldValueBase<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)10, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'02c1  0x14  Code  Gb  main.o [1]
+                         0x800'02cd  0x14  Code  Gb  main.o [1]
 void FieldValueBase<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)16, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'02d5  0x14  Code  Gb  main.o [1]
+                         0x800'02e1  0x14  Code  Gb  main.o [1]
 void FieldValueBase<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)18, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'02e9  0x14  Code  Gb  main.o [1]
+                         0x800'02f5  0x14  Code  Gb  main.o [1]
 void FieldValueBase<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)26, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)0>::Set<ReadWriteMode, void>()
-                         0x800'02b1  0x10  Code  Gb  main.o [1]
+                         0x800'02bd  0x10  Code  Gb  main.o [1]
 void FieldValueBase<RCC_AHB1ENR_DMA2EN_Values<RCC::AHB1ENR, (unsigned int)0, (unsigned int)1, ReadWriteMode, RCC::RCCAHB1ENRBase>, RCC::RCCAHB1ENRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'029d  0x14  Code  Gb  main.o [1]
+                         0x800'02a9  0x14  Code  Gb  main.o [1]
 void FieldValueBase<RCC_AHB1ENR_DMA2EN_Values<RCC::AHB1ENR, (unsigned int)2, (unsigned int)1, ReadWriteMode, RCC::RCCAHB1ENRBase>, RCC::RCCAHB1ENRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'0289  0x14  Code  Gb  main.o [1]
+                         0x800'0295  0x14  Code  Gb  main.o [1]
 void FieldValueBase<RCC_AHB1ENR_DMA2EN_Values<RCC::APB1ENR, (unsigned int)0, (unsigned int)1, ReadWriteMode, RCC::RCCAPB1ENRBase>, RCC::RCCAPB1ENRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'0311  0x14  Code  Gb  main.o [1]
+                         0x800'031d  0x14  Code  Gb  main.o [1]
 void FieldValueBase<TIM2_CR1_CEN_Values<TIM2::CR1, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2CR1Base>, TIM2::TIM2CR1Base, (unsigned int)1>::Set<ReadWriteMode, void>()
                          0x800'035d  0x12  Code  Gb  main.o [1]
 void FieldValueBase<TIM2_DIER_UIE_Values<TIM2::DIER, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2DIERBase>, TIM2::TIM2DIERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
@@ -262,11 +259,11 @@ void FieldValueBase<TIM2_DIER_UIE_Values<TIM2::DIER, (unsigned int)0, (unsigned 
 void FieldValueBase<TIM2_SR_UIF_Values<TIM2::SR, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2SRBase>, TIM2::TIM2SRBase, (unsigned int)0>::Set<ReadWriteMode, void>()
                          0x800'0191  0x10  Code  Gb  startup.o [1]
 void RegisterBase<(unsigned int)1073741860, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
-                         0x800'0331   0xc  Code  Gb  main.o [1]
-void RegisterBase<(unsigned int)1073741864, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
                          0x800'0229   0xc  Code  Gb  main.o [1]
+void RegisterBase<(unsigned int)1073741864, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
+                         0x800'0331   0xc  Code  Gb  main.o [1]
 void RegisterBase<(unsigned int)1073741868, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
-                         0x800'0325   0xc  Code  Gb  main.o [1]
+                         0x800'0235   0xc  Code  Gb  main.o [1]
 void RegisterBase<(unsigned int)1073872916, (unsigned int)32, ReadWriteMode>::Toggle<ReadWriteMode, void>(unsigned int)
                          0x800'01b1  0x10  Code  Gb  startup.o [1]
 void RegisterBase<(unsigned int)1073874964, (unsigned int)32, ReadWriteMode>::Toggle<ReadWriteMode, void>(unsigned int)
@@ -282,8 +279,8 @@ void RegisterBase<(unsigned int)3758153984, (unsigned int)32, ReadWriteMode>::Wr
 [5] = shb_l.a
 
     985 bytes of readonly  code memory
-    227 bytes of readonly  data memory
-  8'206 bytes of readwrite data memory
+    219 bytes of readonly  data memory
+  8'199 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

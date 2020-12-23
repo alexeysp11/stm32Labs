@@ -8,8 +8,8 @@
 Аппаратные устройства используют прерывания для обработки изменений электронного или 
 физического состояния, требующих внимания. 
 
-В секции `__low_level_init` можно разместить какой-то кусок программы (это может быть, например, 
-объявление периферии, как в нашем случае), который будет 
+В функции `__low_level_init()` можно разместить какой-то кусок программы (это может быть, 
+например, объявление периферии, как в нашем случае), который будет 
 выполняться до начала выполнения `main()`, а также до инициализаци всех глобальных переменных 
 и исполнения конструкторов глобальных экземпляров классов (последнее при использовании C++).
 
@@ -24,9 +24,15 @@ link:https://en.wikipedia.org/wiki/Name_mangling[здесь].
 которые имеют одно и то же имя, но находятся в разных пространствах имен, может потребоваться 
 отдельное специализированное соглашение о вызовах в машинном коде.
 
+C++ компиляторы использует менглинг (декорацию) имен, чтобы обеспечить перегрузку функций. 
+Соответственно, нельзя просто так из ассемблера вызвать функцию С++, потому что она 
+превращается во что-то не совсем читаемое. 
+Например, https://godbolt.org/z/pEC6a3[здесь] функция `Test::Run()` превращается в 
+`_ZN4Test3RunEv()`. 
+
 Соответственно, использование конструкции `extern "C"` дает понять компилятору, что имя функции 
-`__low_level_init` менять не надо. 
-Именно использование `__low_level_init` в связке с `extern "C"` позволит настроить периферийные 
+`__low_level_init()` менять не надо. 
+Именно использование `__low_level_init()` в связке с `extern "C"` позволит настроить периферийные 
 устройства до начала выполнения функции `main()`. 
 
 Код файла `main.cpp` представлен ниже: 
@@ -46,7 +52,7 @@ extern "C"
     GPIOC::MODER::MODER8::Output::Set(); 
     
     RCC::APB1ENR::TIM2EN::Enable::Set();
-    TIM2::PSC::Write(16'000); 
+    TIM2::PSC::Write(15'999); 
     
     TIM2::ARR::Write(1000U);
     TIM2::CNT::Write(0U);
@@ -70,7 +76,8 @@ int main()
 В вектор прерываний `__vector_table[]` записываем информацию о том, какой обработчик прерываний 
 нужно вызвать. Например, для почти всех внешних прерываний был вызван фиктивный (англ. dummy) 
 обработчик прерываний `DummyHandler`, который, по сути, реализует лишь функцию задержки. 
-Для прерывания по таймеру `TIM2` был вызван обработчик прерываний `MyTim2InterruptHandler`.
+При возникновении прерывания по таймеру `TIM2`, контроллер прерываний `NVIC` переходит на адрес 
+обработчика прерываний `MyTim2InterruptHandler`.
 
 Стоит отметить, что тип вектора прерываний `__vector_table[]` представляет собой объединение. 
 
@@ -251,7 +258,9 @@ class LightEmittingDiodes
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())
+      {
         isPressed = 0;
+      }
     }
     
 private:
@@ -285,9 +294,13 @@ currentlyOn = !currentlyOn;
 эквивалентна выражению
 ```
 if (!currentlyOn)
+{
 	currentlyOn = 1; 
+}
 else 
+{
 	currentlyOn = 0; 
+}
 ```
 
 В данном примере класс `LightEmittingDiodes` обладает одним публичным методом и одним приватным 
@@ -361,24 +374,54 @@ static void MyTim2InterruptHandler()
 	switch(i)
 	{
 	  case 0: 
-		if(forward == 1) i++;
-		else { i = 0; forward = 1; };
+		if(isForward == 1) 
+		{
+		  i++;
+		}
+		else 
+		{ 
+		  i = 0; 
+		  isForward = 1; 
+		}
+		
 		GPIOC::ODR::Toggle(1U << 5U);
 		break;
 	  case 1: 
+		if(isForward == 1) 
+		{
+		  i++;
+		}
+		else 
+		{
+		  i--;
+		}
+		
 		GPIOC::ODR::Toggle(1U << 8U);
-		if(forward == 1) i++;
-		else i--;
 		break;
 	  case 2: 
+		if(isForward == 1) 
+		{
+		  i++;
+		}
+		else 
+		{
+		  i--;
+		}
+		
 		GPIOC::ODR::Toggle(1U << 9U);
-		if(forward == 1) i++;
-		else i--;
 		break;
 	  case 3: 
+		if(isForward == 1) 
+		{ 
+		  i = 3; 
+		  isForward = 0; 
+		}
+		else 
+		{
+		  i--;
+		}
+		
 		GPIOA::ODR::Toggle(1U << 5U);
-		if(forward == 1) { i = 3; forward = 0; }
-		else i--;
 		break;
 	}
   }
@@ -390,33 +433,37 @@ static void MyTim2InterruptHandler()
 `ReactOnButton()` будем вызывать другой метод, который будет отвечать за изменение настроек 
 таймера - `ChangeFrequency()`. 
 
-Функция, отвечющая за смену частоты моргания светодиодом, приведена ниже: 
+Функция, отвечющая за смену частоты переключения светодиодов, приведена ниже: 
 ```
 static void ChangeFrequency()
 {
-  int min = 50; 
-  int max = 1000; 
-  static int oldDelay_ms = 1000; 
-  static bool forward = 0; 
+  int min = 49; 
+  int max = 999; 
   
-  // Set new delay
-  int newDelay_ms;
-  if (forward == 0)
-	newDelay_ms  = oldDelay_ms - 50; 
+  // We assume that at initial point delay is equal to 1000 ms. 
+  // So variable called isForward should be equal to 1 at initial point 
+  // because a few steps later we need to toggle it. 
+  static bool isForward = 1; 
+  int currentDelay_ms = TIM2::ARR::Get();
+  
+  // If this function was invoked, you should anyway update TIM2_CNT.
+  TIM2::CNT::Write(0);
+  
+  // If delay is equal to min or max, change direction and start counting from zero.
+  if (TIM2::ARR::Get() == min || TIM2::ARR::Get() == max) 
+  {
+	isForward = !isForward; 
+  }
+  
+  // Set new delay.
+  if (isForward == 0)
+  {
+	TIM2::ARR::Write(TIM2::ARR::Get() - 50); 
+  }
   else
-	newDelay_ms  = oldDelay_ms + 50; 
-  
-  // If new delay is equal to min or max, change direction 
-  if (newDelay_ms == min) 
-	forward = 1; 
-  if (newDelay_ms == max)
-	forward = 0; 
-  
-  // Write new prescaler to TIM2_PSC
-  int prescaler = TIM2::PSC::Get();
-  int newPrescaler = prescaler * newDelay_ms / oldDelay_ms;
-  TIM2::PSC::Write(newPrescaler); 
-  oldDelay_ms = newDelay_ms;
+  {
+	TIM2::ARR::Write(TIM2::ARR::Get() + 50); 
+  }
 }
 ```
 
@@ -444,40 +491,45 @@ class LightEmittingDiodes
       }
       
       if(GPIOC::IDR::IDR13::High::IsSet())
-          isPressed = false;
+      {
+        isPressed = 0;
+      }
     }
     
   private:
     static void ChangeFrequency()
     {
-      int min = 50; 
-      int max = 1000; 
-      static int oldDelay_ms = 1000; 
-      static bool forward = 0; 
+      int min = 49; 
+      int max = 999; 
       
-      // Set new delay
-      int newDelay_ms;
-      if (forward == 0)
-        newDelay_ms  = oldDelay_ms - 50; 
+      // We assume that at initial point delay is equal to 1000 ms. 
+      // So variable called isForward should be equal to 1 at initial point 
+      // because a few steps later we need to toggle it. 
+      static bool isForward = 1; 
+      
+      // If this function was invoked, you should anyway update TIM2_CNT.
+      TIM2::CNT::Write(0);
+      
+      // If delay is equal to min or max, change direction and start counting from zero.
+      if (TIM2::ARR::Get() == min || TIM2::ARR::Get() == max) 
+      {
+        isForward = !isForward; 
+      }
+      
+      // Set new delay.
+      if (isForward == 0)
+      {
+        TIM2::ARR::Write(TIM2::ARR::Get() - 50); 
+      }
       else
-        newDelay_ms  = oldDelay_ms + 50; 
-      
-      // If new delay is equal to min or max, change direction 
-      if (newDelay_ms == min) 
-        forward = 1; 
-      if (newDelay_ms == max)
-        forward = 0; 
-      
-      // Write new prescaler to TIM2_PSC
-      int prescaler = TIM2::PSC::Get();
-      int newPrescaler = prescaler * newDelay_ms / oldDelay_ms;
-      TIM2::PSC::Write(newPrescaler); 
-      oldDelay_ms = newDelay_ms;
+      {
+        TIM2::ARR::Write(TIM2::ARR::Get() + 50); 
+      }
     }
 };
 ```
 
-Файл, содержащий функцию `main()`, выглядит следующим образом: 
+Файл `main.cpp` выглядит следующим образом: 
 ```
 #include "gpiocregisters.hpp" //for GPIOC
 #include "gpioaregisters.hpp" //for GPIOA
@@ -501,9 +553,9 @@ extern "C"
     GPIOA::MODER::MODER5::Output::Set();
     
     RCC::APB1ENR::TIM2EN::Enable::Set();
-    TIM2::PSC::Write(16'000); 
+    TIM2::PSC::Write(15'999); 
     
-    TIM2::ARR::Write(1000U);
+    TIM2::ARR::Write(999U);
     TIM2::CNT::Write(0U);
     
     NVIC::ISER0::Write(1U << 28U);
