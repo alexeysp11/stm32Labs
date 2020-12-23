@@ -371,7 +371,7 @@ static void MyTim2InterruptHandler()
 	TIM2::SR::UIF::NoUpdate::Set();
 	
 	static int i = 0; 
-	static bool forward = 1; 
+	static bool isForward = 1; 
 	
 	// Toggle LEDs
 	switch(i)
