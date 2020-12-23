@@ -163,7 +163,10 @@ void __iar_program_start(void) {
 разрозненных функций, которые вызывают друг друга по сложной цепочке, а с объектами и классами, 
 которые в свою очередь обладают отдельными свойствами (переменными разного типа, хранящие 
 информацию о ключевых параметрах объекта) и методами (функциями, выполняющими некоторые 
-операции над свойствами). Например: 
+операции над свойствами). 
+
+Например: 
+
 - некоторый абстракный человек - это класс, 
 - конкретный человек, которого зовут Саймон, - это объект, 
 - имя Саймона - это свойство, 
@@ -368,7 +371,7 @@ static void MyTim2InterruptHandler()
 	TIM2::SR::UIF::NoUpdate::Set();
 	
 	static int i = 0; 
-	static int forward = 1; 
+	static bool forward = 1; 
 	
 	// Toggle LEDs
 	switch(i)
@@ -444,12 +447,11 @@ static void ChangeFrequency()
   // So variable called isForward should be equal to 1 at initial point 
   // because a few steps later we need to toggle it. 
   static bool isForward = 1; 
-  int currentDelay_ms = TIM2::ARR::Get();
   
   // If this function was invoked, you should anyway update TIM2_CNT.
   TIM2::CNT::Write(0);
   
-  // If delay is equal to min or max, change direction and start counting from zero.
+  // If delay is equal to min or max, change direction.
   if (TIM2::ARR::Get() == min || TIM2::ARR::Get() == max) 
   {
 	isForward = !isForward; 
@@ -510,7 +512,7 @@ class LightEmittingDiodes
       // If this function was invoked, you should anyway update TIM2_CNT.
       TIM2::CNT::Write(0);
       
-      // If delay is equal to min or max, change direction and start counting from zero.
+      // If delay is equal to min or max, change direction.
       if (TIM2::ARR::Get() == min || TIM2::ARR::Get() == max) 
       {
         isForward = !isForward; 

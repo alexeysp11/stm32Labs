@@ -36,7 +36,7 @@ private:
       // If this function was invoked, you should anyway update TIM2_CNT.
       TIM2::CNT::Write(0);
       
-      // If delay is equal to min or max, change direction and start counting from zero.
+      // If delay is equal to min or max, change direction.
       if (TIM2::ARR::Get() == min || TIM2::ARR::Get() == max) 
       {
         isForward = !isForward; 
