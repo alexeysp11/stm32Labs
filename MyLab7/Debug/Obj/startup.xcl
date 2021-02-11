@@ -30,7 +30,13 @@ C:\Users\User\Desktop\projects\stm32Labs\MyLab7
 -I
 C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application
 -I
-C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\LED
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Led
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\ChristmasTree
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Timer
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Button
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc
 -I
@@ -58,7 +64,13 @@ C:\Users\User\Desktop\projects\stm32Labs\MyLab7
 -I
 C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application
 -I
-C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\LED
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Led
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\ChristmasTree
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Timer
+-I
+C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Button
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

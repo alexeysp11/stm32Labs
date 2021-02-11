@@ -5,7 +5,6 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
             <file>$PROJ_DIR$\Debug\List\startupF411RE.lst</file>
             <file>$PROJ_DIR$\Debug\Obj\startupF411RE.xcl</file>
             <file>$PROJ_DIR$\Debug\List\startupF411RE.s</file>
@@ -33,19 +32,6 @@
             <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\cwchar</file>
             <file>$TOOLKIT_DIR$\inc\c\DLib_Product_stdlib.h</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\fieldvalue.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\fieldvaluebase.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\register.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\registerbase.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\registerfield.hpp</file>
-            <file>$PROJ_DIR$\AHardware\Registers\registertype.hpp</file>
-            <file>$PROJ_DIR$\Common\susudefs.hpp</file>
-            <file>$PROJ_DIR$\Common\utils.hpp</file>
-            <file>$PROJ_DIR$\main.cpp</file>
-            <file>$PROJ_DIR$\startupF411RE.cpp</file>
             <file>$TOOLKIT_DIR$\inc\cpp\xutility</file>
             <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
             <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
@@ -82,6 +68,19 @@
             <file>$TOOLKIT_DIR$\inc\c\xatomic.h</file>
             <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
             <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\gpiocregisters.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\STM32F411\rccregisters.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\accessmode.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\fieldvalue.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\fieldvaluebase.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\register.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\registerbase.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\registerfield.hpp</file>
+            <file>$PROJ_DIR$\AHardware\Registers\registertype.hpp</file>
+            <file>$PROJ_DIR$\Common\susudefs.hpp</file>
+            <file>$PROJ_DIR$\main.cpp</file>
+            <file>$PROJ_DIR$\startupF411RE.cpp</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
             <file>$PROJ_DIR$\Debug\List\main.s</file>
             <file>$TOOLKIT_DIR$\inc\c\errno.h</file>
             <file>$TOOLKIT_DIR$\inc\cpp\limits</file>
@@ -115,7 +114,7 @@
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 103 47 63</file>
+                    <file> 102 33 49</file>
                 </tool>
             </outputs>
         </file>
@@ -124,17 +123,17 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 77 87 20</file>
+                    <file> 76 86 19</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 0</file>
+                    <file> 75</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 29 10 31 21 14 24 22 76 45 25 75 79 13 90 81 82 73 69 70 84 71 80 42 27 26 23 8 59 32 57 30 37 46 50 83 72 43 44 64 9 41 52 49 85 48 55 53 51 74 86 56 35 34 36 33 28 58 94 62 17 54 60 91 67 101 16 61 65 68 15 66 89 100 88 99 92 93 96 98 102 97 95 78</file>
+                    <file> 64 9 66 20 13 23 21 62 31 24 61 78 12 89 80 81 59 55 56 83 57 79 28 26 25 22 7 45 67 43 65 72 32 36 82 58 29 30 50 8 27 38 35 84 34 41 39 37 60 85 42 70 69 71 68 63 44 93 48 16 40 46 90 53 100 15 47 51 54 14 52 88 99 87 98 91 92 95 97 101 96 94 77</file>
                 </tool>
             </inputs>
         </file>
@@ -143,11 +142,11 @@
             <outputs>
                 <tool>
                     <name>ICCARM</name>
-                    <file> 3 1 19</file>
+                    <file> 2 0 18</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 2</file>
+                    <file> 1</file>
                 </tool>
             </outputs>
         </file>
@@ -156,13 +155,13 @@
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 47 63</file>
+                    <file> 33 49</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 11 20 19 7 12 4 5 6</file>
+                    <file> 10 19 18 6 11 3 4 5</file>
                 </tool>
             </inputs>
         </file>

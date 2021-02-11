@@ -1,10 +1,13 @@
+#include "Port.hpp"
+#include "ChristmasTree.hpp"
+#include "Timer.hpp"
+#include "Button.hpp"
+
 #include "gpiocregisters.hpp" //for GPIOC
 #include "gpioaregisters.hpp" //for GPIOA
 #include "rccregisters.hpp"   //for RCC
 #include "tim2registers.hpp"   //for SPI2
 #include "nvicregisters.hpp"  //for NVIC
-#include "Port.hpp"
-
 
 extern "C"
 {
@@ -46,12 +49,11 @@ extern "C"
 
 int main()
 {
-  Port<GPIOC> port; 
+  IButton* button = new Button(13, portC);
+  ChristmasTree ct(button);
+  ct.Run(); 
   
-  while(1)
-  {
-    port.Toggle(8);
-  }
+  delete button; 
   
   return 0;
 }

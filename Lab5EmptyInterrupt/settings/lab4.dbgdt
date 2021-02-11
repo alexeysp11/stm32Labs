@@ -970,7 +970,7 @@
                     <item>min</item>
                     <item>max</item>
                     <item>currentDelay_ms</item>
-                    <item></item>
+                    <item />
                 </expressions>
                 <col-names>
                     <item>Expression</item>

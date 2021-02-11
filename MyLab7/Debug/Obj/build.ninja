@@ -20,9 +20,17 @@ rule browsedata
 
 
 #Build steps
+build interrupthandler.pbi : index interrupthandler.xcl
+build Button.pbi : index Button.xcl
+build ChristmasTree.pbi : index ChristmasTree.xcl
+build Led.pbi : index Led.xcl
+build Timer.pbi : index Timer.xcl
 build main.pbi : index main.xcl
 build startup.pbi : index startup.xcl
-build lab7.pbd : link main.pbi startup.pbi
+build lab7_part0.pbi : link interrupthandler.pbi Button.pbi ChristmasTree.pbi
+build lab7_part1.pbi : link Led.pbi Timer.pbi main.pbi
+build lab7_part2.pbi : link startup.pbi
+build lab7.pbd : link lab7_part0.pbi lab7_part1.pbi lab7_part2.pbi
 build lab7.pbw : browsedata lab7.pbd
 
 

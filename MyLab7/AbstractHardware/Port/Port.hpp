@@ -1,24 +1,32 @@
 #pragma once
 
-#include <cstdint> // for uint8_t
+#include <cstdint>
+#include <cassert>
 
-class IPort
+class IPortSet
 {
-  public: 
-    void virtual Toggle(uint8_t num) = 0;
+public:
+  virtual void Toggle(std::uint8_t num) = 0;
 };
 
-template<typename Reg>
-class Port : IPort
+class IPortGet
 {
-  public: 
-    void Toggle(uint8_t num)
-    {
-      Reg::ODR::Toggle(1U << num);
-    }
-    
-    bool Read(uint8_t num)
-    {
-      return Reg::IDR::num::Low::IsSet(); 
-    }
+public:
+  virtual bool IsSet() = 0;
+};
+
+template <typename Reg>
+class Port: public IPortSet, public IPortGet
+{
+public:
+  void Toggle(std::uint8_t num) override
+  {
+     assert (num < 16);
+     Reg::ODR::Toggle(1 <<num);
+   }
+
+  bool IsSet() override
+  {
+     return Reg::IDR::Get();
+  }
 };

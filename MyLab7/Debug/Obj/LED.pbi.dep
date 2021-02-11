@@ -1,0 +1,13 @@
+Led.pbi: \
+  C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Led\Led.cpp \
+  C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Application\Led/Led.hpp \
+  C:\Users\User\Desktop\projects\stm32Labs\MyLab7\AbstractHardware\Port\Port.hpp \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\cpp\cstdint \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\stdint.h \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\ycheck.h \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\yvals.h \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Defaults.h \
+  C:\\Program\ Files\\IAR\ Systems\\Embedded\ Workbench\ 8.3\\arm\\inc\\c\\DLib_Config_Normal.h \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\cpp\cassert \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\c\assert.h

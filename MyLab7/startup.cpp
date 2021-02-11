@@ -1,4 +1,3 @@
-
 #include "interrupthandler.hpp"  //for InterruptHandler
 
 extern "C" void __iar_program_start(void) ;
@@ -55,7 +54,7 @@ const tIntVectItem __vector_table[] =
   InterruptHandler::DummyHandler,             //TIM10/TIM1 Update interrupt
   InterruptHandler::DummyHandler,             //TIM11/TIM1 Trigger/Commutation interrupts
   InterruptHandler::DummyHandler,			   //TIM1 Capture Compare interrupt
-  InterruptHandler::DummyHandler,         //TIM2  	
+  InterruptHandler::Tim2Handler,         //TIM2  	
   InterruptHandler::DummyHandler,         //TIM3
   InterruptHandler::DummyHandler,        ////TIM4
 };

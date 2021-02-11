@@ -2382,19 +2382,19 @@
         <group>
             <name>InterruptHandler</name>
             <file>
-                <name>$PROJ_DIR$\AbstractHardware\InterruptHandler\interrupthandler.hpp</name>
+                <name>$PROJ_DIR$\AbstractHardware\InterruptHandler\interrupthandler.cpp</name>
             </file>
-        </group>
-        <group>
-            <name>Pin</name>
             <file>
-                <name>$PROJ_DIR$\AbstractHardware\Pin\pin.hpp</name>
+                <name>$PROJ_DIR$\AbstractHardware\InterruptHandler\interrupthandler.hpp</name>
             </file>
         </group>
         <group>
             <name>Port</name>
             <file>
                 <name>$PROJ_DIR$\AbstractHardware\Port\Port.hpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\AbstractHardware\Port\portsconfig.h</name>
             </file>
         </group>
         <group>
@@ -2764,9 +2764,39 @@
     <group>
         <name>Application</name>
         <group>
-            <name>LED</name>
+            <name>Button</name>
             <file>
-                <name>$PROJ_DIR$\AbstractHardware\LED\LED.hpp</name>
+                <name>$PROJ_DIR$\Application\Button\Button.cpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\Application\Button\Button.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>ChristmasTree</name>
+            <file>
+                <name>$PROJ_DIR$\Application\ChristmasTree\ChristmasTree.cpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\Application\ChristmasTree\ChristmasTree.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>Led</name>
+            <file>
+                <name>$PROJ_DIR$\Application\Led\Led.cpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\Application\Led\Led.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>Timer</name>
+            <file>
+                <name>$PROJ_DIR$\Application\Timer\Timer.cpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\Application\Timer\Timer.hpp</name>
             </file>
         </group>
     </group>
