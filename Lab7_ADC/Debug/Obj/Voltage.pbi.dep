@@ -1,0 +1,7 @@
+Voltage.pbi: \
+  C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 8.3\arm\inc\cpp\cstddef \
+  C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AHardware\Registers\fieldvalue.hpp \
+  C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AHardware\Registers\STM32F411\FieldValues\adc1fieldvalues.hpp \
+  C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AHardware\Registers\STM32F411\adc1registers.hpp \
+  C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Voltage\Voltage.hpp \
+  C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Voltage\Voltage.cpp
