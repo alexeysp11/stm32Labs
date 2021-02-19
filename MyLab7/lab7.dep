@@ -247,6 +247,10 @@
             <name>$PROJ_DIR$\main.cpp</name>
             <outputs>
                 <tool>
+                    <name>ICCARM</name>
+                    <file> 122</file>
+                </tool>
+                <tool>
                     <name>__cstat</name>
                     <file> 100</file>
                 </tool>
