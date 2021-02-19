@@ -10,8 +10,10 @@ class ChristmasTree
 {
 public: 
   ChristmasTree(IButton* aButton);
-  Timer timer;
   void Run();
+  void Update(); 
+  
+  Timer timer;
 
 private:
   IButton* button;

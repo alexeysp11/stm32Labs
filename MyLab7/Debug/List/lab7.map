@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.40.2.214/W32 for ARM                  12/Feb/2021  00:17:52
+# IAR ELF Linker V8.40.2.214/W32 for ARM                  19/Feb/2021  19:25:55
 # Copyright 2007-2019 IAR Systems AB.
 #
 #    Output file  =
@@ -8,7 +8,7 @@
 #    Map file     =
 #        C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Debug\List\lab7.map
 #    Command line =
-#        -f C:\Users\User\AppData\Local\Temp\EW44C9.tmp
+#        -f C:\Users\User\AppData\Local\Temp\EW4E81.tmp
 #        (C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Debug\Obj\Button.o
 #        C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Debug\Obj\ChristmasTree.o
 #        C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Debug\Obj\interrupthandler.o
@@ -31,12 +31,13 @@
 *** RUNTIME MODEL ATTRIBUTES
 ***
 
-CppFlavor        = *
-__CPP_Exceptions = Disabled
-__CPP_Language   = C++14
-__Heap_Handler   = DLMalloc
-__SystemLibrary  = DLib
-__dlib_version   = 6
+CppFlavor                     = *
+__CPP_Exceptions              = Disabled
+__CPP_Language                = C++14
+__Heap_Handler                = DLMalloc
+__SystemLibrary               = DLib
+__dlib_dynamic_initialization = normal
+__dlib_version                = 6
 
 
 *******************************************************************************
@@ -60,98 +61,111 @@ define block HEAP with size = 8K, alignment = 8 { };
           rw, block CSTACK, block HEAP };
 initialize by copy { rw };
 
-  Section            Kind         Address    Size  Object
-  -------            ----         -------    ----  ------
-"A0":                                        0xbc
-  .intvec            const     0x800'0000    0xbc  startup.o [1]
-                             - 0x800'00bc    0xbc
+  Section                Kind         Address    Size  Object
+  -------                ----         -------    ----  ------
+"A0":                                            0xbc
+  .intvec                const     0x800'0000    0xbc  startup.o [1]
+                                 - 0x800'00bc    0xbc
 
-"P1":                                      0x1a0c
-  .text              ro code   0x800'00bc  0x149c  dlmalloc.o [2]
-  .text              ro code   0x800'1558     0x6  abort.o [2]
-  .text              ro code   0x800'155e    0x3a  zero_init3.o [5]
-  .text              ro code   0x800'1598    0x2c  xgetmemchunk.o [2]
-  .text              ro code   0x800'15c4    0x14  exit.o [6]
-  .text              ro code   0x800'15d8    0xac  interrupthandler.o [1]
-  .text              ro code   0x800'1684    0x10  interrupthandler.o [1]
-  .text              ro code   0x800'1694    0x10  main.o [1]
-  .text              ro code   0x800'16a4    0x10  startup.o [1]
-  .text              ro code   0x800'16b4    0x10  startup.o [1]
-  .text              ro code   0x800'16c4    0x7c  main.o [1]
-  .text              ro code   0x800'1740    0x14  main.o [1]
-  .text              ro code   0x800'1754    0x14  main.o [1]
-  .text              ro code   0x800'1768    0x14  main.o [1]
-  .text              ro code   0x800'177c    0x1c  main.o [1]
-  .text              ro code   0x800'1798     0xc  main.o [1]
-  .text              ro code   0x800'17a4     0xc  main.o [1]
-  .text              ro code   0x800'17b0     0xc  Timer.o [1]
-  .text              ro code   0x800'17bc    0x14  main.o [1]
-  .text              ro code   0x800'17d0     0xc  Timer.o [1]
-  .text              ro code   0x800'17dc    0x12  Timer.o [1]
-  .text              ro code   0x800'17ee    0x2e  copy_init3.o [5]
-  .text              ro code   0x800'181c    0x24  newop_0.o [3]
-  .text              ro code   0x800'1840    0x3c  Button.o [1]
-  .text              ro code   0x800'187c    0x68  ChristmasTree.o [1]
-  .text              ro code   0x800'18e4     0x4  delop4_0.o [3]
-  .text              ro code   0x800'18e8     0x4  nomemory.o [3]
-  .text              ro code   0x800'18ec     0x8  Button.o [1]
-  .text              ro code   0x800'18f4     0x6  Led.o [1]
-  .rodata            const     0x800'18fa     0x1  unwind_debug.o [6]
-  .text              ro code   0x800'18fc    0x5c  Timer.o [1]
-  .text              ro code   0x800'1958     0xa  delop_0.o [3]
-  .text              ro code   0x800'1962     0x2  Button.o [1]
-  .text              ro code   0x800'1964     0xc  Timer.o [1]
-  .text              ro code   0x800'1970     0x4  heaptramp0.o [2]
-  .text              ro code   0x800'1974    0x28  data_init.o [5]
-  .text              ro code   0x800'199c    0x22  fpinit_M.o [4]
-  .iar.init_table    const     0x800'19c0    0x24  - Linker created -
-  .text              ro code   0x800'19e4    0x1e  cmain.o [5]
-  .text              ro code   0x800'1a02     0x4  exit.o [2]
-  .text              ro code   0x800'1a08     0xa  cexit.o [5]
-  .rodata            const     0x800'1a14    0x1c  startup.o [1]
-  .rodata            const     0x800'1a30    0x1c  startup.o [1]
-  .text              ro code   0x800'1a4c    0x14  startup.o [1]
-  .text              ro code   0x800'1a60     0xc  startup.o [1]
-  .text              ro code   0x800'1a6c    0x14  startup.o [1]
-  .text              ro code   0x800'1a80     0xc  startup.o [1]
-  Initializer bytes  const     0x800'1a8c    0x14  <for P2-1>
-  .text              ro code   0x800'1aa0    0x10  startup.o [1]
-  .rodata            const     0x800'1ab0     0xc  Button.o [1]
-  .text              ro code   0x800'1abc     0x6  startup.o [1]
-  .text              ro code   0x800'1ac2     0x6  startup.o [1]
-  .rodata            const     0x800'1ac8     0x0  zero_init3.o [5]
-  .rodata            const     0x800'1ac8     0x0  copy_init3.o [5]
-                             - 0x800'1ac8  0x1a0c
+"P1":                                          0x1618
+  .text                  ro code   0x800'00bc   0xf7c  dlmalloc.o [2]
+  .text                  ro code   0x800'1038     0x6  abort.o [2]
+  .text                  ro code   0x800'103e    0x3a  zero_init3.o [5]
+  .text                  ro code   0x800'1078    0x2c  xgetmemchunk.o [2]
+  .text                  ro code   0x800'10a4    0x14  exit.o [6]
+  .text                  ro code   0x800'10b8    0x8c  main.o [1]
+  .text                  ro code   0x800'1144    0x24  newop_0.o [3]
+  .text                  ro code   0x800'1168    0x3c  Button.o [1]
+  .text                  ro code   0x800'11a4    0x86  ChristmasTree.o [1]
+  .text                  ro code   0x800'122a    0x2e  copy_init3.o [5]
+  .text                  ro code   0x800'1258    0x14  main.o [1]
+  .text                  ro code   0x800'126c    0x14  main.o [1]
+  .text                  ro code   0x800'1280    0x14  main.o [1]
+  .text                  ro code   0x800'1294    0x1c  main.o [1]
+  .text                  ro code   0x800'12b0     0xc  main.o [1]
+  .text                  ro code   0x800'12bc     0xc  main.o [1]
+  .text                  ro code   0x800'12c8     0xc  Timer.o [1]
+  .text                  ro code   0x800'12d4    0x14  main.o [1]
+  .text                  ro code   0x800'12e8    0x10  main.o [1]
+  .text                  ro code   0x800'12f8     0xc  Timer.o [1]
+  .text                  ro code   0x800'1304    0x12  Timer.o [1]
+  .text                  ro code   0x800'1316     0x4  nomemory.o [3]
+  .text                  ro code   0x800'131a     0x8  Button.o [1]
+  .text                  ro code   0x800'1322    0x18  Led.o [1]
+  .text                  ro code   0x800'133a     0x2  Button.o [1]
+  .text                  ro code   0x800'133c    0x5c  Timer.o [1]
+  .text                  ro code   0x800'1398     0x6  ChristmasTree.o [1]
+  .text                  ro code   0x800'139e     0x2  Button.o [1]
+  .text                  ro code   0x800'13a0     0xc  Timer.o [1]
+  .rodata                const     0x800'13ac    0x50  startup.o [1]
+  .rodata                const     0x800'13fc    0x50  startup.o [1]
+  .text                  ro code   0x800'144c    0x30  startup.o [1]
+  .text                  ro code   0x800'147c    0x24  ABIassert.o [6]
+  .text                  ro code   0x800'14a0    0x10  startup.o [1]
+  .text                  ro code   0x800'14b0    0x30  startup.o [1]
+  .text                  ro code   0x800'14e0    0x10  startup.o [1]
+  .text                  ro code   0x800'14f0    0x28  data_init.o [5]
+  .text                  ro code   0x800'1518    0x22  fpinit_M.o [4]
+  .iar.init_table        const     0x800'153c    0x28  - Linker created -
+  .rodata                const     0x800'1564     0x1  unwind_debug.o [6]
+  .text                  ro code   0x800'1568    0x20  cmain_call_ctors.o [5]
+  .text                  ro code   0x800'1588    0x18  cppinit.o [2]
+  .text                  ro code   0x800'15a0    0x1e  cmain.o [5]
+  .text                  ro code   0x800'15be     0x4  exit.o [2]
+  .text                  ro code   0x800'15c4     0xa  cexit.o [5]
+  .rodata                const     0x800'15d0    0x1c  startup.o [1]
+  .rodata                const     0x800'15ec    0x1c  startup.o [1]
+  .text                  ro code   0x800'1608    0x1c  interrupthandler.o [1]
+  .text                  ro code   0x800'1624    0x10  interrupthandler.o [1]
+  .rodata                const     0x800'1634    0x14  Button.o [1]
+  .text                  ro code   0x800'1648    0x14  startup.o [1]
+  .text                  ro code   0x800'165c     0xc  startup.o [1]
+  .text                  ro code   0x800'1668    0x14  startup.o [1]
+  .text                  ro code   0x800'167c     0xc  startup.o [1]
+  Initializer bytes      const     0x800'1688    0x14  <for P2-1>
+  .text                  ro code   0x800'169c    0x10  startup.o [1]
+  .rodata                const     0x800'16ac     0xc  startup.o [1]
+  .rodata                const     0x800'16b8     0xc  startup.o [1]
+  .text                  ro code   0x800'16c4     0x6  startup.o [1]
+  .text                  ro code   0x800'16ca     0x6  startup.o [1]
+  SHT$$PREINIT_ARRAY               0x800'16d0     0x0  <Block>
+  SHT$$INIT_ARRAY                  0x800'16d0     0x4  <Block>
+    .init_array          const     0x800'16d0     0x4  main.o [1]
+  __iar_tls$$INIT_ARRAY            0x800'16d4     0x0  <Block>
+  .rodata                const     0x800'16d4     0x0  zero_init3.o [5]
+  .rodata                const     0x800'16d4     0x0  copy_init3.o [5]
+                                 - 0x800'16d4  0x1618
 
-"P2", part 1 of 3:                           0x14
-  P2-1                        0x2000'0000    0x12  <Init block>
-    .data            inited   0x2000'0000     0x8  startup.o [1]
-    .data            inited   0x2000'0008     0x8  startup.o [1]
-    .data            inited   0x2000'0010     0x1  interrupthandler.o [1]
-    .data            inited   0x2000'0011     0x1  Timer.o [1]
-                            - 0x2000'0012    0x12
+"P2", part 1 of 3:                               0x14
+  P2-1                            0x2000'0000    0x11  <Init block>
+    .data                inited   0x2000'0000     0x8  startup.o [1]
+    .data                inited   0x2000'0008     0x8  startup.o [1]
+    .data                inited   0x2000'0010     0x1  Timer.o [1]
+                                - 0x2000'0011    0x11
 
-"P2", part 2 of 3:                          0x1fc
-  .bss               zero     0x2000'0014   0x1d8  dlmalloc.o [2]
-  .bss               zero     0x2000'01ec    0x18  dlmalloc.o [2]
-  .bss               zero     0x2000'0204     0x4  interrupthandler.o [1]
-  .bss               zero     0x2000'0208     0x4  new.o [3]
-  .bss               zero     0x2000'020c     0x4  xgetmemchunk.o [2]
-                            - 0x2000'0210   0x1fc
+"P2", part 2 of 3:                              0x228
+  .bss                   zero     0x2000'0014   0x1d8  dlmalloc.o [2]
+  .bss                   zero     0x2000'01ec    0x2c  main.o [1]
+  .bss                   zero     0x2000'0218    0x18  dlmalloc.o [2]
+  .bss                   zero     0x2000'0230     0x4  main.o [1]
+  .bss                   zero     0x2000'0234     0x4  new.o [3]
+  .bss                   zero     0x2000'0238     0x4  xgetmemchunk.o [2]
+                                - 0x2000'023c   0x228
 
-"P2", part 3 of 3:                         0x4000
-  CSTACK                      0x2000'0210  0x2000  <Block>
-    CSTACK           uninit   0x2000'0210  0x2000  <Block tail>
-  HEAP                        0x2000'2210  0x2000  <Block>
-    HEAP             uninit   0x2000'2210  0x2000  <Block tail>
-                            - 0x2000'4210  0x4000
+"P2", part 3 of 3:                             0x4000
+  CSTACK                          0x2000'0240  0x2000  <Block>
+    CSTACK               uninit   0x2000'0240  0x2000  <Block tail>
+  HEAP                            0x2000'2240  0x2000  <Block>
+    HEAP                 uninit   0x2000'2240  0x2000  <Block tail>
+                                - 0x2000'4240  0x4000
 
 Unused ranges:
 
          From           To      Size
          ----           --      ----
-   0x800'1ac8   0x807'ffff  0x7'e538
-  0x2000'4210  0x2001'ffff  0x1'bdf0
+   0x800'16d4   0x807'ffff  0x7'e92c
+  0x2000'023c  0x2000'023f       0x4
+  0x2000'4240  0x2001'ffff  0x1'bdc0
 
 
 *******************************************************************************
@@ -161,14 +175,16 @@ Unused ranges:
           Address      Size
           -------      ----
 Zero (__iar_zero_init3)
-    1 destination range, total size 0x1fc:
-          0x2000'0014  0x1fc
+    1 destination range, total size 0x228:
+          0x2000'0014  0x228
 
 Copy (__iar_copy_init3)
-    1 source range, total size 0x14 (111% of destination):
-           0x800'1a8c   0x14
-    1 destination range, total size 0x12:
-          0x2000'0000   0x12
+    1 source range, total size 0x14 (117% of destination):
+           0x800'1688   0x14
+    1 destination range, total size 0x11:
+          0x2000'0000   0x11
+
+Extra (__iar_cstart_call_ctors)
 
 
 
@@ -183,33 +199,31 @@ command line/config:
     Total:
 
 C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Debug\Obj: [1]
-    Button.o                 70       12
-    ChristmasTree.o         104
-    Led.o                     6
+    Button.o                 72       20
+    ChristmasTree.o         140
+    Led.o                    24
     Timer.o                 146        1        1
-    interrupthandler.o      188        1        5
-    main.o                  272
-    startup.o               124      260       16
+    interrupthandler.o       44
+    main.o                  288        4       48
+    startup.o               220      444       16
     ---------------------------------------------
-    Total:                  910      274       22
+    Total:                  934      469       65
 
 dl7M_tln.a: [2]
     abort.o                   6
-    dlmalloc.o            5'276               496
+    cppinit.o                24
+    dlmalloc.o            3'964               496
     exit.o                    4
-    heaptramp0.o              4
     xgetmemchunk.o           44                 4
     ---------------------------------------------
-    Total:                5'334               500
+    Total:                4'042               500
 
 dlpp7M_tl_nc.a: [3]
-    delop4_0.o                4
-    delop_0.o                10
     new.o                                       4
     newop_0.o                36
     nomemory.o                4
     ---------------------------------------------
-    Total:                   54                 4
+    Total:                   40                 4
 
 m7M_tls.a: [4]
     fpinit_M.o               34
@@ -219,22 +233,24 @@ m7M_tls.a: [4]
 rt7M_tl.a: [5]
     cexit.o                  10
     cmain.o                  30
+    cmain_call_ctors.o       32
     copy_init3.o             46
     data_init.o              40
     zero_init3.o             58
     ---------------------------------------------
-    Total:                  184
+    Total:                  216
 
 shb_l.a: [6]
+    ABIassert.o              36
     exit.o                   20
     unwind_debug.o                     1
     ---------------------------------------------
-    Total:                   20        1
+    Total:                   56        1
 
-    Gaps                      3        4
-    Linker created                    38   16'384
+    Gaps                      5        4
+    Linker created                    43   16'384
 -------------------------------------------------
-    Grand Total:          6'539      317   16'910
+    Grand Total:          5'327      517   16'953
 
 
 *******************************************************************************
@@ -243,123 +259,148 @@ shb_l.a: [6]
 
 Entry                       Address   Size  Type      Object
 -----                       -------   ----  ----      ------
-.iar.init_table$$Base    0x800'19c0          --   Gb  - Linker created -
-.iar.init_table$$Limit   0x800'19e4          --   Gb  - Linker created -
-?main                    0x800'19e5         Code  Gb  cmain.o [5]
+.iar.init_table$$Base    0x800'153c          --   Gb  - Linker created -
+.iar.init_table$$Limit   0x800'1564          --   Gb  - Linker created -
+?main                    0x800'15a1         Code  Gb  cmain.o [5]
 Button::Button(unsigned char, IPortGet &)
-                         0x800'1841   0x1a  Code  Gb  Button.o [1]
-Button::IsPressed()      0x800'1861   0x1c  Code  Gb  Button.o [1]
-CSTACK$$Base            0x2000'0210          --   Gb  - Linker created -
-CSTACK$$Limit           0x2000'2210          --   Gb  - Linker created -
+                         0x800'1169   0x1a  Code  Gb  Button.o [1]
+Button::IsPressed()      0x800'1189   0x1c  Code  Gb  Button.o [1]
+Button::~Button()        0x800'133b    0x2  Code  Gb  Button.o [1]
+CSTACK$$Base            0x2000'0240          --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'2240          --   Gb  - Linker created -
 ChristmasTree::ChristmasTree(IButton *)
-                         0x800'187d   0x40  Code  Gb  ChristmasTree.o [1]
-ChristmasTree::Run()     0x800'18c5   0x20  Code  Gb  ChristmasTree.o [1]
-HEAP$$Base              0x2000'2210          --   Gb  - Linker created -
-HEAP$$Limit             0x2000'4210          --   Gb  - Linker created -
-IButton::IButton()       0x800'1963    0x2  Code  Gb  Button.o [1]
+                         0x800'11a5   0x40  Code  Gb  ChristmasTree.o [1]
+ChristmasTree::Run()     0x800'11ed   0x20  Code  Gb  ChristmasTree.o [1]
+ChristmasTree::Update()
+                         0x800'120d   0x1e  Code  Gb  ChristmasTree.o [1]
+HEAP$$Base              0x2000'2240          --   Gb  - Linker created -
+HEAP$$Limit             0x2000'4240          --   Gb  - Linker created -
+IButton::IButton()       0x800'139f    0x2  Code  Gb  Button.o [1]
 IButton::IButton() [subobject]
-                         0x800'18ed    0x8  Code  Gb  Button.o [1]
+                         0x800'131b    0x8  Code  Gb  Button.o [1]
 InterruptHandler::DummyHandler()
-                         0x800'15d9    0x2  Code  Gb  interrupthandler.o [1]
+                         0x800'1609    0x2  Code  Gb  interrupthandler.o [1]
 InterruptHandler::Tim2Handler()
-                         0x800'15db   0xa2  Code  Gb  interrupthandler.o [1]
-InterruptHandler::Tim2Handler(){1}::i
-                        0x2000'0204    0x4  Data  Lc  interrupthandler.o [1]
-InterruptHandler::Tim2Handler(){1}::isForward
-                        0x2000'0010    0x1  Data  Lc  interrupthandler.o [1]
+                         0x800'160b   0x16  Code  Gb  interrupthandler.o [1]
 Led::Led(unsigned char, IPortSet &)
-                         0x800'18f5    0x6  Code  Gb  Led.o [1]
-Port<GPIOA>::IsSet()     0x800'1a6d   0x14  Code  Gb  startup.o [1]
-Port<GPIOC>::IsSet()     0x800'1a4d   0x14  Code  Gb  startup.o [1]
-Region$$Table$$Base      0x800'19c0          --   Gb  - Linker created -
-Region$$Table$$Limit     0x800'19e4          --   Gb  - Linker created -
+                         0x800'1323    0x6  Code  Gb  Led.o [1]
+Led::Toggle()            0x800'1329   0x12  Code  Gb  Led.o [1]
+Port<GPIOA>::IsSet()     0x800'1669   0x14  Code  Gb  startup.o [1]
+Port<GPIOA>::Toggle(unsigned char)
+                         0x800'14b1   0x30  Code  Gb  startup.o [1]
+Port<GPIOA>::Toggle(unsigned char)::string
+                         0x800'16b8    0xc  Data  Gb  startup.o [1]
+Port<GPIOA>::Toggle(unsigned char)::string (instance 2)
+                         0x800'13fc   0x50  Data  Gb  startup.o [1]
+Port<GPIOC>::IsSet()     0x800'1649   0x14  Code  Gb  startup.o [1]
+Port<GPIOC>::Toggle(unsigned char)
+                         0x800'144d   0x30  Code  Gb  startup.o [1]
+Port<GPIOC>::Toggle(unsigned char)::string
+                         0x800'16ac    0xc  Data  Gb  startup.o [1]
+Port<GPIOC>::Toggle(unsigned char)::string (instance 2)
+                         0x800'13ac   0x50  Data  Gb  startup.o [1]
+Region$$Table$$Base      0x800'153c          --   Gb  - Linker created -
+Region$$Table$$Limit     0x800'1564          --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Base    0x800'16d0          --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Limit   0x800'16d4          --   Gb  - Linker created -
+SHT$$PREINIT_ARRAY$$Base
+                         0x800'16d0          --   Gb  - Linker created -
+SHT$$PREINIT_ARRAY$$Limit
+                         0x800'16d0          --   Gb  - Linker created -
 Thunk for (offset -4) Port<GPIOA>::IsSet()
-                         0x800'1ac3    0x6  Code  Gb  startup.o [1]
+                         0x800'16cb    0x6  Code  Gb  startup.o [1]
 Thunk for (offset -4) Port<GPIOC>::IsSet()
-                         0x800'1abd    0x6  Code  Gb  startup.o [1]
+                         0x800'16c5    0x6  Code  Gb  startup.o [1]
 Timer::ChangeFrequency()
-                         0x800'18fd   0x50  Code  Gb  Timer.o [1]
+                         0x800'133d   0x50  Code  Gb  Timer.o [1]
 Timer::ChangeFrequency()::isForward
-                        0x2000'0011    0x1  Data  Lc  Timer.o [1]
-Timer::Start()           0x800'1951    0x8  Code  Gb  Timer.o [1]
+                        0x2000'0010    0x1  Data  Lc  Timer.o [1]
+Timer::Start()           0x800'1391    0x8  Code  Gb  Timer.o [1]
 Virtual function table for Button
-                         0x800'1ab0    0xc  Data  Gb  Button.o [1]
+                         0x800'1634   0x14  Data  Gb  Button.o [1]
 Virtual function table for Port<GPIOA>
-                         0x800'1a30   0x1c  Data  Gb  startup.o [1]
+                         0x800'15ec   0x1c  Data  Gb  startup.o [1]
 Virtual function table for Port<GPIOC>
-                         0x800'1a14   0x1c  Data  Gb  startup.o [1]
-__cmain                  0x800'19e5         Code  Gb  cmain.o [5]
-__data_GetMemChunk       0x800'1599   0x2c  Code  Gb  xgetmemchunk.o [2]
+                         0x800'15d0   0x1c  Data  Gb  startup.o [1]
+__aeabi_assert           0x800'147d   0x24  Code  Gb  ABIassert.o [6]
+__call_ctors             0x800'1589   0x18  Code  Gb  cppinit.o [2]
+__cmain                  0x800'15a1         Code  Gb  cmain.o [5]
+__data_GetMemChunk       0x800'1079   0x2c  Code  Gb  xgetmemchunk.o [2]
 __data_GetMemChunk::start
-                        0x2000'020c    0x4  Data  Lc  xgetmemchunk.o [2]
-__exit                   0x800'15c5   0x14  Code  Gb  exit.o [6]
-__iar_copy_init3         0x800'17ef   0x2e  Code  Gb  copy_init3.o [5]
-__iar_data_init3         0x800'1975   0x28  Code  Gb  data_init.o [5]
-__iar_debug_exceptions   0x800'18fa    0x1  Data  Gb  unwind_debug.o [6]
-__iar_dlfree             0x800'1033  0x51e  Code  Gb  dlmalloc.o [2]
+                        0x2000'0238    0x4  Data  Lc  xgetmemchunk.o [2]
+__exit                   0x800'10a5   0x14  Code  Gb  exit.o [6]
+__iar_copy_init3         0x800'122b   0x2e  Code  Gb  copy_init3.o [5]
+__iar_cstart_call_ctors
+                         0x800'1569   0x20  Code  Gb  cmain_call_ctors.o [5]
+__iar_data_init3         0x800'14f1   0x28  Code  Gb  data_init.o [5]
+__iar_debug_exceptions   0x800'1564    0x1  Data  Gb  unwind_debug.o [6]
 __iar_dlmalloc           0x800'0145  0xeee  Code  Gb  dlmalloc.o [2]
-__iar_init_vfp           0x800'199d         Code  Gb  fpinit_M.o [4]
-__iar_program_start      0x800'1aa1   0x10  Code  Gb  startup.o [1]
-__iar_zero_init3         0x800'155f   0x3a  Code  Gb  zero_init3.o [5]
-__low_level_init         0x800'16c5   0x40  Code  Gb  main.o [1]
+__iar_init_vfp           0x800'1519         Code  Gb  fpinit_M.o [4]
+__iar_program_start      0x800'169d   0x10  Code  Gb  startup.o [1]
+__iar_tls$$INIT_ARRAY$$Base
+                         0x800'16d4          --   Gb  - Linker created -
+__iar_tls$$INIT_ARRAY$$Limit
+                         0x800'16d4          --   Gb  - Linker created -
+__iar_zero_init3         0x800'103f   0x3a  Code  Gb  zero_init3.o [5]
+__low_level_init         0x800'10df   0x40  Code  Gb  main.o [1]
+__sti__routine           0x800'10b9   0x26  Code  Lc  main.o [1]
 __vector_table           0x800'0000   0xbc  Data  Lc  startup.o [1]
-_call_main               0x800'19f1         Code  Gb  cmain.o [5]
-_exit                    0x800'1a09         Code  Gb  cexit.o [5]
+_call_main               0x800'15ad         Code  Gb  cmain.o [5]
+_exit                    0x800'15c5         Code  Gb  cexit.o [5]
 _gm_                    0x2000'0014  0x1d8  Data  Lc  dlmalloc.o [2]
-_main                    0x800'19ff         Code  Gb  cmain.o [5]
-abort                    0x800'1559    0x6  Code  Gb  abort.o [2]
+_main                    0x800'15bb         Code  Gb  cmain.o [5]
+abort                    0x800'1039    0x6  Code  Gb  abort.o [2]
 bool FieldValueBase<TIM2_SR_UIF_Values<TIM2::SR, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2SRBase>, TIM2::TIM2SRBase, (unsigned int)1>::IsSet<ReadWriteMode, void>()
-                         0x800'1685   0x10  Code  Gb  interrupthandler.o [1]
-exit                     0x800'1a03    0x4  Code  Gb  exit.o [2]
-free                     0x800'1971    0x4  Code  Gb  heaptramp0.o [2]
+                         0x800'1625   0x10  Code  Gb  interrupthandler.o [1]
+button                  0x2000'0230    0x4  Data  Gb  main.o [1]
+ct                      0x2000'01ec   0x2c  Data  Gb  main.o [1]
+exit                     0x800'15bf    0x4  Code  Gb  exit.o [2]
 init_mparams             0x800'00d7   0x2c  Code  Lc  dlmalloc.o [2]
 init_top                 0x800'0103   0x34  Code  Lc  dlmalloc.o [2]
-main                     0x800'1705   0x36  Code  Gb  main.o [1]
-mparams                 0x2000'01ec   0x18  Data  Lc  dlmalloc.o [2]
-operator delete (void *)
-                         0x800'1959    0xa  Code  Gb  delop_0.o [3]
-operator delete (void *, unsigned int)
-                         0x800'18e5    0x4  Code  Gb  delop4_0.o [3]
+main                     0x800'111f   0x18  Code  Gb  main.o [1]
+mparams                 0x2000'0218   0x18  Data  Lc  dlmalloc.o [2]
 operator new (unsigned int)
-                         0x800'181d   0x24  Code  Gb  newop_0.o [3]
+                         0x800'1145   0x24  Code  Gb  newop_0.o [3]
 portA                   0x2000'0008    0x8  Data  Gb  startup.o [1]
 portC                   0x2000'0000    0x8  Data  Gb  startup.o [1]
 segment_holding          0x800'00bd   0x1a  Code  Lc  dlmalloc.o [2]
 std::_NomemoryNothrow()
-                         0x800'18e9    0x4  Code  Gb  nomemory.o [3]
-std::__iar_New_hand     0x2000'0208    0x4  Data  Gb  new.o [3]
+                         0x800'1317    0x4  Code  Gb  nomemory.o [3]
+std::__iar_New_hand     0x2000'0234    0x4  Data  Gb  new.o [3]
+std::array<Led, (unsigned int)4>::operator [](unsigned int)
+                         0x800'1399    0x6  Code  Gb  ChristmasTree.o [1]
 unsigned int RegisterBase<(unsigned int)1073741868, (unsigned int)32, ReadWriteMode>::Get<ReadWriteMode, void>()
-                         0x800'1965    0xc  Code  Gb  Timer.o [1]
+                         0x800'13a1    0xc  Code  Gb  Timer.o [1]
 unsigned int RegisterBase<(unsigned int)1073872912, (unsigned int)32, ReadMode>::Get<ReadMode, void>()
-                         0x800'1a81    0xc  Code  Gb  startup.o [1]
+                         0x800'167d    0xc  Code  Gb  startup.o [1]
 unsigned int RegisterBase<(unsigned int)1073874960, (unsigned int)32, ReadMode>::Get<ReadMode, void>()
-                         0x800'1a61    0xc  Code  Gb  startup.o [1]
+                         0x800'165d    0xc  Code  Gb  startup.o [1]
 void FieldValueBase<GPIOA_MODER_MODER15_Values<GPIOA::MODER, (unsigned int)10, (unsigned int)2, ReadWriteMode, GPIOA::GPIOAMODERBase>, GPIOA::GPIOAMODERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'1769   0x14  Code  Gb  main.o [1]
+                         0x800'1281   0x14  Code  Gb  main.o [1]
 void FieldValueBase<TIM2_CR1_CEN_Values<TIM2::CR1, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2CR1Base>, TIM2::TIM2CR1Base, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'17dd   0x12  Code  Gb  Timer.o [1]
+                         0x800'1305   0x12  Code  Gb  Timer.o [1]
 void FieldValueBase<TIM2_DIER_UIE_Values<TIM2::DIER, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2DIERBase>, TIM2::TIM2DIERBase, (unsigned int)1>::Set<ReadWriteMode, void>()
-                         0x800'17bd   0x14  Code  Gb  main.o [1]
+                         0x800'12d5   0x14  Code  Gb  main.o [1]
 void FieldValueBase<TIM2_SR_UIF_Values<TIM2::SR, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2SRBase>, TIM2::TIM2SRBase, (unsigned int)0>::Set<ReadWriteMode, void>()
-                         0x800'1695   0x10  Code  Gb  main.o [1]
+                         0x800'12e9   0x10  Code  Gb  main.o [1]
 void Register<(unsigned int)1073874944, (unsigned int)32, ReadWriteMode, GPIOC::GPIOCMODERBase, FieldValue<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)10, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)1>, FieldValue<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)16, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)1>, FieldValue<GPIOC_MODER_MODER15_Values<GPIOC::MODER, (unsigned int)18, (unsigned int)2, ReadWriteMode, GPIOC::GPIOCMODERBase>, GPIOC::GPIOCMODERBase, (unsigned int)1>>::Set<ReadWriteMode, void>()
-                         0x800'177d   0x1c  Code  Gb  main.o [1]
+                         0x800'1295   0x1c  Code  Gb  main.o [1]
 void Register<(unsigned int)1073887280, (unsigned int)32, ReadWriteMode, RCC::RCCAHB1ENRBase, FieldValue<RCC_AHB1ENR_DMA2EN_Values<RCC::AHB1ENR, (unsigned int)2, (unsigned int)1, ReadWriteMode, RCC::RCCAHB1ENRBase>, RCC::RCCAHB1ENRBase, (unsigned int)1>, FieldValue<RCC_AHB1ENR_DMA2EN_Values<RCC::AHB1ENR, (unsigned int)0, (unsigned int)1, ReadWriteMode, RCC::RCCAHB1ENRBase>, RCC::RCCAHB1ENRBase, (unsigned int)1>>::Set<ReadWriteMode, void>()
-                         0x800'1741   0x14  Code  Gb  main.o [1]
+                         0x800'1259   0x14  Code  Gb  main.o [1]
 void Register<(unsigned int)1073887296, (unsigned int)32, ReadWriteMode, RCC::RCCAPB1ENRBase, FieldValue<RCC_AHB1ENR_DMA2EN_Values<RCC::APB1ENR, (unsigned int)0, (unsigned int)1, ReadWriteMode, RCC::RCCAPB1ENRBase>, RCC::RCCAPB1ENRBase, (unsigned int)1>>::Set<ReadWriteMode, void>()
-                         0x800'1755   0x14  Code  Gb  main.o [1]
+                         0x800'126d   0x14  Code  Gb  main.o [1]
 void RegisterBase<(unsigned int)1073741860, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
-                         0x800'17d1    0xc  Code  Gb  Timer.o [1]
+                         0x800'12f9    0xc  Code  Gb  Timer.o [1]
 void RegisterBase<(unsigned int)1073741864, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
-                         0x800'17a5    0xc  Code  Gb  main.o [1]
+                         0x800'12bd    0xc  Code  Gb  main.o [1]
 void RegisterBase<(unsigned int)1073741868, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
-                         0x800'17b1    0xc  Code  Gb  Timer.o [1]
+                         0x800'12c9    0xc  Code  Gb  Timer.o [1]
 void RegisterBase<(unsigned int)1073872916, (unsigned int)32, ReadWriteMode>::Toggle<ReadWriteMode, void>(unsigned int)
-                         0x800'16b5   0x10  Code  Gb  startup.o [1]
+                         0x800'14e1   0x10  Code  Gb  startup.o [1]
 void RegisterBase<(unsigned int)1073874964, (unsigned int)32, ReadWriteMode>::Toggle<ReadWriteMode, void>(unsigned int)
-                         0x800'16a5   0x10  Code  Gb  startup.o [1]
+                         0x800'14a1   0x10  Code  Gb  startup.o [1]
 void RegisterBase<(unsigned int)3758153984, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
-                         0x800'1799    0xc  Code  Gb  main.o [1]
+                         0x800'12b1    0xc  Code  Gb  main.o [1]
 
 
 [1] = C:\Users\User\Desktop\projects\stm32Labs\MyLab7\Debug\Obj
@@ -369,9 +410,9 @@ void RegisterBase<(unsigned int)3758153984, (unsigned int)32, ReadWriteMode>::Wr
 [5] = rt7M_tl.a
 [6] = shb_l.a
 
-   6'539 bytes of readonly  code memory
-     317 bytes of readonly  data memory
-  16'910 bytes of readwrite data memory
+   5'327 bytes of readonly  code memory
+     517 bytes of readonly  data memory
+  16'953 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

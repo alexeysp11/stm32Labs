@@ -47,13 +47,15 @@ extern "C"
   }
 }
 
+IButton* button = new Button(13, portC);
+ChristmasTree ct(button);
+
 int main()
 {
-  IButton* button = new Button(13, portC);
-  ChristmasTree ct(button);
   ct.Run(); 
   
-  delete button; 
+  ct.~ChristmasTree(); 
+  button->~IButton(); 
   
   return 0;
 }

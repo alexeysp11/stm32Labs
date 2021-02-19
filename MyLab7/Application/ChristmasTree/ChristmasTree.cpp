@@ -21,3 +21,9 @@ void ChristmasTree::Run()
     }
   }
 }
+
+void ChristmasTree::Update()
+{
+  leds[i].Toggle();
+  i = (i + 1) & 0x3;
+}

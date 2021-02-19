@@ -126,6 +126,7 @@ public:
 ```
 
 То есть *абстракный класс* - это тот класс, который не может иметь экземпляры; а *интерфейс* - это абстрактный метод, который вообще не имеет никакой реализации. 
+
 Тогда зачем вообще использовать интерфейсы, когда есть абстрактные классы, которые определяют методы (и причём эти методы можно переопределить в наследуемом классе)? 
 
 Объявление одной лишь сигнатуры метода делает так, что базовый класс не может быть создан, а производные классы вынуждены определять эти функции. 
@@ -223,16 +224,27 @@ private:
 
 Реализация класса `Button` (файл `Button.cpp`): 
 ```
-#include "Button.hpp"
+#pragma once
+#include "Port.hpp"
 
-Button::Button(uint8_t num, IPortGet& aPin): number(num), pin(aPin)
+class IButton
 {
-}
+public:
+  virtual ~IButton() {}
+  virtual bool IsPressed() = 0;
+};
 
-bool Button::IsPressed()
+class Button : public IButton
 {
-  return (!pin.IsSet());
-}
+public:
+  Button(uint8_t num, IPortGet& aPin);
+  
+  bool IsPressed();
+
+private:
+  uint8_t number; 
+  IPortGet& pin;
+};
 ```
 
 Класс `Led` определён в файле `Led.hpp` следующим образом: 
@@ -280,8 +292,10 @@ class ChristmasTree
 {
 public: 
   ChristmasTree(IButton* aButton);
-  Timer timer;
   void Run();
+  void Update(); 
+  
+  Timer timer;
 
 private:
   IButton* button;
@@ -316,6 +330,12 @@ void ChristmasTree::Run()
       timer.ChangeFrequency();
     }
   }
+}
+
+void ChristmasTree::Update()
+{
+  leds[i].Toggle();
+  i = (i + 1) & 0x3;
 }
 ```
 
@@ -468,7 +488,7 @@ public:
 #endif
 ```
 
-Обработчик прерываний `InterruptHandler` реализован в файле `interrupthandler.hpp`:
+Обработчик прерываний `InterruptHandler` реализован в файле `interrupthandler.cpp`:
 ```
 #include "interrupthandler.hpp"
 
@@ -479,64 +499,11 @@ void InterruptHandler::DummyHandler()
 
 void InterruptHandler::Tim2Handler()
 {
-  if (TIM2::SR::UIF::UpdatePending::IsSet())
-  {
-     TIM2::SR::UIF::NoUpdate::Set();
-
-      static int i = 0;
-      static bool isForward = 1;
-
-      // Toggle LEDs
-      switch(i)
-      {
-        case 0:
-          if(isForward == 1)
-          {
-            i++;
-          }
-          else
-          {
-            i = 0;
-            isForward = 1;
-          }
-          GPIOC::ODR::Toggle(1U << 5U);
-          break;
-        case 1:
-          if(isForward == 1)
-          {
-            i++;
-          }
-          else
-          {
-            i--;
-          }
-          GPIOC::ODR::Toggle(1U << 8U);
-          break;
-        case 2:
-          if(isForward == 1)
-          {
-            i++;
-          }
-          else
-          {
-            i--;
-          }
-          GPIOC::ODR::Toggle(1U << 9U);
-          break;
-        case 3:
-          if(isForward == 1)
-          {
-            i = 3;
-            isForward = 0;
-          }
-          else
-          {
-            i--;
-          }
-          GPIOA::ODR::Toggle(1U << 5U);
-          break;
-      }
-   }
+  if (TIM2::SR::UIF::UpdatePending::IsSet()) 
+  { 
+    TIM2::SR::UIF::NoUpdate::Set();
+    ct.Update();
+  }
 }
 ```
 
@@ -591,13 +558,15 @@ extern "C"
   }
 }
 
+IButton* button = new Button(13, portC);
+ChristmasTree ct(button);
+
 int main()
 {
-  IButton* button = new Button(13, portC);
-  ChristmasTree ct(button);
   ct.Run(); 
   
-  delete button; 
+  ct.~ChristmasTree(); 
+  button->~IButton(); 
   
   return 0;
 }

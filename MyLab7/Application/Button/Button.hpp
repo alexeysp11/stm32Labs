@@ -4,6 +4,7 @@
 class IButton
 {
 public:
+  virtual ~IButton() {}
   virtual bool IsPressed() = 0;
 };
 
