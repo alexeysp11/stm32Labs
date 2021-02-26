@@ -1,35 +1,28 @@
-#pragma once
+// File Voltage.hpp contains declaration of a class Voltage. 
+// Class Voltage implements interfaces ISubjectMeasurer and IMeasurer. 
 
+#ifndef _STM32LABS_VOLTAGE_H_
+#define _STM32LABS_VOLTAGE_H_
+
+#include "Observers.hpp"        // for ISubjectMeasurer and IMeasurer. 
 #include "Adc.hpp"
 
-#include "adc1registers.hpp"
-
 #include <cstdint>
-#include <iostream>
+#include <list>
 
-class IVoltage
+static float V_REF = *reinterpret_cast < uint16_t* >(0x1FFF7A2A);
+static float K = 0.0f;                  // Slope. 
+
+class Voltage: public ISubjectMeasurer, public IMeasurer
 {
 public: 
-  virtual ~IVoltage() {}
-  virtual std::uint8_t GetNumOfLeds() = 0; 
-
+  Voltage() = default; 
+  void Run(); 
+  float GetValue(); 
+  void Subscribe(IObserverMeasurer& observer);
+  void Unsubscribe(IObserverMeasurer& observer); 
 private: 
-  virtual void InvokeAdcConversions() = 0;
+  std::list<IObserverMeasurer*> _observers;
 };
 
-class Voltage: public IVoltage
-{
-public: 
-  Voltage(); 
-  std::uint8_t GetNumOfLeds(); 
-
-private: 
-  void InvokeAdcConversions(); 
-  
-  float V25 = 0.76f;
-  float Avg_Slope = 0.0025f;
-  float Temperature = 0.0f;
-  
-  std::int8_t minTemp = - 40; 
-  std::int8_t maxTemp = 125; 
-};
+#endif

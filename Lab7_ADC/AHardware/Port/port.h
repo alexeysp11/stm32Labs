@@ -1,4 +1,7 @@
-#pragma once
+// File port.h contains definition of IPortSet interface and class Port. 
+
+#ifndef _STM32LABS_PORT_H_
+#define _STM32LABS_PORT_H_
 
 #include "gpiocregisters.hpp" 
 #include "gpioaregisters.hpp" 
@@ -10,33 +13,21 @@
 class IPortSet
 {
 public:
-  virtual bool IsSet(std::uint8_t num) = 0;
   virtual void SetHigh(std::uint8_t num) = 0;
   virtual void SetLow(std::uint8_t num) = 0;
   virtual void Toggle(std::uint8_t num) = 0;
 };
 
-class IPortMeasure
-{
-public:
-  virtual std::uint8_t Measure() = 0;
-};
-
 template <typename Reg>
-class Port: public IPortSet, public IPortMeasure
+class Port: public IPortSet
 {
 public:
-  bool IsSet(std::uint8_t num) override
-  {
-    return (Reg::IDR::Get()&(1<<num)) != 0;
-  }
-  
-  void SetHigh(std::uint8_t num)
+  void SetHigh(std::uint8_t num) override
   {
     Reg::ODR::Write(1 << num); 
   }
   
-  void SetLow(std::uint8_t num)
+  void SetLow(std::uint8_t num) override
   {
     Reg::ODR::Write(1 << num); 
   }
@@ -46,9 +37,6 @@ public:
      assert (num < 16);
      Reg::ODR::Toggle(1 << num);
    }
-
-  std::uint8_t Measure() override
-  {
-     return Reg::IDR::Get();
-  }
 };
+
+#endif

@@ -2790,14 +2790,35 @@
         <file>
             <name>$PROJ_DIR$\Led\Led.hpp</name>
         </file>
-    </group>
-    <group>
-        <name>TempMeasurement</name>
         <file>
-            <name>$PROJ_DIR$\TempMeasurement\TempMeasurement.cpp</name>
+            <name>$PROJ_DIR$\Led\LedsController.cpp</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\TempMeasurement\TempMeasurement.hpp</name>
+            <name>$PROJ_DIR$\Led\LedsController.hpp</name>
+        </file>
+    </group>
+    <group>
+        <name>Observer</name>
+        <file>
+            <name>$PROJ_DIR$\Observer\Observers.hpp</name>
+        </file>
+    </group>
+    <group>
+        <name>Solver</name>
+        <file>
+            <name>$PROJ_DIR$\Solver\Solver.cpp</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Solver\Solver.hpp</name>
+        </file>
+    </group>
+    <group>
+        <name>Temperature</name>
+        <file>
+            <name>$PROJ_DIR$\Temperature\Temperature.cpp</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Temperature\Temperature.hpp</name>
         </file>
     </group>
     <group>

@@ -23,13 +23,15 @@ rule browsedata
 build Adc.pbi : index Adc.xcl
 build interrupthandler.pbi : index interrupthandler.xcl
 build Led.pbi : index Led.xcl
-build TempMeasurement.pbi : index TempMeasurement.xcl
+build LedsController.pbi : index LedsController.xcl
+build Solver.pbi : index Solver.xcl
+build Temperature.pbi : index Temperature.xcl
 build Voltage.pbi : index Voltage.xcl
 build main.pbi : index main.xcl
 build startup.pbi : index startup.xcl
 build lab7_part0.pbi : link Adc.pbi interrupthandler.pbi Led.pbi
-build lab7_part1.pbi : link TempMeasurement.pbi Voltage.pbi main.pbi
-build lab7_part2.pbi : link startup.pbi
+build lab7_part1.pbi : link LedsController.pbi Solver.pbi Temperature.pbi
+build lab7_part2.pbi : link Voltage.pbi main.pbi startup.pbi
 build lab7.pbd : link lab7_part0.pbi lab7_part1.pbi lab7_part2.pbi
 build lab7.pbw : browsedata lab7.pbd
 

@@ -8,11 +8,6 @@ Led::~Led()
 {
 }
 
-bool Led::IsSet()
-{
-  return port.IsSet(number);
-}
-
 void Led::SetHigh()
 {
    port.SetHigh(number);

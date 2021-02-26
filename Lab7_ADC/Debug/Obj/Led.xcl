@@ -30,11 +30,15 @@ C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AController
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AHardware\InterruptHandler
 -I
-C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\TempMeasurement
+C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Temperature
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Voltage
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Adc
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Observer
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Solver
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc
 -I
@@ -62,11 +66,15 @@ C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AController
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\AHardware\InterruptHandler
 -I
-C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\TempMeasurement
+C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Temperature
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Voltage
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Adc
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Observer
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab7_ADC\Solver
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
