@@ -1,0 +1,28 @@
+#Generating source browse information for project Lab8_UART
+
+
+#Abbreviations
+cc = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 8.3\common\bin\SourceIndexer.exe
+ll = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 8.3\common\bin\PbdLink.exe
+bd = C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 8.3\common\bin\makeBrowseData.exe
+
+
+
+#Rules
+rule index
+  depfile = $out.dep
+  command = $cc -out=$out -f $in
+rule link
+  command = $ll -M $out $in
+rule browsedata
+  command = $bd $in -output  $out
+
+
+
+#Build steps
+build main.pbi : index main.xcl
+build startup.pbi : index startup.xcl
+build Lab8_UART.pbd : link main.pbi startup.pbi
+build Lab8_UART.pbw : browsedata Lab8_UART.pbd
+
+

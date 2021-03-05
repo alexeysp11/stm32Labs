@@ -2,15 +2,19 @@
 
 # Process docs
 /Lab7_ADC/ProcDoc.md
+/Lab7_ADC/DMA.md
+/Lab7_ADC/Design.mdj
+/Lab8_UART/Structs.md
 
 # In progress 
 Lab8
 
 # Copies of projects
-Lab5EmptyInterrupt.rar 
+
 
 # Templates
 HappyNewYear.rar
-Lab10
-Lab12
 Snippets
+
+# Additional sofware 
+/Lab8_UART/Terminal1_9_b.zip

@@ -1,0 +1,258 @@
+###############################################################################
+#
+# IAR ELF Linker V8.40.2.214/W32 for ARM                  05/Mar/2021  14:45:53
+# Copyright 2007-2019 IAR Systems AB.
+#
+#    Output file  =
+#        C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\Exe\Lab8_UART.out
+#    Map file     =
+#        C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\List\Lab8_UART.map
+#    Command line =
+#        -f C:\Users\User\AppData\Local\Temp\EW4202.tmp
+#        (C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\Obj\main.o
+#        C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\Obj\startup.o
+#        --no_out_extension -o
+#        C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\Exe\Lab8_UART.out
+#        --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb
+#        --map
+#        C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\List\Lab8_UART.map
+#        --config "C:\Program Files\IAR Systems\Embedded Workbench
+#        8.3\arm\config\linker\ST\stm32f411xC.icf" --semihosting --entry
+#        __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor        = *
+__CPP_Exceptions = Disabled
+__CPP_Language   = C++14
+__SystemLibrary  = DLib
+__dlib_version   = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because no calls to memory allocation
+functions were found in the application outside of system library
+functions, and there are calls to deallocation functions in the
+application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x800'0000 { ro section .intvec };
+"P1":  place in [from 0x800'0000 to 0x803'ffff] { ro };
+define block CSTACK with size = 8K, alignment = 8 { };
+define block HEAP with size = 8K, alignment = 8 { };
+"P2":  place in [from 0x2000'0000 to 0x2001'ffff] {
+          rw, block CSTACK, block HEAP };
+
+No sections matched the following patterns:
+
+  rw  in "P2"
+
+
+  Section   Kind         Address    Size  Object
+  -------   ----         -------    ----  ------
+"A0":                               0xbc
+  .intvec   const     0x800'0000    0xbc  startup.o [1]
+                    - 0x800'00bc    0xbc
+
+"P1":                              0x308
+  .text     ro code   0x800'00bc    0x8c  main.o [1]
+  .text     ro code   0x800'0148    0x14  main.o [1]
+  .text     ro code   0x800'015c    0x10  main.o [1]
+  .text     ro code   0x800'016c    0x14  main.o [1]
+  .text     ro code   0x800'0180    0x1c  main.o [1]
+  .text     ro code   0x800'019c    0x10  main.o [1]
+  .text     ro code   0x800'01ac    0x14  main.o [1]
+  .text     ro code   0x800'01c0    0x14  main.o [1]
+  .text     ro code   0x800'01d4    0x14  main.o [1]
+  .text     ro code   0x800'01e8    0x14  main.o [1]
+  .text     ro code   0x800'01fc    0x14  main.o [1]
+  .text     ro code   0x800'0210    0x14  main.o [1]
+  .text     ro code   0x800'0224    0x10  main.o [1]
+  .text     ro code   0x800'0234    0x14  main.o [1]
+  .text     ro code   0x800'0248    0x10  main.o [1]
+  .text     ro code   0x800'0258    0x10  main.o [1]
+  .text     ro code   0x800'0268    0x10  main.o [1]
+  .text     ro code   0x800'0278    0x14  main.o [1]
+  .text     ro code   0x800'028c     0xc  main.o [1]
+  .text     ro code   0x800'0298    0x14  main.o [1]
+  .text     ro code   0x800'02ac    0x14  main.o [1]
+  .text     ro code   0x800'02c0    0x14  main.o [1]
+  .text     ro code   0x800'02d4     0xc  main.o [1]
+  .text     ro code   0x800'02e0    0x10  main.o [1]
+  .text     ro code   0x800'02f0    0x22  fpinit_M.o [3]
+  .text     ro code   0x800'0312     0x2  startup.o [1]
+  .text     ro code   0x800'0314    0x1e  cmain.o [4]
+  .text     ro code   0x800'0332     0x4  exit.o [2]
+  .rodata   const     0x800'0336     0x1  unwind_debug.o [5]
+  .text     ro code   0x800'0338     0xa  cexit.o [4]
+  .text     ro code   0x800'0344    0x14  exit.o [5]
+  .text     ro code   0x800'0358    0x18  startup.o [1]
+  .text     ro code   0x800'0370    0x10  startup.o [1]
+  .text     ro code   0x800'0380    0x14  startup.o [1]
+  .text     ro code   0x800'0394    0x10  startup.o [1]
+  .rodata   const     0x800'03a4    0x10  main.o [1]
+  .text     ro code   0x800'03b4    0x10  startup.o [1]
+                    - 0x800'03c4   0x308
+
+"P2":                             0x2000
+  CSTACK             0x2000'0000  0x2000  <Block>
+    CSTACK  uninit   0x2000'0000  0x2000  <Block tail>
+                   - 0x2000'2000  0x2000
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+   0x800'03c4   0x803'ffff  0x3'fc3c
+  0x2000'2000  0x2001'ffff  0x1'e000
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module          ro code  ro data  rw data
+    ------          -------  -------  -------
+command line/config:
+    -----------------------------------------
+    Total:
+
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\Obj: [1]
+    main.o              564       16
+    startup.o            94      188
+    -----------------------------------------
+    Total:              658      204
+
+dl7M_tln.a: [2]
+    exit.o                4
+    -----------------------------------------
+    Total:                4
+
+m7M_tls.a: [3]
+    fpinit_M.o           34
+    -----------------------------------------
+    Total:               34
+
+rt7M_tl.a: [4]
+    cexit.o              10
+    cmain.o              30
+    -----------------------------------------
+    Total:               40
+
+shb_l.a: [5]
+    exit.o               20
+    unwind_debug.o                 1
+    -----------------------------------------
+    Total:               20        1
+
+    Gaps                  3
+    Linker created                      8'192
+---------------------------------------------
+    Grand Total:        759      205    8'192
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address  Size  Type      Object
+-----                       -------  ----  ----      ------
+?main                    0x800'0315        Code  Gb  cmain.o [4]
+CSTACK$$Base            0x2000'0000         --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'2000         --   Gb  - Linker created -
+InterruptHandler::DummyHandler()
+                         0x800'0313   0x2  Code  Gb  startup.o [1]
+InterruptHandler::Timer2Handler()
+                         0x800'0359  0x18  Code  Gb  startup.o [1]
+Region$$Table$$Base             0x0         --   Gb  - Linker created -
+Region$$Table$$Limit            0x0         --   Gb  - Linker created -
+__cmain                  0x800'0315        Code  Gb  cmain.o [4]
+__exit                   0x800'0345  0x14  Code  Gb  exit.o [5]
+__iar_debug_exceptions   0x800'0336   0x1  Data  Gb  unwind_debug.o [5]
+__iar_init_vfp           0x800'02f1        Code  Gb  fpinit_M.o [3]
+__iar_program_start      0x800'03b5  0x10  Code  Gb  startup.o [1]
+__low_level_init         0x800'00bd  0x5a  Code  Gb  main.o [1]
+__vector_table           0x800'0000  0xbc  Data  Lc  startup.o [1]
+_call_main               0x800'0321        Code  Gb  cmain.o [4]
+_exit                    0x800'0339        Code  Gb  cexit.o [4]
+_main                    0x800'032f        Code  Gb  cmain.o [4]
+bool FieldValueBase<RCC_CFGR_SWS_Values<RCC::CFGR, (unsigned int)2, (unsigned int)2, ReadMode, RCC::RCCCFGRBase>, RCC::RCCCFGRBase, (unsigned int)1>::IsSet<ReadMode, void>()
+                         0x800'0181  0x1c  Code  Gb  main.o [1]
+bool FieldValueBase<RCC_CR_HSERDY_Values<RCC::CR, (unsigned int)17, (unsigned int)1, ReadMode, RCC::RCCCRBase>, RCC::RCCCRBase, (unsigned int)1>::IsSet<ReadMode, void>()
+                         0x800'015d  0x10  Code  Gb  main.o [1]
+bool FieldValueBase<TIM2_SR_UIF_Values<TIM2::SR, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2SRBase>, TIM2::TIM2SRBase, (unsigned int)1>::IsSet<ReadWriteMode, void>()
+                         0x800'0371  0x10  Code  Gb  startup.o [1]
+bool FieldValueBase<USART2_SR_TXE_Values<USART2::SR, (unsigned int)7, (unsigned int)1, ReadMode, USART2::USART2SRBase>, USART2::USART2SRBase, (unsigned int)1>::IsSet<ReadMode, void>()
+                         0x800'02e1  0x10  Code  Gb  main.o [1]
+exit                     0x800'0333   0x4  Code  Gb  exit.o [2]
+main                     0x800'0117  0x2e  Code  Gb  main.o [1]
+void FieldValueBase<GPIOA_AFRL_AFRL7_Values<GPIOA::AFRL, (unsigned int)12, (unsigned int)4, ReadWriteMode, GPIOA::GPIOAAFRLBase>, GPIOA::GPIOAAFRLBase, (unsigned int)7>::Set<ReadWriteMode, void>()
+                         0x800'0211  0x14  Code  Gb  main.o [1]
+void FieldValueBase<GPIOA_AFRL_AFRL7_Values<GPIOA::AFRL, (unsigned int)8, (unsigned int)4, ReadWriteMode, GPIOA::GPIOAAFRLBase>, GPIOA::GPIOAAFRLBase, (unsigned int)7>::Set<ReadWriteMode, void>()
+                         0x800'01fd  0x14  Code  Gb  main.o [1]
+void FieldValueBase<GPIOA_MODER_MODER15_Values<GPIOA::MODER, (unsigned int)4, (unsigned int)2, ReadWriteMode, GPIOA::GPIOAMODERBase>, GPIOA::GPIOAMODERBase, (unsigned int)2>::Set<ReadWriteMode, void>()
+                         0x800'01d5  0x14  Code  Gb  main.o [1]
+void FieldValueBase<GPIOA_MODER_MODER15_Values<GPIOA::MODER, (unsigned int)6, (unsigned int)2, ReadWriteMode, GPIOA::GPIOAMODERBase>, GPIOA::GPIOAMODERBase, (unsigned int)2>::Set<ReadWriteMode, void>()
+                         0x800'01e9  0x14  Code  Gb  main.o [1]
+void FieldValueBase<GPIOA_OTYPER_OT3_Values<GPIOA::OTYPER, (unsigned int)3, (unsigned int)1, ReadWriteMode, GPIOA::GPIOAOTYPERBase>, GPIOA::GPIOAOTYPERBase, (unsigned int)0>::Set<ReadWriteMode, void>()
+                         0x800'0225  0x10  Code  Gb  main.o [1]
+void FieldValueBase<GPIOA_PUPDR_PUPDR15_Values<GPIOA::PUPDR, (unsigned int)6, (unsigned int)2, ReadWriteMode, GPIOA::GPIOAPUPDRBase>, GPIOA::GPIOAPUPDRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'0235  0x14  Code  Gb  main.o [1]
+void FieldValueBase<RCC_AHB1ENR_DMA2EN_Values<RCC::AHB1ENR, (unsigned int)0, (unsigned int)1, ReadWriteMode, RCC::RCCAHB1ENRBase>, RCC::RCCAHB1ENRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'01ad  0x14  Code  Gb  main.o [1]
+void FieldValueBase<RCC_APB1ENR_USART2EN_Values<RCC::APB1ENR, (unsigned int)17, (unsigned int)1, ReadWriteMode, RCC::RCCAPB1ENRBase>, RCC::RCCAPB1ENRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'01c1  0x14  Code  Gb  main.o [1]
+void FieldValueBase<RCC_CFGR_SW_Values<RCC::CFGR, (unsigned int)0, (unsigned int)2, ReadWriteMode, RCC::RCCCFGRBase>, RCC::RCCCFGRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'016d  0x14  Code  Gb  main.o [1]
+void FieldValueBase<RCC_CR_HSEON_Values<RCC::CR, (unsigned int)16, (unsigned int)1, ReadWriteMode, RCC::RCCCRBase>, RCC::RCCCRBase, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'0149  0x14  Code  Gb  main.o [1]
+void FieldValueBase<RCC_CR_HSION_Values<RCC::CR, (unsigned int)0, (unsigned int)1, ReadWriteMode, RCC::RCCCRBase>, RCC::RCCCRBase, (unsigned int)0>::Set<ReadWriteMode, void>()
+                         0x800'019d  0x10  Code  Gb  main.o [1]
+void FieldValueBase<TIM2_SR_UIF_Values<TIM2::SR, (unsigned int)0, (unsigned int)1, ReadWriteMode, TIM2::TIM2SRBase>, TIM2::TIM2SRBase, (unsigned int)0>::Set<ReadWriteMode, void>()
+                         0x800'0381  0x14  Code  Gb  startup.o [1]
+void FieldValueBase<USART2_CR1_M_Values<USART2::CR1, (unsigned int)12, (unsigned int)1, ReadWriteMode, USART2::USART2CR1Base>, USART2::USART2CR1Base, (unsigned int)0>::Set<ReadWriteMode, void>()
+                         0x800'0249  0x10  Code  Gb  main.o [1]
+void FieldValueBase<USART2_CR1_OVER8_Values<USART2::CR1, (unsigned int)15, (unsigned int)1, ReadWriteMode, USART2::USART2CR1Base>, USART2::USART2CR1Base, (unsigned int)0>::Set<ReadWriteMode, void>()
+                         0x800'0259  0x10  Code  Gb  main.o [1]
+void FieldValueBase<USART2_CR1_RE_Values<USART2::CR1, (unsigned int)2, (unsigned int)1, ReadWriteMode, USART2::USART2CR1Base>, USART2::USART2CR1Base, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'02ad  0x14  Code  Gb  main.o [1]
+void FieldValueBase<USART2_CR1_TE_Values<USART2::CR1, (unsigned int)3, (unsigned int)1, ReadWriteMode, USART2::USART2CR1Base>, USART2::USART2CR1Base, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'0299  0x14  Code  Gb  main.o [1]
+void FieldValueBase<USART2_CR1_UE_Values<USART2::CR1, (unsigned int)13, (unsigned int)1, ReadWriteMode, USART2::USART2CR1Base>, USART2::USART2CR1Base, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'02c1  0x14  Code  Gb  main.o [1]
+void FieldValueBase<USART2_CR2_LINEN_Values<USART2::CR2, (unsigned int)14, (unsigned int)1, ReadWriteMode, USART2::USART2CR2Base>, USART2::USART2CR2Base, (unsigned int)1>::Set<ReadWriteMode, void>()
+                         0x800'0279  0x14  Code  Gb  main.o [1]
+void FieldValueBase<USART2_CR2_STOP_Values<USART2::CR2, (unsigned int)12, (unsigned int)2, ReadWriteMode, USART2::USART2CR2Base>, USART2::USART2CR2Base, (unsigned int)0>::Set<ReadWriteMode, void>()
+                         0x800'0269  0x10  Code  Gb  main.o [1]
+void RegisterBase<(unsigned int)1073759236, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
+                         0x800'02d5   0xc  Code  Gb  main.o [1]
+void RegisterBase<(unsigned int)1073759240, (unsigned int)32, ReadWriteMode>::Write<ReadWriteMode, void>(unsigned int)
+                         0x800'028d   0xc  Code  Gb  main.o [1]
+void RegisterBase<(unsigned int)1073874964, (unsigned int)32, ReadWriteMode>::Toggle<ReadWriteMode, void>(unsigned int)
+                         0x800'0395  0x10  Code  Gb  startup.o [1]
+
+
+[1] = C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Debug\Obj
+[2] = dl7M_tln.a
+[3] = m7M_tls.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+    759 bytes of readonly  code memory
+    205 bytes of readonly  data memory
+  8'192 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
