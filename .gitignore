@@ -1,19 +1,21 @@
 .vscode
 
-# Process docs
+# Process docs (lab 7)
 /Lab7_ADC/ProcDoc.md
 /Lab7_ADC/DMA.md
 /Lab7_ADC/Design.mdj
+
+# Process docs (lab 8)
 /Lab8_UART/Structs.md
 
+# Process docs (lab9)
+/RtosWrapper/RtosModel.mdj
+
 # In progress 
-Lab8
 
 # Copies of projects
 
-
 # Templates
-HappyNewYear.rar
 Snippets
 
 # Additional sofware 
