@@ -2381,8 +2381,14 @@
         </group>
         <group>
             <name>InterruptHandler</name>
+            <group>
+                <name>include</name>
+                <file>
+                    <name>$PROJ_DIR$\AbstractHardware\InterruptHandler\include\interrupthandler.hpp</name>
+                </file>
+            </group>
             <file>
-                <name>$PROJ_DIR$\AbstractHardware\InterruptHandler\interrupthandler.hpp</name>
+                <name>$PROJ_DIR$\AbstractHardware\InterruptHandler\interrupthandler.cpp</name>
             </file>
         </group>
         <group>
@@ -2748,11 +2754,95 @@
                 <name>$PROJ_DIR$\AbstractHardware\Registers\registertype.hpp</name>
             </file>
         </group>
+        <group>
+            <name>Timer</name>
+            <file>
+                <name>$PROJ_DIR$\AbstractHardware\Timer\timers.hpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\AbstractHardware\Timer\timersconfig.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>Uart</name>
+            <group>
+                <name>include</name>
+                <file>
+                    <name>$PROJ_DIR$\AbstractHardware\Uart\include\uart.hpp</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\AbstractHardware\Uart\include\uartconfig.hpp</name>
+                </file>
+            </group>
+            <file>
+                <name>$PROJ_DIR$\AbstractHardware\Uart\uart.cpp</name>
+            </file>
+        </group>
+    </group>
+    <group>
+        <name>Application</name>
+        <group>
+            <name>include</name>
+            <file>
+                <name>$PROJ_DIR$\Application\include\timersdriver.hpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\Application\include\uartdriver.hpp</name>
+            </file>
+        </group>
+        <file>
+            <name>$PROJ_DIR$\Application\timersdiver.cpp</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\uartdriver.cpp</name>
+        </file>
     </group>
     <group>
         <name>Common</name>
+        <group>
+            <name>CriticalSection</name>
+            <file>
+                <name>$PROJ_DIR$\Common\CriticalSection\criticalsectiondefault.hpp</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\Common\CriticalSection\criticalsectionguard.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>Observer</name>
+            <file>
+                <name>$PROJ_DIR$\Common\Observer\observers.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>PatternMatching</name>
+            <file>
+                <name>$PROJ_DIR$\Common\PatternMatching\guide.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>RomObject</name>
+            <file>
+                <name>$PROJ_DIR$\Common\RomObject\memoryobject.hpp</name>
+            </file>
+        </group>
+        <group>
+            <name>Singleton</name>
+            <file>
+                <name>$PROJ_DIR$\Common\Singleton\singleton.hpp</name>
+            </file>
+        </group>
+        <file>
+            <name>$PROJ_DIR$\Common\interruptslist.hpp</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Common\subscriber.hpp</name>
+        </file>
         <file>
             <name>$PROJ_DIR$\Common\susudefs.hpp</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Common\utils.hpp</name>
         </file>
     </group>
     <file>

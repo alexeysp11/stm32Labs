@@ -20,7 +20,7 @@
 #ifndef REGISTERS_PIN_HPP
 #define REGISTERS_PIN_HPP
 
-#include "susudefs.hpp"  //for __forceinline
+#include "susudefs.hpp"  	// for __forceinline
 #include <cinttypes>
 
 struct PinConfigurable

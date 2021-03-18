@@ -1,4 +1,5 @@
 .vscode
+books
 
 # Process docs (lab 7)
 /Lab7_ADC/ProcDoc.md
@@ -7,6 +8,8 @@
 
 # Process docs (lab 8)
 /Lab8_UART/Structs.md
+/Lab8_UART/Lab8_UART_Model.mdj
+/Lab8_UART/ProcessDoc.md 
 
 # Process docs (lab9)
 /RtosWrapper/RtosModel.mdj

@@ -20,9 +20,16 @@ rule browsedata
 
 
 #Build steps
+build interrupthandler.pbi : index interrupthandler.xcl
+build uart.pbi : index uart.xcl
+build timersdiver.pbi : index timersdiver.xcl
+build uartdriver.pbi : index uartdriver.xcl
 build main.pbi : index main.xcl
 build startup.pbi : index startup.xcl
-build Lab8_UART.pbd : link main.pbi startup.pbi
+build Lab8_UART_part0.pbi : link interrupthandler.pbi uart.pbi
+build Lab8_UART_part1.pbi : link timersdiver.pbi uartdriver.pbi
+build Lab8_UART_part2.pbi : link main.pbi startup.pbi
+build Lab8_UART.pbd : link Lab8_UART_part0.pbi Lab8_UART_part1.pbi Lab8_UART_part2.pbi
 build Lab8_UART.pbw : browsedata Lab8_UART.pbd
 
 

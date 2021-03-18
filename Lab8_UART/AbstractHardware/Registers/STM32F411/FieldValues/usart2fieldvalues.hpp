@@ -193,15 +193,15 @@ struct USART2_CR1_IDLEIE_Values: public RegisterField<Reg, offset, size, AccessM
 template <typename Reg, size_t offset, size_t size, typename AccessMode, typename BaseType> 
 struct USART2_CR1_TE_Values: public RegisterField<Reg, offset, size, AccessMode> 
 {
-  using Value0 = FieldValue<USART2_CR1_TE_Values, BaseType, 0U> ;
-  using Value1 = FieldValue<USART2_CR1_TE_Values, BaseType, 1U> ;
+  using Disable = FieldValue<USART2_CR1_TE_Values, BaseType, 0U> ;
+  using Enable = FieldValue<USART2_CR1_TE_Values, BaseType, 1U> ;
 } ;
 
 template <typename Reg, size_t offset, size_t size, typename AccessMode, typename BaseType> 
 struct USART2_CR1_RE_Values: public RegisterField<Reg, offset, size, AccessMode> 
 {
-  using Value0 = FieldValue<USART2_CR1_RE_Values, BaseType, 0U> ;
-  using Value1 = FieldValue<USART2_CR1_RE_Values, BaseType, 1U> ;
+  using Disable = FieldValue<USART2_CR1_RE_Values, BaseType, 0U> ;
+  using Enable = FieldValue<USART2_CR1_RE_Values, BaseType, 1U> ;
 } ;
 
 template <typename Reg, size_t offset, size_t size, typename AccessMode, typename BaseType> 

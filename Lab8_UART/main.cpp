@@ -1,13 +1,14 @@
-/*
-* Test UART. 
-*/
+// TODO: add description and comment all methods and classes. 
+
+#include "uartdriver.hpp"
+#include "timers.hpp"
+#include "timersdriver.hpp"
 
 #include "rccregisters.hpp"
 #include "rccfieldvalues.hpp"
 #include "gpiocregisters.hpp"
 #include "gpioaregisters.hpp"
-#include "tim2registers.hpp"
-#include "usart2registers.hpp"
+#include "usart2registers.hpp"          // for UART2.
 
 // Set UART data rate equal to 9600 bps. 
 constexpr std::uint32_t UartSpeed9600 = std::uint32_t(8000000U / 9600U);
@@ -43,44 +44,23 @@ extern "C"
     USART2::CR2::STOP::Value0::Set();           // 1 Stop bits: these bits are used for programming the stop bits.
     USART2::CR2::LINEN::Value1::Set();          // LIN mode enabled: This bit is set and cleared by software.
     USART2::BRR::Write(UartSpeed9600);          // Set baud rate for USART. 
-    
-    // Timer TIM2 configuration. 
-    //TIM2::PSC::Write(7999);                     // Divide clock rate to get 1000 counts to complete one cycle. 
-    //TIM2::ARR::Write(1000);                     // Count up to 1000. 
-    //TIM2::SR::UIF::NoUpdate::Set();             // There's no interrupts, so no update  interrupt flag occurred.
-    //TIM2::CNT::Write(0);
-    
+        
     return 1;
   }
 }
 
 int main()
 {
-  USART2::CR1::TE::Value1::Set();               // Transmitter is enabled. 
-  USART2::CR1::RE::Value1::Set();               // Receiver is enabled. 
-  
-  //TIM2::CR1::CEN::Enable::Set();                // Timer TIM2 is enabled. 
-  USART2::CR1::UE::Value1::Set();               // USART enabled.
-  
   constexpr char *str = "Hello world!";         // Message to be send. 
-  const char *ptr = str;                        // Pointer to the message. 
+
+  UartDriver uartdriver; 
+  TimersDriver timersdriver; 
+  timersdriver.Config(8000U, 1000U, 0U); 
   
   while (true)
   {
-    // Dereference a pointer to message and write it into DR. 
-    USART2::DR::Write(*ptr); 
-    
-    // While transmit data register empty, do nothing. 
-   while(!USART2::SR::TXE::Value1::IsSet());
-    
-    ptr++;                                      // Increase pointer by one. 
-    if (*ptr == 0)
-    {
-      ptr = str;
-    }
-    
-    //while(TIM2::SR::UIF::NoUpdate::IsSet());
-    //TIM2::SR::UIF::NoUpdate::Set();
+    uartdriver.SendMessage(str, strlen(str)); 
+    timersdriver.Sleep(); 
   }
   
   return 0;

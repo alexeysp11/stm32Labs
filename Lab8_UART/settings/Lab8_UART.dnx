@@ -16,7 +16,7 @@
         <ShowSource>1</ShowSource>
     </Trace1>
     <DebugChecksum>
-        <Checksum>3000574793</Checksum>
+        <Checksum>313825585</Checksum>
     </DebugChecksum>
     <CodeCoverage>
         <Enabled>0</Enabled>
@@ -24,6 +24,7 @@
         <HideCovered>0</HideCovered>
     </CodeCoverage>
     <Disassembly>
+        <MixedMode>1</MixedMode>
         <InstrCount>0</InstrCount>
     </Disassembly>
     <Exceptions>
@@ -51,10 +52,10 @@
     <StLinkDriver>
         <stlinkserialNo>47580367</stlinkserialNo>
         <stlinkfoundProbes />
-        <stlinkResetStyle>0</stlinkResetStyle>
-        <stlinkResetStrategy>0</stlinkResetStrategy>
         <CStepIntDis>_ 0</CStepIntDis>
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
+        <stlinkResetStyle>0</stlinkResetStyle>
+        <stlinkResetStrategy>0</stlinkResetStrategy>
     </StLinkDriver>
     <SWOTraceHWSettings>
         <OverrideDefaultClocks>0</OverrideDefaultClocks>
@@ -119,6 +120,12 @@
         <ShowTimeSum>1</ShowTimeSum>
         <SumSortOrder>0</SumSortOrder>
     </EventLog>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -128,6 +135,11 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </LogFile>
+    <Aliases>
+        <A0>_ "C:\Users\Студент-04\Desktop\MPs\UART\AbstractHardware\InterruptHandler\interrupthandler.hpp" "C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\InterruptHandler\interrupthandler.hpp"</A0>
+        <Count>1</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
     <DriverProfiling>
         <Enabled>0</Enabled>
         <Mode>3</Mode>
@@ -141,15 +153,4 @@
     <CallStackStripe>
         <ShowTiming>1</ShowTiming>
     </CallStackStripe>
-    <DisassembleMode>
-        <mode>0</mode>
-    </DisassembleMode>
-    <Breakpoints2>
-        <Count>0</Count>
-    </Breakpoints2>
-    <Aliases>
-        <A0>_ "C:\Users\Студент-04\Desktop\MPs\UART\AbstractHardware\InterruptHandler\interrupthandler.hpp" "C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\InterruptHandler\interrupthandler.hpp"</A0>
-        <Count>1</Count>
-        <SuppressDialog>0</SuppressDialog>
-    </Aliases>
 </settings>

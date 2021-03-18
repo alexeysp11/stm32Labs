@@ -16,9 +16,9 @@
 #ifndef REGISTERS_PORT_HPP
 #define REGISTERS_PORT_HPP
 
-#include <cassert>          //for assert.
-#include "susudefs.hpp"     //for __forceinline.
-#include "atomicutils.hpp"  //for AtomicUtils.
+#include <cassert>          // for assert.
+#include "susudefs.hpp"     // for __forceinline.
+#include "atomicutils.hpp"  // for AtomicUtils.
 
 template <typename T>
 struct Port

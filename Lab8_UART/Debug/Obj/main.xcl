@@ -22,9 +22,15 @@ C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Registers\ST
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Atomic
 -I
-C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\InterruptHandler
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\InterruptHandler\include
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Uart\include
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Timer
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Common
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Application\include
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 8.3\arm\inc
 -I
@@ -44,9 +50,15 @@ C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Registers\ST
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Atomic
 -I
-C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\InterruptHandler
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\InterruptHandler\include
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Uart\include
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\AbstractHardware\Timer
 -I
 C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Common
+-I
+C:\Users\User\Desktop\projects\stm32Labs\Lab8_UART\Application\include
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
